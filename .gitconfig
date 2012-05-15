@@ -1,0 +1,49 @@
+[user]
+	name = jkremser
+	email = jkremser@redhat.com
+[alias]
+	bugs = "ls-remote --heads "
+
+	# plain diff
+	st = "status --porcelain"
+
+	#colored diff
+        dif = diff --ignore-all-space --color
+
+	# View the SHA, description, and history graph of the latest 25 commits
+	l = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\" --graph
+
+	# Undo a `git push`
+	undopush = push -f origin HEAD^:master
+
+	# Undo your last commit, but don't throw away your changes
+	undo = git reset --soft HEAD^
+
+        # fire up the merge tool
+	mt = mergetool
+
+[color]
+	# Use colors in Git commands that are capable of colored output when outputting to the terminal
+	ui = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[format]
+  pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+
+[branch]
+	autosetuprebase = always
