@@ -100,6 +100,13 @@ alias search="ack -i "
 alias bup='ssh kremser@10.102.0.1'
 alias wor='ssh kremser@10.2.3.105'
 
+alias rhq="cd /home/jkremser/workspace/rhq"
+
+#misc
+alias runPostgres="sudo service postgresql start"
+alias runServer="/home/jkremser/workspace/rhq/dev-container/bin/rhq-server.sh console"
+alias runAgent=" /home/jkremser/workspace/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
+
 
 #env
 export HISTCONTROL="ignoreboth"
