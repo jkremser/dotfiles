@@ -113,6 +113,8 @@ export HISTCONTROL="ignoreboth"
 export HISTSIZE="100000"
 export HISTFILESIZE="100000"
 export EDITOR="vim"
+export LESS="-FerX"
+
 export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
 export JAVA_HOME="/home/jkremser/install/jdk1.6.0_31"
 export M2_HOME="/home/jkremser/install/apache-maven-3.0.4"

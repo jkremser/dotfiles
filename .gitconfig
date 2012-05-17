@@ -17,6 +17,8 @@
 	a = add
 	cm = commit
 	pl = pull
+	ls = branch -a
+	cd = checkout -t
 
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
@@ -48,7 +50,9 @@
 	untracked = cyan
 
 [format]
-  	pretty = format:%ad %C(yellow)%h%C(green)%d%Creset %C(magenta) [%an]%Creset %n %C(blue)%s%n
+  	pretty = format:time:    %C(green)%ad%Creset%ncommit:  %C(yellow)%H%Creset%nauthor:  %C(red)%an - %ae%Creset%nmessage: %C(blue)%s%Creset%n%n
 
 [branch]
 	autosetuprebase = always
+[merge]
+	tool = meld
