@@ -15,7 +15,7 @@
 
 	#abrv
 	a = add
-	cm = commit
+	cm = commit -m 
 	pl = pull
 	ls = branch -a
 	cd = checkout -t
