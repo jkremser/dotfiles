@@ -1,5 +1,5 @@
 [user]
-	name = jkremser
+	name = Jirka Kremser
 	email = jkremser@redhat.com
 [alias]
 	bugs = "ls-remote --heads "
@@ -12,6 +12,11 @@
 
 	# View the SHA, description, and history graph of the latest 25 commits
 	l = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\" --graph
+
+	#abrv
+	a = add
+	cm = commit
+	pl = pull
 
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
@@ -43,7 +48,7 @@
 	untracked = cyan
 
 [format]
-  pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+  	pretty = format:%ad %C(yellow)%h%C(green)%d%Creset %C(magenta) [%an]%Creset %n %C(blue)%s%n
 
 [branch]
 	autosetuprebase = always
