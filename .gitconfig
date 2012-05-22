@@ -15,7 +15,7 @@
 
 	#abrv
 	a = add
-	cm = commit -m 
+	cm = commit
 	pl = pull
 	ls = branch -a
 	cd = checkout -t
@@ -24,7 +24,7 @@
 	undopush = push -f origin HEAD^:master
 
 	# Undo your last commit, but don't throw away your changes
-	undo = git reset --soft HEAD^
+	undo = reset --soft HEAD^
 
         # fire up the merge tool
 	mt = mergetool
