@@ -83,7 +83,6 @@ alias yi="sudo yum install"
 alias ys="sudo yum search"
 
 alias log=mylog
-alias agent="cd /home/jkremser/workspace/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent"
 
 # Complement to whoami command.
 alias whereami='echo "$( hostname --fqdn ) ($(hostname -i)):$( pwd )"'
@@ -102,10 +101,12 @@ alias wor='ssh kremser@10.2.3.105'
 
 alias rhq="cd /home/jkremser/workspace/rhq"
 
-#misc
+#rhq
+export WORKSPACE="$HOME/workspace"
 alias runPostgres="sudo service postgresql start"
-alias runServer="/home/jkremser/workspace/rhq/dev-container/bin/rhq-server.sh console"
-alias runAgent=" /home/jkremser/workspace/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
+alias runServer="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh console"
+alias runAgent=" $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
+alias runAgentInstalation="java -jar $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-enterprise-agent-4.5.0-SNAPSHOT.jar --install"
 
 
 #env
@@ -116,8 +117,8 @@ export EDITOR="vim"
 export LESS="-FerX"
 
 export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
-export JAVA_HOME="/home/jkremser/install/jdk1.6.0_31"
-export M2_HOME="/home/jkremser/install/apache-maven-3.0.4"
+export JAVA_HOME="$HOME/install/jdk1.6.0_31"
+export M2_HOME="$HOME/install/apache-maven-3.0.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 export PATH="$M2_HOME/bin:$JAVA_HOME/bin:$PATH"
 
