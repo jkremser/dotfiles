@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="use_system_font" mtime="1336381284" type="bool" value="true"/>
+	<entry name="scrollback_unlimited" mtime="1338130438" type="bool" value="true"/>
+	<entry name="use_theme_colors" mtime="1338130438" type="bool" value="false"/>
+	<entry name="palette" mtime="1338130438" type="string">
+		<stringvalue>#000000000000:#CDCB00000000:#0000CDCB0000:#CDCBCDCB0000:#1E1A908FFFFF:#CDCB0000CDCB:#0000CDCBCDCB:#E5E2E5E2E5E2:#4CCC4CCC4CCC:#FFFF00000000:#0000FFFF0000:#FFFFFFFF0000:#46458281B4AE:#FFFF0000FFFF:#0000FFFFFFFF:#FFFFFFFFFFFF</stringvalue>
+	</entry>
+	<entry name="background_color" mtime="1338130438" type="string">
+		<stringvalue>#294A294A294A</stringvalue>
+	</entry>
+	<entry name="visible_name" mtime="1338130438" type="string">
+		<stringvalue>Default</stringvalue>
+	</entry>
+	<entry name="bold_color" mtime="1338130438" type="string">
+		<stringvalue>#000000000000</stringvalue>
+	</entry>
+	<entry name="foreground_color" mtime="1338130438" type="string">
+		<stringvalue>#CE72CE72CE72</stringvalue>
+	</entry>
+</gconf>
