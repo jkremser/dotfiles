@@ -29,8 +29,8 @@
         # fire up the merge tool
 	mt = mergetool
 
-	# what is going to be pulled
-	whatsup = log HEAD..origin/master
+	# changes between local repo and origin, use before pull/push to see the commits in advance
+	wtf = log --oneline --left-right HEAD...origin/master
 
 [color]
 	# Use colors in Git commands that are capable of colored output when outputting to the terminal
