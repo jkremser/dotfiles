@@ -84,6 +84,9 @@ alias ys="sudo yum search"
 
 alias log=mylog
 
+#top on steroids
+alias top="htop"
+
 # Complement to whoami command.
 alias whereami='echo "$( hostname --fqdn ) ($(hostname -i)):$( pwd )"'
 #alias neco="melodyping"
@@ -99,14 +102,16 @@ alias search="ack -i "
 alias bup='ssh kremser@10.102.0.1'
 alias wor='ssh kremser@10.2.3.105'
 
-alias rhq="cd /home/jkremser/workspace/rhq"
+alias rhq="cd /home/jkremser/workspace/rhq && pwd"
+alias rhqGui="cd /home/jkremser/workspace/rhq/modules/enterprise/gui/coregui && pwd"
+
 
 #rhq
 export WORKSPACE="$HOME/workspace"
 alias runPostgres="sudo service postgresql start"
 alias runServer="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh console"
 alias runAgent=" $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
-alias runAgentInstalation="java -jar $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-enterprise-agent-4.5.0-SNAPSHOT.jar --install"
+alias runAgentInstalation="cd $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/ && java -jar $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-enterprise-agent-4.5.0-SNAPSHOT.jar --install && cd -"
 
 
 #env
