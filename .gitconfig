@@ -5,7 +5,7 @@
 	bugs = "ls-remote --heads "
 
 	# plain diff
-	st = "status --porcelain"
+	st = "status -sb"
 
 	#colored diff
         dif = diff --ignore-all-space --color
