@@ -19,7 +19,7 @@
 	cm = commit
 	pl = pull
 	ls = branch -a
-	cd = checkout -t
+	cd = checkout
 
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
