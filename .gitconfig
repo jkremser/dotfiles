@@ -20,6 +20,7 @@
 	pl = pull
 	ls = branch -a
 	cd = checkout
+	s = show
 
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
