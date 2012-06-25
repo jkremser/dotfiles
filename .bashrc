@@ -112,6 +112,7 @@ alias runPostgres="sudo service postgresql start"
 alias runServer="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh console"
 alias runAgent=" $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/ && java -jar $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-enterprise-agent-4.5.0-SNAPSHOT.jar --install && cd -"
+alias runCli="$WORKSPACE/rhq/modules/enterprise/remoting/cli/target/rhq-remoting-cli-4.5.0-SNAPSHOT/bin/rhq-cli.sh"
 
 
 #env
@@ -124,8 +125,11 @@ export EDITOR="vim"
 #export LESS="-FerX"
 
 export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
+export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address=9797,server=y,suspend=n'
+export RHQ_SERVER_DEBUG="true"
 export JAVA_HOME="$HOME/install/jdk1.6.0_31"
 export M2_HOME="$HOME/install/apache-maven-3.0.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 export PATH="$M2_HOME/bin:$JAVA_HOME/bin:$PATH"
+export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
 
