@@ -110,6 +110,7 @@ alias rhqGui="cd /home/jkremser/workspace/rhq/modules/enterprise/gui/coregui && 
 export WORKSPACE="$HOME/workspace"
 alias runPostgres="sudo service postgresql start"
 alias runServer="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh console"
+alias runCompileAndServer="mvn clean -Penterprise,dev -DskipTests install && runServer"
 alias runAgent=" $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/ && java -jar $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-enterprise-agent-4.5.0-SNAPSHOT.jar --install && cd -"
 alias runCli="$WORKSPACE/rhq/modules/enterprise/remoting/cli/target/rhq-remoting-cli-4.5.0-SNAPSHOT/bin/rhq-cli.sh"
