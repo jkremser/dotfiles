@@ -59,6 +59,7 @@ alias sniff="sudo ngrep -d 'em1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 alias g="git "
+alias update="g stash && g pull --rebase && g stash pop"
 
 # Start a web service on port 8000 that uses CWD as its document root.
 alias share="python -m SimpleHTTPServer"
