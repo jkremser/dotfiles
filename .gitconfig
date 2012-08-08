@@ -17,7 +17,7 @@
 	#abrv
 	a = add
 	cm = commit
-	pl = pull
+	pl = pull --rebase
 	ls = branch -a
 	cd = checkout
 	sh = show
@@ -33,7 +33,10 @@
 
 	# changes between local repo and origin, use before pull/push to see the commits in advance
 	wtf = log --oneline --left-right HEAD...origin/master
+	h = !git --no-pager log origin/master..HEAD --abbrev-commit --pretty=oneline
 
+	ps = !sh -c 'git h && echo Are you sure? ENTER && read && git push origin master' -
+	rps = !git pl && git ps
 [color]
 	# Use colors in Git commands that are capable of colored output when outputting to the terminal
 	ui = auto
