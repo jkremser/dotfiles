@@ -103,18 +103,19 @@ alias search="ack -i "
 alias bup='ssh kremser@10.102.0.1'
 alias wor='ssh kremser@10.2.3.105'
 
-alias rhq="cd /home/jkremser/workspace/rhq && pwd"
-alias rhqGui="cd /home/jkremser/workspace/rhq/modules/enterprise/gui/coregui && pwd"
+export WORKSPACE="$HOME/workspace"
+alias rhq="cd $WORKSPACE/rhq && pwd"
+alias rhqGui="cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && pwd"
 
 
 #rhq
-export WORKSPACE="$HOME/workspace"
 alias runPostgres="sudo service postgresql start"
 alias runServer="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh console"
 alias runCompileAndServer="mvn clean -Penterprise,dev -DskipTests install && runServer"
 alias runAgent=" $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/ && java -jar $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-enterprise-agent-4.5.0-SNAPSHOT.jar --install && cd -"
 alias runCli="$WORKSPACE/rhq/modules/enterprise/remoting/cli/target/rhq-remoting-cli-4.5.0-SNAPSHOT/bin/rhq-cli.sh"
+alias agentLog="tail -f $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/logs/agent.log"
 
 
 #env
@@ -132,6 +133,8 @@ export RHQ_SERVER_DEBUG="true"
 export JAVA_HOME="$HOME/install/jdk1.6.0_31"
 export M2_HOME="$HOME/install/apache-maven-3.0.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
+#export HADOOP_HOME="/home/jkremser/install/hadoop-1.0.3"
 export PATH="$M2_HOME/bin:$JAVA_HOME/bin:$PATH"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
 
+#export HADOOP_LOG_DIR=$HADOOP_HOME/log
