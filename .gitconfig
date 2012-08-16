@@ -25,6 +25,8 @@
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
 
+	unstage = reset
+
 	# Undo your last commit, but don't throw away your changes
 	undo = reset --soft HEAD^
 
