@@ -123,6 +123,8 @@ export HISTCONTROL="ignoreboth"
 export HISTSIZE="100000"
 export HISTFILESIZE="100000"
 export EDITOR="vim"
+export GREP_OPTIONS="--color=auto"
+export GREP_COLOR="0;31"
 
 # wrap the text content on the screen
 #export LESS="-FerX"
