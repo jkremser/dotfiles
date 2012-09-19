@@ -136,7 +136,7 @@ export JAVA_HOME="$HOME/install/jdk1.6.0_31"
 export M2_HOME="$HOME/install/apache-maven-3.0.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 #export HADOOP_HOME="/home/jkremser/install/hadoop-1.0.3"
-export PATH="$M2_HOME/bin:$JAVA_HOME/bin:$PATH"
+export PATH="$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$PATH"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
 
 #export HADOOP_LOG_DIR=$HADOOP_HOME/log
