@@ -66,3 +66,5 @@
 	autosetuprebase = always
 [merge]
 	tool = meld
+[push]
+	default = current
