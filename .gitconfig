@@ -12,7 +12,7 @@
 	difw = diff --ignore-all-space --color --word-diff
 
 	# View the SHA, description, and history graph of the latest 25 commits
-	l = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\" --graph
+	l = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\" --graph --abbrev=9
 
 	#abrv
 	a = add
