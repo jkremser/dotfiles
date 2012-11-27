@@ -47,6 +47,17 @@ mylog(){
   less +F $1 |egrep --line-buffered --color=auto 'ERROR|WARN|$' # tail log & highlight errors (if your grep supports --color)
 }
 
+myRunAgents(){
+  cd $WORKSPACE/rhq/etc/agentspawn/target/
+  java -jar -Dperftest.spawncount=$1 org.rhq.agentspawn-1.0-SNAPSHOT.jar start
+  cd -
+}
+
+myCertAdd(){
+  certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n $1 -i $1
+}
+
+
 ##### </Maven colors>
 # Mvn color (https://gist.github.com/1027800) 
 # Formatting constants
@@ -135,9 +146,18 @@ alias whereami='echo "$( hostname --fqdn ) ($(hostname -i)):$( pwd )"'
 
 alias rtfm="echo '16i[q]sa[ln0=aln100%Pln100/snlbx]sbA0D4D465452snlbxq' | dc"
 
+#play short sounds
+alias soundCow="paplay /usr/lib/libreoffice/share/gallery/sounds/cow.wav"
+alias soundHorse="paplay /usr/lib/libreoffice/share/gallery/sounds/horse.wav"
+alias soundTrain="paplay /usr/lib/libreoffice/share/gallery/sounds/train.wav"
+
 #vpn
 alias vpnVsup='sudo /etc/init.d/openvpn stop && sleep 1 && sudo cp /etc/openvpn/client.conf_vsup /etc/openvpn/client.conf && sudo /etc/init.d/openvpn start'
 alias vpnMzk='sudo /etc/init.d/openvpn stop && sleep 1 && sudo cp /etc/openvpn/client.conf_mzk /etc/openvpn/client.conf && sudo /etc/init.d/openvpn start'
+
+#cert
+alias certAdd="myCertAdd"
+alias certList="certutil -d sql:$HOME/.pki/nssdb -L" # add '-h all' to see all built-in certs"
 
 # Quick search in a directory for a string
 alias search="ack -i "
@@ -146,7 +166,7 @@ alias search="ack -i "
 alias bup='ssh kremser@10.102.0.1'
 alias wor='ssh kremser@10.2.3.105'
 
-export WORKSPACE="$HOME/workspace"
+export WORKSPACE="$HOME/workspace/"
 alias rhq="cd $WORKSPACE/rhq && pwd"
 alias rhqGui="cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && pwd"
 
@@ -155,9 +175,11 @@ alias rhqGui="cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && pwd"
 RHQ_VERSION="4.6.0"
 alias runPostgres="sudo service postgresql start"
 alias runServer="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh console"
+alias runServerBackground="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh"
 alias runCompileAndServer="mvn clean -Penterprise,dev -DskipTests install && runServer"
 alias runAgent=" $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/ && java -jar $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-enterprise-agent-$RHQ_VERSION-SNAPSHOT.jar --install && cd -"
+alias runAgents="myRunAgents"
 alias runCli="$WORKSPACE/rhq/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias agentLog="tail -f $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/logs/agent.log"
 
