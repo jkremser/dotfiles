@@ -68,3 +68,5 @@
 	tool = meld
 [push]
 	default = current
+[core]
+	excludesfile = ~/.gitignore
