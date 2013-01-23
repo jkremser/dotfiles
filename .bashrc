@@ -1,15 +1,9 @@
 # .bashrc (Jiri Kremser)
 
-# packages needed: pv ngrep tcpdump
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
-# User specific aliases and functions
-
-export HISTTIMEFORMAT="%y-%d-%m %H:%M:%S "
-
 
 #git cmd line branch highlighting
 GIT_VERSION=`rpm -q --qf "%{VERSION}" git`
@@ -24,12 +18,9 @@ GIT_VERSION=`rpm -q --qf "%{VERSION}" git`
 #     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk -F / '{print " svn:" $0}'
 #}
 #PS1='[\u@\h \W\[\033[01;32m\]$(__git_ps1 " git:%s")$(parse_svn_branch)\[\033[00m\]]\$ '
-PS1='[\u@\h \W\[\033[01;32m\]$(__git_ps1 " git:%s")\[\033[00m\]]\$ '
+PS1='[\u@\h \W\[\033[0;32m\]$(__git_ps1 " git:%s")\[\033[00m\]]\$ '
+#PS1='[\u@\h \W\[${TEXT_GREEN}$(__git_ps1 " g:%s")${RESET_FORMATTING}]\$ '
 PS1="\[\033[G\]$PS1"
-
-#to retain history across multiple open sessions to the same system
-shopt -s histappend
-
 
 rpick(){
   echo $@ | tr ',' '\n' | tr ' ' '\n' | sort -R | head -1
@@ -83,21 +74,27 @@ export BACKGROUND_WHITE=`tput setab 7`
 export RESET_FORMATTING=`tput sgr0`
  
 # Wrapper function for Maven's mvn command.
-mvn-color() {
-  # Filter mvn output using sed
-  mvn $@ | sed -e "s/\(\[INFO\]\ \-.*\)/${TEXT_BLUE}${BOLD}\1/g" \
-               -e "s/\(\[INFO\]\ \[.*\)/${RESET_FORMATTING}${BOLD}\1${RESET_FORMATTING}/g" \
-               -e "s/\(\[INFO\]\ BUILD SUCCESSFUL\)/${BOLD}${TEXT_GREEN}\1${RESET_FORMATTING}/g" \
-               -e "s/\(\[WARNING\].*\)/${BOLD}${TEXT_YELLOW}\1${RESET_FORMATTING}/g" \
-               -e "s/\(\[ERROR\].*\)/${BOLD}${TEXT_RED}\1${RESET_FORMATTING}/g" \
+mvnColor() {
+  mvn $@ | sed -e "s/\(\[INFO\]\ \[.*\)/${RESET_FORMATTING}\1${RESET_FORMATTING}/g" \
+               -e "s/\(\[INFO\]\ Building .*\)/${TEXT_BLUE}\1${RESET_FORMATTING}/g" \
+               -e "s/\(\[INFO\]\ BUILD SUCCESSFUL\)/${TEXT_GREEN}\1${RESET_FORMATTING}/g" \
+               -e "s/\(\[WARNING\].*\)/${TEXT_YELLOW}\1${RESET_FORMATTING}/g" \
+               -e "s/\(\[ERROR\].*\)/${TEXT_RED}\1${RESET_FORMATTING}/g" \
                -e "s/Tests run: \([^,]*\), Failures: \([^,]*\), Errors: \([^,]*\), Skipped: \([^,]*\)/${BOLD}${TEXT_GREEN}Tests run: \1${RESET_FORMATTING}, Failures: ${BOLD}${TEXT_RED}\2${RESET_FORMATTING}, Errors: ${BOLD}${TEXT_RED}\3${RESET_FORMATTING}, Skipped: ${BOLD}${TEXT_YELLOW}\4${RESET_FORMATTING}/g"
- 
-  # Make sure formatting is reset
   echo -ne ${RESET_FORMATTING}
 }
-
-alias mvn="mvn-color"
+alias mvn="mvnColor"
 ##### </Maven colors>
+
+
+logColor() {
+  echo $@
+  [ $# = 0 ] && exit
+  $@ | sed -e "s/\(\ INFO\ \ .*\)/${RESET_FORMATTING}\1${RESET_FORMATTING}/g" \
+           -e "s/\(\ WARN\ \ .*\)/${TEXT_YELLOW}\1${RESET_FORMATTING}/g" \
+           -e "s/\(\ ERROR\ .*\)/${TEXT_RED}\1${RESET_FORMATTING}/g" \
+           -e "s/\(Caused by: .*\)/${BOLD}${TEXT_RED}\1${RESET_FORMATTING}/g"
+}
 
 # Make box around text.
 box() { t="$1xxxx";c=${2:-=}; echo ${t//?/$c}; echo "$c $1 $c"; echo ${t//?/$c}; }
@@ -111,7 +108,10 @@ alias sniff="sudo ngrep -d 'em1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 alias g="git "
-alias update="g stash && g pull --rebase && g stash pop"
+# bash completion working with the 'g' alias
+complete -o default -o nospace -F _git g
+
+alias dlna="/home/jkremser/install/pms-1.72.0/PMS.sh"
 
 # Start a web service on port 8000 that uses CWD as its document root.
 alias share="python -m SimpleHTTPServer"
@@ -165,29 +165,42 @@ alias search="ack -i "
 #places
 alias bup='ssh kremser@10.102.0.1'
 alias wor='ssh kremser@10.2.3.105'
-
-export WORKSPACE="$HOME/workspace/"
-alias rhq="cd $WORKSPACE/rhq && pwd"
-alias rhqGui="cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && pwd"
-
+alias rasp='ssh pi@192.168.1.102'
 
 #rhq
-RHQ_VERSION="4.6.0"
-alias runPostgres="sudo service postgresql start"
-alias runServer="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh console"
-alias runServerBackground="$WORKSPACE/rhq/dev-container/bin/rhq-server.sh"
-alias runCompileAndServer="mvn clean -Penterprise,dev -DskipTests install && runServer"
-alias runAgent=" $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/bin/rhq-agent.sh"
-alias runAgentInstalation="cd $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/ && java -jar $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-enterprise-agent-$RHQ_VERSION-SNAPSHOT.jar --install && cd -"
-alias runAgents="myRunAgents"
-alias runCli="$WORKSPACE/rhq/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
-alias agentLog="tail -f $WORKSPACE/rhq/dev-container/jbossas/server/default/deploy/rhq.ear/rhq-downloads/rhq-agent/rhq-agent/logs/agent.log"
+export WORKSPACE="$HOME/workspace"
+export RHQ_HOME="$WORKSPACE/rhq"
+alias rhq='cd $WORKSPACE/rhq && echo ${TEXT_CYAN} && figlet RHQ && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias rhqGui='cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && echo ${TEXT_MAGENTA} && figlet coregui && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
+RHQ_VERSION="4.6.0"
+RHQ_AGENT_HOME="$HOME/agent/rhq-agent/"
+#RHQ_AGENT_HOME="$WORKSPACE/rhq/dev-container/jbossas/standalone/deployments/rhq.ear/rhq-downloads/rhq-agent/rhq-agent"
+
+alias runPostgres="sudo service postgresql start"
+alias runServer="logColor $RHQ_HOME/dev-container/bin/rhq-server.sh"
+alias runSer="runServer console"
+alias runAgent="$RHQ_AGENT_HOME/bin/rhq-agent.sh"
+alias runAgentInstalation="cd $RHQ_AGENT_HOME && java -jar $RHQ_AGENT_HOME/rhq-enterprise-agent-$RHQ_VERSION-SNAPSHOT.jar --install && cd -"
+alias runAgents="myRunAgents"
+alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
+alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
+alias agentLog="logColor tail -f $RHQ_AGENT_HOME/logs/agent.log"
+alias serverLog="logColor tail -f $RHQ_HOME/dev-container/logs/server.log"
+
+alias hist="history -r; history"
 
 #env
-export HISTCONTROL="ignoreboth"
+#history on steroids
+export HISTCONTROL="ignoreboth" #ignoreboth will ignore consecutive dups and commands starting with space
+export HISTTIMEFORMAT="${TEXT_BLUE}%F %T${RESET_FORMATTING} "
+export HISTIGNORE="hist*:ls:pwd:g l:g st:g dif:rhq:rhqGui:runPostgres"
 export HISTSIZE="100000"
 export HISTFILESIZE="100000"
+
+shopt -s histappend # append to history, don't overwrite it
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # Save and reload the history after each command finishes
+
 export EDITOR="vim"
 export GREP_OPTIONS="--color=auto"
 export GREP_COLOR="0;31"
@@ -197,13 +210,14 @@ export GREP_COLOR="0;31"
 
 export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
 export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address=9797,server=y,suspend=n'
-export RHQ_SERVER_DEBUG="true"
-export JAVA_HOME="$HOME/install/jdk1.6.0_31"
+export RHQ_SERVER_DEBUG="false"
+export JAVA_HOME="$HOME/install/jdk1.7.0_09"
+#export JAVA_HOME="$HOME/install/jdk1.6.0_31"
 export M2_HOME="$HOME/install/apache-maven-3.0.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge/"
-export PATH="$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$PATH"
+export PATH="/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$PATH"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
 
 #export HADOOP_LOG_DIR=$HADOOP_HOME/log
