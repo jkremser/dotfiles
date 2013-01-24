@@ -18,7 +18,7 @@ GIT_VERSION=`rpm -q --qf "%{VERSION}" git`
 #     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk -F / '{print " svn:" $0}'
 #}
 #PS1='[\u@\h \W\[\033[01;32m\]$(__git_ps1 " git:%s")$(parse_svn_branch)\[\033[00m\]]\$ '
-PS1='[\u@\h \W\[\033[0;32m\]$(__git_ps1 " git:%s")\[\033[00m\]]\$ '
+PS1='[\u@\h \W\[\033[0;32m\]$(__git_ps1 " %s")\[\033[00m\]]\$ '
 #PS1='[\u@\h \W\[${TEXT_GREEN}$(__git_ps1 " g:%s")${RESET_FORMATTING}]\$ '
 PS1="\[\033[G\]$PS1"
 
@@ -194,7 +194,7 @@ alias hist="history -r; history"
 #history on steroids
 export HISTCONTROL="ignoreboth" #ignoreboth will ignore consecutive dups and commands starting with space
 export HISTTIMEFORMAT="${TEXT_BLUE}%F %T${RESET_FORMATTING} "
-export HISTIGNORE="hist*:ls:pwd:g l:g st:g dif:rhq:rhqGui:runPostgres"
+export HISTIGNORE="hist*:ls:pwd:g l:g st:g dif:rhq:rhqGui:runPostgres:bash"
 export HISTSIZE="100000"
 export HISTFILESIZE="100000"
 
