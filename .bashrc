@@ -107,7 +107,12 @@ alias box=box
 alias sniff="sudo ngrep -d 'em1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
+# git
 alias g="git "
+alias gl="g l"
+alias gst="g st"
+alias gpl="g pull --rebase origin master"
+alias gd="g dif"
 # bash completion working with the 'g' alias
 complete -o default -o nospace -F _git g
 
