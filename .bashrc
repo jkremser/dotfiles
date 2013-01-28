@@ -179,18 +179,19 @@ alias rhq='cd $WORKSPACE/rhq && echo ${TEXT_CYAN} && figlet RHQ && echo ${RESET_
 alias rhqGui='cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && echo ${TEXT_MAGENTA} && figlet coregui && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 RHQ_VERSION="4.6.0"
-RHQ_AGENT_HOME="$HOME/agent/rhq-agent/"
+RHQ_AGENT_HOME="$HOME/agent"
+RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME/rhq-agent"
 #RHQ_AGENT_HOME="$WORKSPACE/rhq/dev-container/jbossas/standalone/deployments/rhq.ear/rhq-downloads/rhq-agent/rhq-agent"
 
 alias runPostgres="sudo service postgresql start"
 alias runServer="logColor $RHQ_HOME/dev-container/bin/rhq-server.sh"
 alias runSer="runServer console"
-alias runAgent="$RHQ_AGENT_HOME/bin/rhq-agent.sh"
+alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && java -jar $RHQ_AGENT_HOME/rhq-enterprise-agent-$RHQ_VERSION-SNAPSHOT.jar --install && cd -"
 alias runAgents="myRunAgents"
 alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
-alias agentLog="logColor tail -f $RHQ_AGENT_HOME/logs/agent.log"
+alias agentLog="logColor tail -f $RHQ_AGENT_INSTALL_DIR/logs/agent.log"
 alias serverLog="logColor tail -f $RHQ_HOME/dev-container/logs/server.log"
 
 alias hist="history -r; history"
