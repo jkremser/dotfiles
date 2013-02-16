@@ -37,7 +37,9 @@ autocmd BufReadPost *
 set viminfo^=%
 
 "spaces instead of tab
-set expandtab 
+set expandtab
+set tabstop=2
+set shiftwidth=2 
 
 "F10 for switching between paste and nopaste mode
 set pastetoggle=<F10>
