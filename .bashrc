@@ -113,6 +113,8 @@ alias gl="g l"
 alias gst="g st"
 alias gpl="g pull --rebase origin master"
 alias gd="g dif"
+alias gdf="gd"
+
 # bash completion working with the 'g' alias
 complete -o default -o nospace -F _git g
 
@@ -167,11 +169,6 @@ alias certList="certutil -d sql:$HOME/.pki/nssdb -L" # add '-h all' to see all b
 # Quick search in a directory for a string
 alias search="ack -i "
 
-#places
-alias bup='ssh kremser@10.102.0.1'
-alias wor='ssh kremser@10.2.3.105'
-alias rasp='ssh pi@192.168.1.102'
-
 #rhq
 export WORKSPACE="$HOME/workspace"
 export RHQ_HOME="$WORKSPACE/rhq"
@@ -217,8 +214,12 @@ export GREP_COLOR="0;31"
 export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
 export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address=9797,server=y,suspend=n'
 export RHQ_SERVER_DEBUG="false"
-export JAVA_HOME="$HOME/install/jdk1.7.0_09"
+
+#JAVA_HOME
+#export JAVA_HOME="$HOME/install/jdk1.7.0_09"
 #export JAVA_HOME="$HOME/install/jdk1.6.0_31"
+export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.9/"
+
 export M2_HOME="$HOME/install/apache-maven-3.0.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
