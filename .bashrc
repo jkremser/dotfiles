@@ -175,7 +175,7 @@ export RHQ_HOME="$WORKSPACE/rhq"
 alias rhq='cd $WORKSPACE/rhq && echo ${TEXT_CYAN} && figlet RHQ && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias rhqGui='cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && echo ${TEXT_MAGENTA} && figlet coregui && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
-RHQ_VERSION="4.6.0"
+RHQ_VERSION="4.7.0"
 RHQ_AGENT_HOME="$HOME/agent"
 RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME/rhq-agent"
 #RHQ_AGENT_HOME="$WORKSPACE/rhq/dev-container/jbossas/standalone/deployments/rhq.ear/rhq-downloads/rhq-agent/rhq-agent"
