@@ -110,6 +110,7 @@ alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 # git
 alias g="git "
 alias gl="g l"
+alias gll="BRANCH=`git rev-parse --abbrev-ref HEAD` && g l5-helper | sed \"s/%REPLACE%/`g rev-parse --abbrev-ref HEAD`/\""
 alias gst="g st"
 alias gpl="g pull --rebase origin master"
 alias gd="g dif"
