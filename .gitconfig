@@ -14,6 +14,8 @@
 	# View the SHA, description, and history graph of the latest 25 commits
 	l = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\" --graph --abbrev=9
 
+  l5-helper = log --date=iso --pretty=format:\"%nbranch:  %%REPLACE%%%nlink:    http://git.fedorahosted.org/cgit/rhq/rhq.git/commit/?id=%h%ntime:    %C(green)%cd%Creset%ncommit:  %C(yellow)%H%Creset%nauthor:  %C(red)%an - %ae%Creset%nmessage: %w(72,0,9)%s%Creset%n\" -5
+
 	#abrv
 	a = add
 	cm = commit
@@ -30,7 +32,7 @@
 	# Undo your last commit, but don't throw away your changes
 	undo = reset --soft HEAD^
 
-        # fire up the merge tool
+  # fire up the merge tool
 	mt = mergetool
 
 	# changes between local repo and origin, use before pull/push to see the commits in advance
@@ -60,7 +62,7 @@
 	untracked = cyan
 
 [format]
-  	pretty = format:time:    %C(green)%ad%Creset%ncommit:  %C(yellow)%H%Creset%nauthor:  %C(red)%an - %ae%Creset%nmessage: %C(blue)%s%Creset%n%n
+  pretty = format:time:    %C(green)%ad%Creset%ncommit:  %C(yellow)%H%Creset%nauthor:  %C(red)%an - %ae%Creset%nmessage: %C(blue)%s%Creset%n%n
 
 [branch]
 	autosetuprebase = always
