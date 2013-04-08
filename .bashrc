@@ -19,7 +19,6 @@ GIT_VERSION=`rpm -q --qf "%{VERSION}" git`
 #}
 #PS1='[\u@\h \W\[\033[01;32m\]$(__git_ps1 " git:%s")$(parse_svn_branch)\[\033[00m\]]\$ '
 PS1='[\u@\h \W\[\033[0;32m\]$(__git_ps1 " %s")\[\033[00m\]]\$ '
-#PS1='[\u@\h \W\[${TEXT_GREEN}$(__git_ps1 " g:%s")${RESET_FORMATTING}]\$ '
 PS1="\[\033[G\]$PS1"
 
 rpick(){
@@ -110,7 +109,7 @@ alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 # git
 alias g="git "
 alias gl="g l"
-alias gll="BRANCH=`git rev-parse --abbrev-ref HEAD` && g l5-helper | sed \"s/%REPLACE%/`g rev-parse --abbrev-ref HEAD`/\""
+alias gll="BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null` && g l5-helper | sed \"s/%REPLACE%/`g rev-parse --abbrev-ref HEAD 2> /dev/null`/\""
 alias gst="g st"
 alias gpl="g pull --rebase origin master"
 alias gd="g dif"
