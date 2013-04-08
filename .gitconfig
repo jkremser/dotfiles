@@ -19,10 +19,11 @@
 	#abrv
 	a = add
 	cm = commit
-	pl = pull --rebase
+	pl = pull --rebase origin master
 	ls = branch -a
 	cd = checkout
 	sh = show
+  ap = add -p
 
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master

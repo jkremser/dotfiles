@@ -111,9 +111,10 @@ alias g="git "
 alias gl="g l"
 alias gll="BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null` && g l5-helper | sed \"s/%REPLACE%/`g rev-parse --abbrev-ref HEAD 2> /dev/null`/\""
 alias gst="g st"
-alias gpl="g pull --rebase origin master"
+alias gpl="g pl"
 alias gd="g dif"
 alias gdf="gd"
+alias gap="g ap"
 
 # bash completion working with the 'g' alias
 complete -o default -o nospace -F _git g
