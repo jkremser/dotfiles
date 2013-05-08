@@ -99,6 +99,12 @@ logColor() {
 box() { t="$1xxxx";c=${2:-=}; echo ${t//?/$c}; echo "$c $1 $c"; echo ${t//?/$c}; }
 alias box=box
 
+# make nice commit log output for BugZilla
+myGll() {
+  BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null | tr '/' '#@#'`
+  git l5-helper | sed -e "s/%REPLACE%/${BRANCH}/" -e "s/#@#/\\//"
+}
+
 #melodyping(){ ping $1|awk -F[=\ ] '/me=/{t=$(NF-1);f=3000-14*log(t^20);c="play -q -n synth 0.7s pl " f;print $0;system(c)}';}
 
 #aliases
@@ -109,7 +115,7 @@ alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 # git
 alias g="git "
 alias gl="g l"
-alias gll="BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null` && g l5-helper | sed \"s/%REPLACE%/`g rev-parse --abbrev-ref HEAD`/\""
+alias gll="myGll"
 alias gst="g st"
 alias gpl="g pl"
 alias gd="g dif"
