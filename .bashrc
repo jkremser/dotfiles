@@ -189,7 +189,9 @@ RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME/rhq-agent"
 
 alias runPostgres="sudo service postgresql start"
 alias runServer="logColor $RHQ_HOME/dev-container/bin/rhq-server.sh"
-alias runSer="runServer console"
+alias ctl="logColor rhqctl"
+#alias runSer="runServer console"
+alias runSer="ctl console --server"
 alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
 alias runAgents="myRunAgents"
@@ -205,8 +207,8 @@ alias hist="history -r; history"
 export HISTCONTROL="ignoreboth" #ignoreboth will ignore consecutive dups and commands starting with space
 export HISTTIMEFORMAT="${TEXT_BLUE}%F %T${RESET_FORMATTING} "
 export HISTIGNORE="hist*:ls:pwd:g l:g st:g dif:rhq:rhqGui:runPostgres:bash"
-export HISTSIZE="100000"
-export HISTFILESIZE="100000"
+export HISTSIZE="1000000"
+export HISTFILESIZE="1000000"
 
 shopt -s histappend # append to history, don't overwrite it
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # Save and reload the history after each command finishes
@@ -223,18 +225,22 @@ export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,add
 export RHQ_SERVER_DEBUG="false"
 
 #JAVA_HOME
-#export JAVA_HOME="$HOME/install/jdk1.7.0_09"
+export JAVA_HOME="$HOME/install/jdk1.7.0_09"
 #export JAVA_HOME="$HOME/install/jdk1.6.0_31"
-export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.9/"
+#export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.9/"
 
 export M2_HOME="$HOME/install/apache-maven-3.0.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge/"
 export GWT_HOME="$HOME/install/gwt-2.5.1/"
-export PATH="$RHQ_HOME/dev-container/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$PATH"
+export PATH="$RHQ_HOME/dev-container/bin:$RHQ_HOME/dev-container/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$PATH"
 # rhq ant bundle deployer
 export PATH="$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin:$PATH"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
+
+# C*
+export MAX_HEAP_SIZE="512M"
+export HEAP_NEWSIZE="128M"
 
 #export HADOOP_LOG_DIR=$HADOOP_HOME/log
