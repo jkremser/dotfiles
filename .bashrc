@@ -125,6 +125,10 @@ alias gap="g ap"
 # bash completion working with the 'g' alias
 complete -o default -o nospace -F _git g
 
+# ignore some patterns during bash completion
+export FIGNORE=.bat:.svn
+bind 'set match-hidden-files off'
+
 alias dlna="/home/jkremser/install/pms-1.72.0/PMS.sh"
 
 # Start a web service on port 8000 that uses CWD as its document root.
