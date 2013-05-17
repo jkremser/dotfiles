@@ -14,7 +14,7 @@
 	# View the SHA, description, and history graph of the latest 25 commits
 	l = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\" --graph --abbrev=9
 
-  l5-helper = log --date=iso --pretty=format:\"%nbranch:  %%REPLACE%%%nlink:    http://git.fedorahosted.org/cgit/rhq/rhq.git/commit/?id=%h%ntime:    %C(green)%cd%Creset%ncommit:  %C(yellow)%H%Creset%nauthor:  %C(red)%an - %ae%Creset%nmessage: %w(72,0,9)%s%Creset%n\" -5
+  l5-helper = log --date=iso --pretty=format:\"%nbranch:  %%REPLACE%%%nlink:    http://git.fedorahosted.org/cgit/rhq/rhq.git/commit/?id=%h%ntime:    %C(green)%cd%Creset%ncommit:  %C(yellow)%H%Creset%nauthor:  %C(red)%an - %ae%Creset%nmessage: %w(72,0,9)%s%Creset%n\" -5 --abbrev=9
 
 	#abrv
 	a = add
@@ -29,6 +29,9 @@
 	undopush = push -f origin HEAD^:master
 
 	unstage = reset
+
+  # commit counts
+  commitCount = shortlog -sn
 
 	# Undo your last commit, but don't throw away your changes
 	undo = reset --soft HEAD^
@@ -73,3 +76,5 @@
 	default = current
 [core]
 	excludesfile = ~/.gitignore
+[help]
+	autocorrect = 1
