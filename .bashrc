@@ -77,8 +77,11 @@ mvnColor() {
   mvn $@ | sed -e "s/\(\[INFO\]\ \[.*\)/${RESET_FORMATTING}\1${RESET_FORMATTING}/g" \
                -e "/\[INFO\]\ Building\ \(war\:\|jar\:\|ear\:\)/! s/\(\[INFO\]\ Building .*\)/${TEXT_BLUE}\1${RESET_FORMATTING}/g" \
                -e "s/\(\[INFO\]\ BUILD SUCCESSFUL\)/${TEXT_GREEN}\1${RESET_FORMATTING}/g" \
+               -e "s/\(\[INFO\]\ BUILD FAILURE\)/${TEXT_RED}\1${RESET_FORMATTING}/g" \
                -e "s/\(\[WARNING\].*\)/${TEXT_YELLOW}\1${RESET_FORMATTING}/g" \
                -e "s/\(\[ERROR\].*\)/${TEXT_RED}\1${RESET_FORMATTING}/g" \
+               -e "s/\(Caused by: .*\)/${BOLD}${TEXT_RED}\1${RESET_FORMATTING}/g" \
+               -e "s/\(org\.rhq\..*\)/${BOLD}\1${RESET_FORMATTING}/g" \
                -e "s/Tests run: \([^,]*\), Failures: \([^,]*\), Errors: \([^,]*\), Skipped: \([^,]*\)/${BOLD}${TEXT_GREEN}Tests run: \1${RESET_FORMATTING}, Failures: ${BOLD}${TEXT_RED}\2${RESET_FORMATTING}, Errors: ${BOLD}${TEXT_RED}\3${RESET_FORMATTING}, Skipped: ${BOLD}${TEXT_YELLOW}\4${RESET_FORMATTING}/g"
   echo -ne ${RESET_FORMATTING}
 }
@@ -92,6 +95,7 @@ logColor() {
   $@ | sed -e "s/\(\ INFO\ \ .*\)/${RESET_FORMATTING}\1${RESET_FORMATTING}/g" \
            -e "s/\(\ WARN\ \ .*\)/${TEXT_YELLOW}\1${RESET_FORMATTING}/g" \
            -e "s/\(\ ERROR\ .*\)/${TEXT_RED}\1${RESET_FORMATTING}/g" \
+           -e "s/\(org\.rhq\..*\)/${BOLD}\1${RESET_FORMATTING}/g" \
            -e "s/\(Caused by: .*\)/${BOLD}${TEXT_RED}\1${RESET_FORMATTING}/g"
 }
 
@@ -180,13 +184,17 @@ alias certList="certutil -d sql:$HOME/.pki/nssdb -L" # add '-h all' to see all b
 # Quick search in a directory for a string
 alias search="ack -i "
 
+# phone
+alias n4mount="simple-mtpfs ~/Nexus4"
+alias n4umount="fusermount -u ~/Nexus4"
+
 #rhq
 export WORKSPACE="$HOME/workspace"
 export RHQ_HOME="$WORKSPACE/rhq"
 alias rhq='cd $WORKSPACE/rhq && echo ${TEXT_CYAN} && figlet RHQ && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias rhqGui='cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && echo ${TEXT_MAGENTA} && figlet coregui && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
-RHQ_VERSION="4.7.0"
+RHQ_VERSION="4.8.0"
 RHQ_AGENT_HOME="$HOME/agent"
 RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME/rhq-agent"
 #RHQ_AGENT_HOME="$WORKSPACE/rhq/dev-container/jbossas/standalone/deployments/rhq.ear/rhq-downloads/rhq-agent/rhq-agent"
