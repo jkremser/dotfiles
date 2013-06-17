@@ -200,7 +200,6 @@ RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME/rhq-agent"
 #RHQ_AGENT_HOME="$WORKSPACE/rhq/dev-container/jbossas/standalone/deployments/rhq.ear/rhq-downloads/rhq-agent/rhq-agent"
 
 alias runPostgres="sudo service postgresql start"
-alias runServer="logColor $RHQ_HOME/dev-container/bin/rhq-server.sh"
 alias ctl="logColor rhqctl"
 #alias runSer="runServer console"
 alias runSer="ctl console --server"
@@ -210,7 +209,7 @@ alias runAgents="myRunAgents"
 alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
 alias agentLog="logColor tail -f $RHQ_AGENT_INSTALL_DIR/logs/agent.log"
-alias serverLog="logColor tail -f $RHQ_HOME/dev-container/logs/server.log"
+alias serverLog="logColor tail -f $RHQ_HOME/dev-container/rhq-server/logs/server.log"
 
 alias hist="history -r; history"
 
@@ -246,7 +245,7 @@ export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge/"
 export GWT_HOME="$HOME/install/gwt-2.5.1/"
-export PATH="$RHQ_HOME/dev-container/bin:$RHQ_HOME/dev-container/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$PATH"
+export PATH="$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$PATH"
 # rhq ant bundle deployer
 export PATH="$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin:$PATH"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
