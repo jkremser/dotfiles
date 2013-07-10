@@ -136,7 +136,11 @@ bind 'set match-hidden-files off'
 alias dlna="/home/jkremser/install/pms-1.72.0/PMS.sh"
 
 # Start a web service on port 8000 that uses CWD as its document root.
-alias share="python -m SimpleHTTPServer"
+if type ruby &> /dev/null; then
+  alias share="ruby -run -e httpd . -p 8000"
+else
+  alias share="python -m SimpleHTTPServer"
+fi
 
 #randomly selects one of its arguments
 alias pick=rpick
