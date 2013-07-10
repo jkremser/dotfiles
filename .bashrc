@@ -214,6 +214,7 @@ alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
 alias agentLog="logColor tail -f $RHQ_AGENT_INSTALL_DIR/logs/agent.log"
 alias serverLog="logColor tail -f $RHQ_HOME/dev-container/rhq-server/logs/server.log"
+alias webcam="ssh jkremser@192.168.1.100 -Y 'mplayer tv://device=/dev/video0'"
 
 alias hist="history -r; history"
 
