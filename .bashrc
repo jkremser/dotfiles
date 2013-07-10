@@ -106,7 +106,7 @@ alias box=box
 # make nice commit log output for BugZilla
 myGll() {
   BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null | tr '/' '#@#'`
-  git l5-helper | sed -e "s/%REPLACE%/${BRANCH}/" -e "s/#@#/\\//"
+  git l4-helper | sed -e "s/%REPLACE%/${BRANCH}/" -e "s/#@#/\\//"
 }
 
 #melodyping(){ ping $1|awk -F[=\ ] '/me=/{t=$(NF-1);f=3000-14*log(t^20);c="play -q -n synth 0.7s pl " f;print $0;system(c)}';}
