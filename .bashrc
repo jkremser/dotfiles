@@ -17,9 +17,28 @@ GIT_VERSION=`rpm -q --qf "%{VERSION}" git`
 #parse_svn_branch() {
 #     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk -F / '{print " svn:" $0}'
 #}
-#PS1='[\u@\h \W\[\033[01;32m\]$(__git_ps1 " git:%s")$(parse_svn_branch)\[\033[00m\]]\$ '
-PS1='[\u@\h \W\[\033[0;32m\]$(__git_ps1 " %s")\[\033[00m\]]\$ '
-PS1="\[\033[G\]$PS1"
+promptText() {    
+  CODE=$?;
+  CODE_STR="";
+  GITBRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/');
+  YELLOW="\[\033[0;33m\]";
+  BLUE="\[\033[0;34m\]";
+  LIGHT_BLUE="\[\033[0;36m\]";
+  RED="\[\033[0;31m\]";
+  LIGHT_RED="\[\033[1;31m\]";
+  GREEN="\[\033[0;32m\]";
+  LIGHT_GREEN="\[\033[1;32m\]";
+  WHITE="\[\033[1;37m\]";
+  LIGHT_GRAY="\[\033[0;37m\]";
+  NORMAL="\[\033[0m\]";
+  [ $CODE != 0 ] && CODE_STR="($CODE)";
+  PS1="[\u@\h \W$GREEN $GITBRANCH$NORMAL]";
+  PS1="\[\033[G\]$PS1$RED$CODE_STR$NORMAL\$ ";
+}
+export PROMPT_COMMAND=promptText
+
+#PS1='[\u@\h \W\[\033[0;32m\]$(__git_ps1 " %s")\[\033[00m\]]\$ '
+#PS1="\[\033[G\]$PS1"
 
 rpick(){
   echo $@ | tr ',' '\n' | tr ' ' '\n' | sort -R | head -1
@@ -227,7 +246,7 @@ export HISTSIZE="1000000"
 export HISTFILESIZE="1000000"
 
 shopt -s histappend # append to history, don't overwrite it
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # Save and reload the history after each command finishes
+#PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # Save and reload the history after each command finishes
 
 export EDITOR="vim"
 export GREP_OPTIONS="--color=auto"
