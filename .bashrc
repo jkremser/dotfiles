@@ -181,6 +181,7 @@ alias yi="sudo yum install"
 alias ys="sudo yum search"
 
 alias log=mylog
+alias syslogs='s tail -f -n5 $(find /var/log -name \*log)'
 
 #top on steroids
 alias top="htop"
@@ -218,8 +219,8 @@ alias rhq='cd $WORKSPACE/rhq && echo ${TEXT_CYAN} && figlet RHQ && echo ${RESET_
 alias rhqGui='cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && echo ${TEXT_MAGENTA} && figlet coregui && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 RHQ_VERSION="4.9.0"
-RHQ_AGENT_HOME="$HOME/agent"
-RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME/rhq-agent"
+RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
+RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME"
 #RHQ_AGENT_HOME="$WORKSPACE/rhq/dev-container/jbossas/standalone/deployments/rhq.ear/rhq-downloads/rhq-agent/rhq-agent"
 
 alias runPostgres="sudo service postgresql start"
