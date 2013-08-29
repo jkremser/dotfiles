@@ -128,9 +128,26 @@ myGll() {
   git l4-helper | sed -e "s/%REPLACE%/${BRANCH}/" -e "s/#@#/\\//"
 }
 
+# simple webcam timelapse toolkit
+myTimelapse() {
+  i=0
+  while true; do
+  figlet "Frame: $i"
+  mplayer tv:// -vo jpeg -frames 1 > /dev/null 2>&1
+  mv 00000001.jpg img_$(date +%s).jpg
+  sleep 1
+  ((i++))
+  done;
+}
+alias timelapse="myTimelapse"
+alias timelapsePreview="mplayer mf://*.jpg"
+alias timelapseEncode="mencoder mf://*.jpg -ovc lavc -o out.avi"
+
+
 #melodyping(){ ping $1|awk -F[=\ ] '/me=/{t=$(NF-1);f=3000-14*log(t^20);c="play -q -n synth 0.7s pl " f;print $0;system(c)}';}
 
 #aliases
+
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'em1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
