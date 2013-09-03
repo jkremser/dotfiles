@@ -162,6 +162,16 @@ alias gd="g dif"
 alias gdf="gd"
 alias gap="g ap"
 
+# cd
+alias ..='cd ..'
+alias ...='cd ../../../'
+
+# safe rm
+alias rm='rm --preserve-root'
+
+# netstat
+alias ports='netstat -tulanp'
+
 # bash completion working with the 'g' alias
 complete -o default -o nospace -F _git g
 
