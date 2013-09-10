@@ -166,6 +166,9 @@ alias gap="g ap"
 alias ..='cd ..'
 alias ...='cd ../../../'
 
+# https://github.com/vigneshwaranr/bd
+alias bd=". bd -s"
+
 # safe rm
 alias rm='rm --preserve-root'
 
