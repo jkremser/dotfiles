@@ -20,6 +20,7 @@
 	a = add
 	cm = commit
 	pl = pull --rebase origin master
+  pll = pull --rebase
 	ls = branch -a
 	cd = checkout
 	sh = show

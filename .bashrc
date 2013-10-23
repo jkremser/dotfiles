@@ -158,6 +158,7 @@ alias gl="g l"
 alias gll="myGll"
 alias gst="g st"
 alias gpl="g pl"
+alias gpll="g pll"
 alias gd="g dif"
 alias gdf="gd"
 alias gap="g ap"
@@ -248,7 +249,7 @@ export RHQ_HOME="$WORKSPACE/rhq"
 alias rhq='cd $WORKSPACE/rhq && echo ${TEXT_CYAN} && figlet RHQ && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias rhqGui='cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && echo ${TEXT_MAGENTA} && figlet coregui && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
-RHQ_VERSION="4.9.0"
+RHQ_VERSION="4.10.0"
 RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
 RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME"
 #RHQ_AGENT_HOME="$WORKSPACE/rhq/dev-container/jbossas/standalone/deployments/rhq.ear/rhq-downloads/rhq-agent/rhq-agent"
