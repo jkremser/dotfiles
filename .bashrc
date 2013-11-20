@@ -292,7 +292,9 @@ export GREP_COLOR="0;31"
 
 export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
 export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address=9797,server=y,suspend=n'
-export RHQ_SERVER_DEBUG="false"
+#pre-rhqctl epoch
+#export RHQ_SERVER_DEBUG="true"
+#export RHQ_CONTROL_DEBUG="true"
 
 #JAVA_HOME
 export JAVA_HOME="$HOME/install/jdk1.7.0_09"
