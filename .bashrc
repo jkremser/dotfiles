@@ -230,7 +230,7 @@ alias soundHorse="paplay /usr/lib/libreoffice/share/gallery/sounds/horse.wav"
 alias soundTrain="paplay /usr/lib/libreoffice/share/gallery/sounds/train.wav"
 
 #train
-alias train="/home/jkremser/install/sl/sl|soundTrain"
+alias train="(soundTrain&/home/jkremser/install/sl/sl)"
 
 #vpn
 alias vpnVsup='sudo /etc/init.d/openvpn stop && sleep 1 && sudo cp /etc/openvpn/client.conf_vsup /etc/openvpn/client.conf && sudo /etc/init.d/openvpn start'
