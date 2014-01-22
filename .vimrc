@@ -1,6 +1,10 @@
 "syntax highlighting
 syntax on
 
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+
 "backup
 "set backup
 "set backupdir=~/.vim/backup,.,~/
