@@ -295,12 +295,14 @@ export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,ad
 export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address=9797,server=y,suspend=n'
 #pre-rhqctl epoch
 #export RHQ_SERVER_DEBUG="true"
+#export RHQ_AGENT_DEBUG="true"
 #export RHQ_CONTROL_DEBUG="true"
 
 #JAVA_HOME
-export JAVA_HOME="$HOME/install/jdk1.7.0_09"
+#export JAVA_HOME="$HOME/install/jdk1.7.0_09"
 #export JAVA_HOME="$HOME/install/jdk1.6.0_31"
-#export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.9/"
+#export JAVA_HOME="$HOME/install/jdk1.6.0_24"
+export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.3.0.fc19.i386"
 
 export M2_HOME="$HOME/install/apache-maven-3.0.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
