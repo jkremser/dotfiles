@@ -125,8 +125,8 @@ alias box=box
 
 # make nice commit log output for BugZilla
 myGll() {
-  BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null | tr '/' '#@#'`
-  git l4-helper | sed -e "s/%REPLACE%/${BRANCH}/" -e "s/#@#/\\//"
+  BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null | tr '/' '?'`
+  git l4-helper | sed -e "s/%REPLACE%/${BRANCH}/" -e "s/\?/\\//"
 }
 
 # simple webcam timelapse toolkit
