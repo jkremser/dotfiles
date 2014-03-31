@@ -209,6 +209,7 @@ alias bcp=mybcp
 
 #sudo
 alias s=sudo
+alias plz=sudo
 
 #yum
 alias yi="sudo yum install"
