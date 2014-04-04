@@ -40,7 +40,7 @@ export PROMPT_COMMAND=promptText
 #PS1='[\u@\h \W\[\033[0;32m\]$(__git_ps1 " %s")\[\033[00m\]]\$ '
 #PS1="\[\033[G\]$PS1"
 
-rpick(){
+pick(){
   echo $@ | tr ',' '\n' | tr ' ' '\n' | sort -R | head -1
 }
 
@@ -48,7 +48,7 @@ mywhich(){
   readlink -f $( which $1 )
 }
 
-mybcp(){
+bcp(){
   cp $1{,-$( date +%F )}
 }
 
@@ -56,13 +56,13 @@ mylog(){
   less +F $1 |egrep --line-buffered --color=auto 'ERROR|WARN|$' # tail log & highlight errors (if your grep supports --color)
 }
 
-myRunAgents(){
+runAgents(){
   cd $WORKSPACE/rhq/etc/agentspawn/target/
   java -jar -Dperftest.spawncount=$1 org.rhq.agentspawn-1.0-SNAPSHOT.jar start
   cd -
 }
 
-myCertAdd(){
+certAdd(){
   certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n $1 -i $1
 }
 
@@ -121,16 +121,15 @@ logColor() {
 
 # Make box around text.
 box() { t="$1xxxx";c=${2:-=}; echo ${t//?/$c}; echo "$c $1 $c"; echo ${t//?/$c}; }
-alias box=box
 
 # make nice commit log output for BugZilla
-myGll() {
+gll() {
   BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null | tr '/' '?'`
   git l4-helper | sed -e "s/%REPLACE%/${BRANCH}/" -e "s/\?/\\//"
 }
 
 # simple webcam timelapse toolkit
-myTimelapse() {
+timelapse() {
   i=0
   while true; do
   figlet "Frame: $i"
@@ -140,7 +139,6 @@ myTimelapse() {
   ((i++))
   done;
 }
-alias timelapse="myTimelapse"
 alias timelapsePreview="mplayer mf://*.jpg"
 alias timelapseEncode="mencoder mf://*.jpg -ovc lavc -o out.avi"
 
@@ -158,7 +156,6 @@ alias g="git "
 alias gl="g l"
 alias gl1="g l1"
 alias gg="git g"
-alias gll="myGll"
 alias gst="g st"
 alias gpl="g pl"
 alias gpll="g pll"
@@ -195,17 +192,11 @@ else
   alias share="python -m SimpleHTTPServer"
 fi
 
-#randomly selects one of its arguments
-alias pick=rpick
-
 #which follows symlinks
 alias wh=mywhich
 
 #Show a count of how many normal files are in the current directory and below.
 alias fileNumber="find . -type f | wc -l"
-
-#backup
-alias bcp=mybcp
 
 #sudo
 alias s=sudo
@@ -240,7 +231,6 @@ alias vpnVsup='sudo /etc/init.d/openvpn stop && sleep 1 && sudo cp /etc/openvpn/
 alias vpnMzk='sudo /etc/init.d/openvpn stop && sleep 1 && sudo cp /etc/openvpn/client.conf_mzk /etc/openvpn/client.conf && sudo /etc/init.d/openvpn start'
 
 #cert
-alias certAdd="myCertAdd"
 alias certList="certutil -d sql:$HOME/.pki/nssdb -L" # add '-h all' to see all built-in certs"
 
 # Quick search in a directory for a string
@@ -269,7 +259,6 @@ alias ctl="logColor rhqctl"
 alias runSer="ctl console --server"
 alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
-alias runAgents="myRunAgents"
 alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
 alias agentLog="logColor tail -f $RHQ_AGENT_INSTALL_DIR/logs/agent.log"
