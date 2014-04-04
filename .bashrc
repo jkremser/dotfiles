@@ -142,6 +142,19 @@ timelapse() {
 alias timelapsePreview="mplayer mf://*.jpg"
 alias timelapseEncode="mencoder mf://*.jpg -ovc lavc -o out.avi"
 
+#make ~? typo work as ~/
+function cd {
+  local target="$1"
+  [[ $target == ~?* ]] && target="~/${target:2}"
+  eval "builtin cd ${target}"
+  return $?
+}
+function vim {
+  local target="$1"
+  [[ $target == ~?* ]] && target="~/${target:2}"
+  eval "/usr/bin/vim ${target}"
+  return $?
+}
 
 #melodyping(){ ping $1|awk -F[=\ ] '/me=/{t=$(NF-1);f=3000-14*log(t^20);c="play -q -n synth 0.7s pl " f;print $0;system(c)}';}
 
