@@ -143,12 +143,15 @@ alias timelapsePreview="mplayer mf://*.jpg"
 alias timelapseEncode="mencoder mf://*.jpg -ovc lavc -o out.avi"
 
 #make ~? typo work as ~/
+: << 'END'
 function cd {
   local target="$1"
   [[ $target == ~?* ]] && target="~/${target:2}"
   eval "builtin cd ${target}"
   return $?
 }
+END
+
 function vim {
   local target="$1"
   [[ $target == ~?* ]] && target="~/${target:2}"
@@ -274,6 +277,7 @@ alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
 alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
+alias ctailf="logColor tailf"
 alias agentLog="logColor tail -f $RHQ_AGENT_INSTALL_DIR/logs/agent.log"
 alias serverLog="logColor tail -f $RHQ_HOME/dev-container/rhq-server/logs/server.log"
 alias webcam="ssh jkremser@192.168.1.100 -Y 'mplayer tv://device=/dev/video0'"
@@ -290,6 +294,9 @@ export HISTFILESIZE="1000000"
 
 shopt -s histappend # append to history, don't overwrite it
 #PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # Save and reload the history after each command finishes
+
+# don't complete if there is no command
+# shopt -s no_empty_cmd_com­pletion
 
 export EDITOR="vim"
 export GREP_OPTIONS="--color=auto"
@@ -312,16 +319,17 @@ export JAVA_HOME="$HOME/install/jdk1.7.0_09"
 #export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.3.0.fc19.i386"
 #export JAVA_HOME="$HOME/install/jdk1.8.0"
 
-export M2_HOME="$HOME/install/apache-maven-3.0.4"
+export M2_HOME="$HOME/install/apache-maven-3.2.1"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge"
 export GWT_HOME="$HOME/install/gwt-2.5.1"
 export ANDROID_SDK_HOME="$HOME/install/adt-bundle-linux-x86-20130717/sdk"
+export ANDROID_HOME="$ANDROID_SDK_HOME"
 export SCALA_HOME="$HOME/install/scala-2.10.2"
 export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
-export PATH="$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin:$PATH"
+export PATH="$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin:$PATH"
 # rhq ant bundle deployer
 export PATH="/home/jkremser/install/node-v0.10.22-linux-x86/bin:$PATH"
 export PATH="$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin:$PATH"
