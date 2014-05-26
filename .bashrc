@@ -6,8 +6,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 #git cmd line branch highlighting
-GIT_VERSION=`rpm -q --qf "%{VERSION}" git`
-. /usr/share/doc/git-"$GIT_VERSION"/contrib/completion/git-completion.bash
+. /usr/share/doc/git/contrib/completion/git-completion.bash
 #parse_svn_url() {
 #     svn info 2>/dev/null | grep -e '^URL*' | sed -e 's#^URL: *\(.*\)#\1#g '
 #}
@@ -235,9 +234,9 @@ alias whereami='echo "$( hostname --fqdn ) ($(hostname -i)):$( pwd )"'
 alias rtfm="echo '16i[q]sa[ln0=aln100%Pln100/snlbx]sbA0D4D465452snlbxq' | dc"
 
 #play short sounds
-alias soundCow="paplay /usr/lib/libreoffice/share/gallery/sounds/cow.wav"
-alias soundHorse="paplay /usr/lib/libreoffice/share/gallery/sounds/horse.wav"
-alias soundTrain="paplay /usr/lib/libreoffice/share/gallery/sounds/train.wav"
+alias soundCow="paplay /usr/lib64/libreoffice/share/gallery/sounds/cow.wav"
+alias soundHorse="paplay /usr/lib64/libreoffice/share/gallery/sounds/horse.wav"
+alias soundTrain="paplay /usr/lib64/libreoffice/share/gallery/sounds/train.wav"
 
 #train
 alias train="(soundTrain&/home/jkremser/install/sl/sl)"
@@ -315,7 +314,7 @@ export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,add
 #JAVA_HOME
 #export JAVA_HOME="$HOME/install/jdk1.6.0_24"
 #export JAVA_HOME="$HOME/install/jdk1.6.0_31"
-export JAVA_HOME="$HOME/install/jdk1.7.0_09"
+export JAVA_HOME="$HOME/install/jdk1.7.0_55"
 #export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.3.0.fc19.i386"
 #export JAVA_HOME="$HOME/install/jdk1.8.0"
 
