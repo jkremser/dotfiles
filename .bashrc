@@ -282,7 +282,7 @@ alias serverLog="logColor tail -f $RHQ_HOME/dev-container/rhq-server/logs/server
 alias pj='ps ax | grep java'
 alias killCassandra='kill -9 $(ps ax | grep cassandra | grep java | awk '\''{print $1}'\'')'
 alias killAgent='kill -9 $(ps ax | grep AgentMain | grep java | awk '\''{print $1}'\'')'
-alias killServer='kill -9 $(ps ax | grep rhq-server | grep java | awk '\''{print $1}'\'')'
+alias killServer='kill -9 $(ps ax | grep rhq-server.properties | grep java | awk '\''{print $1}'\'')'
 alias killRhq='killAgent; killCassandra; killServer'
 
 alias webcam="ssh jkremser@192.168.1.100 -Y 'mplayer tv://device=/dev/video0'"
