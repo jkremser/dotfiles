@@ -291,7 +291,23 @@ export HISTIGNORE="hist*:ls:pwd:g l:g st:g dif:rhq:rhqGui:runPostgres:bash"
 export HISTSIZE="1000000"
 export HISTFILESIZE="1000000"
 
+history() {
+  _bash_history_sync
+  builtin history "$@"
+}
+
+_bash_history_sync() {
+  builtin history -a         #1
+  HISTFILESIZE=$HISTSIZE     #2
+  builtin history -c         #3 comment out 3 and 4 if you don't want to share last commands across terminal sessions
+  builtin history -r         #4
+}
+
+PROMPT_COMMAND=_bash_history_sync
+
 shopt -s histappend # append to history, don't overwrite it
+shopt -s histreedit # reedit a history substitution line if it failed
+shopt -s histverify # edit a recalled history line before executing
 #PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND" # Save and reload the history after each command finishes
 
 # don't complete if there is no command
@@ -323,7 +339,7 @@ export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge"
 export GWT_HOME="$HOME/install/gwt-2.5.1"
-export ANDROID_SDK_HOME="$HOME/install/adt-bundle-linux-x86-20130717/sdk"
+export ANDROID_SDK_HOME="$HOME/install/adt-bundle-linux-x86_64-20140321/sdk"
 export ANDROID_HOME="$ANDROID_SDK_HOME"
 export SCALA_HOME="$HOME/install/scala-2.10.2"
 export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
