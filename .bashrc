@@ -34,7 +34,7 @@ promptText() {
   PS1="[\u@\h \W$GREEN $GITBRANCH$NORMAL]";
   PS1="\[\033[G\]$PS1$RED$CODE_STR$NORMAL\$ ";
 }
-export PROMPT_COMMAND=promptText
+#export PROMPT_COMMAND=promptText
 
 #PS1='[\u@\h \W\[\033[0;32m\]$(__git_ps1 " %s")\[\033[00m\]]\$ '
 #PS1="\[\033[G\]$PS1"
@@ -301,6 +301,7 @@ _bash_history_sync() {
   HISTFILESIZE=$HISTSIZE     #2
   builtin history -c         #3 comment out 3 and 4 if you don't want to share last commands across terminal sessions
   builtin history -r         #4
+  promptText  
 }
 
 PROMPT_COMMAND=_bash_history_sync
@@ -319,6 +320,10 @@ export GREP_COLOR="0;31"
 
 # wrap the text content on the screen
 #export LESS="-FerX"
+
+# syntax highlight in less (assumes the source-highlight package to be installed)
+export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+export LESS=' -R '
 
 export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
 export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address=9797,server=y,suspend=n'
