@@ -280,7 +280,7 @@ alias ctailf="logColor tailf"
 alias agentLog="logColor tail -f $RHQ_AGENT_INSTALL_DIR/logs/agent.log"
 alias serverLog="logColor tail -f $RHQ_HOME/dev-container/rhq-server/logs/server.log"
 alias killCassandra='kill -9 $(ps ax | grep cassandra | grep java | awk '\''{print $1}'\'')'
-alias killAgent='kill -9 $(ps ax | grep agent | grep java | awk '\''{print $1}'\'')'
+alias killAgent='kill -9 $(ps ax | grep AgentMain | grep java | awk '\''{print $1}'\'')'
 alias killServer='kill -9 $(ps ax | grep rhq-server | grep java | awk '\''{print $1}'\'')'
 alias killRhq='killAgent; killCassandra; killServer'
 
