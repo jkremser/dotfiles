@@ -279,7 +279,8 @@ alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
 alias ctailf="logColor tailf"
 alias agentLog="logColor tail -f $RHQ_AGENT_INSTALL_DIR/logs/agent.log"
 alias serverLog="logColor tail -f $RHQ_HOME/dev-container/rhq-server/logs/server.log"
-alias cassandra-kill='kill -9 $(ps ax | grep cassandra | grep java | awk '\''{print $1}'\'')'
+alias killCassandra='kill -9 $(ps aux | grep cassandra | grep java | awk '\''{print $1}'\'')'
+alias killAgent='kill -9 $(ps aux | grep cassandra | grep java | awk '\''{print $1}'\'')'
 
 alias webcam="ssh jkremser@192.168.1.100 -Y 'mplayer tv://device=/dev/video0'"
 
