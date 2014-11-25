@@ -342,11 +342,11 @@ export RHQ_AGENT_DEBUG="true"
 #JAVA_HOME
 #export JAVA_HOME="$HOME/install/jdk1.6.0_24"
 #export JAVA_HOME="$HOME/install/jdk1.6.0_31"
-export JAVA_HOME="$HOME/install/jdk1.7.0_55"
+export JAVA_HOME="$HOME/install/jdk1.7.0_71"
 #export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.3.0.fc19.i386"
 #export JAVA_HOME="$HOME/install/jdk1.8.0_11"
 
-export M2_HOME="$HOME/install/apache-maven-3.2.1"
+export M2_HOME="$HOME/install/apache-maven-3.2.3"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge"
@@ -360,11 +360,22 @@ export PATH="$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$AN
 # rhq ant bundle deployer
 export PATH="/home/jkremser/install/node-v0.10.22-linux-x86/bin:$PATH"
 export PATH="$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin:$PATH"
+export PATH="/home/jkremser/install/openshift-origin/_output/local/go/bin:$PATH"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
 
 # C*
 export MAX_HEAP_SIZE="512M"
 export HEAP_NEWSIZE="128M"
+
+export GOPATH=/home/jkremser/install/go-workspace
+
+
+#export OPENSHIFT_DEV_CLUSTER=true
+#export OPENSHIFT_NUM_MINIONS=1
+#export DOCKER_TLS=no
+#export EXTRA_ARGS="--insecure-registry 192.168.59.103:5000 --insecure-registry dockerhost:5000 --insecure-registry 10.245.2.2:5000 --insecure-registry 10.245.2.3:5000"
+#export KUBERNETES_MASTER=http://10.245.1.2:8080
+#export DOCKER_REGISTRY=10.245.2.2:5000
 
 #export HADOOP_LOG_DIR=$HADOOP_HOME/log
 
