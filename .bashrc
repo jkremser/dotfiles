@@ -342,9 +342,9 @@ export RHQ_AGENT_DEBUG="true"
 #JAVA_HOME
 #export JAVA_HOME="$HOME/install/jdk1.6.0_24"
 #export JAVA_HOME="$HOME/install/jdk1.6.0_31"
-export JAVA_HOME="$HOME/install/jdk1.7.0_71"
+#export JAVA_HOME="$HOME/install/jdk1.7.0_71"
 #export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.3.0.fc19.i386"
-#export JAVA_HOME="$HOME/install/jdk1.8.0_11"
+export JAVA_HOME="$HOME/install/jdk1.8.0_25"
 
 export M2_HOME="$HOME/install/apache-maven-3.2.3"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
@@ -417,3 +417,9 @@ alias deploy32='docker run -d --name jon32-psql vnguyen/rhq-psql; docker run -dP
 # Launch RHQ server
 #docker run -dPit --link rhq-psql:db --name rhq-server docker-registry.usersys.redhat.com/jon_qe/rhq-master-nodb
 alias deployLatestMaster='docker run -d --name rhq-psql vnguyen/rhq-psql; docker run -dPit --link rhq-psql:db --name rhq-server docker-registry.usersys.redhat.com/jon_qe/rhq-master-nodb'
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/home/jkremser/install/google-cloud-sdk/path.bash.inc'
+
+# The next line enables bash completion for gcloud.
+source '/home/jkremser/install/google-cloud-sdk/completion.bash.inc'
