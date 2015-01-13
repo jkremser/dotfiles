@@ -345,22 +345,25 @@ export RHQ_AGENT_DEBUG="true"
 #export JAVA_HOME="$HOME/install/jdk1.7.0_71"
 #export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.3.0.fc19.i386"
 export JAVA_HOME="$HOME/install/jdk1.8.0_25"
-
 export M2_HOME="$HOME/install/apache-maven-3.2.3"
+#export GRADLE_HOME="$HOME/install/gradle-2.2.1"
+export GRADLE_HOME="$HOME/install/android-studio/gradle/gradle-2.2.1"
+#export M2_HOME="$HOME/install/apache-maven-2.2.1"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge"
+export JBAKE_HOME="$HOME/install/jbake-2.3.2"
 export GWT_HOME="$HOME/install/gwt-2.5.1"
-export ANDROID_SDK_HOME="$HOME/install/adt-bundle-linux-x86_64-20140321/sdk"
+export ANDROID_SDK_HOME="$HOME/install/adt-bundle-linux-x86_64-20140702/sdk"
 export ANDROID_HOME="$ANDROID_SDK_HOME"
 export SCALA_HOME="$HOME/install/scala-2.10.2"
 export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
-export PATH="$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin:$PATH"
+export PATH="$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin:$PATH"
 # rhq ant bundle deployer
-export PATH="/home/jkremser/install/node-v0.10.22-linux-x86/bin:$PATH"
+export PATH="$HOME/install/android-ndk-r10d:$HOME/install//node-v0.10.22-linux-x86/bin:$PATH"
 export PATH="$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin:$PATH"
-export PATH="/home/jkremser/install/openshift-origin/_output/local/go/bin:$PATH"
+export PATH="$HOME/install/openshift-origin/_output/local/go/bin:$PATH"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
 
 # C*
@@ -368,6 +371,8 @@ export MAX_HEAP_SIZE="512M"
 export HEAP_NEWSIZE="128M"
 
 export GOPATH=/home/jkremser/install/go-workspace
+
+export WINEARCH=win32
 
 
 #export OPENSHIFT_DEV_CLUSTER=true
