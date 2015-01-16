@@ -349,7 +349,10 @@ export M2_HOME="$HOME/install/apache-maven-3.2.3"
 #export GRADLE_HOME="$HOME/install/gradle-2.2.1"
 export GRADLE_HOME="$HOME/install/android-studio/gradle/gradle-2.2.1"
 #export M2_HOME="$HOME/install/apache-maven-2.2.1"
-export MAVEN_OPTS="-Xms256M -Xmx768M -XX:PermSize=128M -XX:MaxPermSize=256M -XX:ReservedCodeCacheSize=96M"
+
+export MAVEN_OPTS="-Xms256M -Xmx768M -XX:ReservedCodeCacheSize=96M"
+# add permgen jvm options for jdk 7 and lower
+[[ $("$JAVA_HOME/bin/java" -version 2>&1 | awk -F '"' '/version/ {print $2}') > "1.8" ]] || export MAVEN_OPTS="$MAVEN_OPTS -XX:PermSize=128M -XX:MaxPermSize=256M"
 #export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge"
 export JBAKE_HOME="$HOME/install/jbake-2.3.2"
@@ -428,3 +431,6 @@ source '/home/jkremser/install/google-cloud-sdk/path.bash.inc'
 
 # The next line enables bash completion for gcloud.
 source '/home/jkremser/install/google-cloud-sdk/completion.bash.inc'
+
+# added by travis gem
+[ -f /home/jkremser/.travis/travis.sh ] && source /home/jkremser/.travis/travis.sh
