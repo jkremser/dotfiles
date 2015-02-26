@@ -177,6 +177,8 @@ alias gpll="g pll"
 alias gd="g dif"
 alias gdf="gd"
 alias gap="g ap"
+alias grc="g rc"
+alias gra="g ra"
 
 # cd
 alias ..='cd ..'
@@ -362,7 +364,7 @@ export ANDROID_HOME="$ANDROID_SDK_HOME"
 export SCALA_HOME="$HOME/install/scala-2.10.2"
 export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
-export PATH="$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin:$PATH"
+export PATH="$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin:$PATH"
 # rhq ant bundle deployer
 export PATH="$HOME/install/android-ndk-r10d:$HOME/install//node-v0.10.22-linux-x86/bin:$PATH"
 export PATH="$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin:$PATH"

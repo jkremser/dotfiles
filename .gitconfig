@@ -29,6 +29,8 @@
 	cd = checkout
 	sh = show
   ap = add -p
+  rc = rebase --continue
+  ra = rebase --abort
 
 	# Undo a `git push`
 	undopush = push -f origin HEAD^:master
