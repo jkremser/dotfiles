@@ -342,11 +342,17 @@ export RHQ_AGENT_DEBUG="true"
 #export RHQ_CONTROL_DEBUG="true"
 
 #JAVA_HOME
-#export JAVA_HOME="$HOME/install/jdk1.6.0_24"
-#export JAVA_HOME="$HOME/install/jdk1.6.0_31"
-#export JAVA_HOME="$HOME/install/jdk1.7.0_71"
-#export JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.60-2.4.3.0.fc19.i386"
-export JAVA_HOME="$HOME/install/jdk1.8.0_25"
+[[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_71"
+[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_25"
+[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_25"
+
+# simple jdk switcher
+jdk() {
+  [[ "x$1" == "x7" ]] && echo "jdk 7" && JDK_VER="7" bash
+  [[ "x$1" == "x8" ]] && echo "jdk 8" && JDK_VER="8" bash
+  [[ "x$1" == "x" ]] && echo "no jdk version specified, defaults to jdk 8" && JDK_VER="8" bash
+}
+
 export M2_HOME="$HOME/install/apache-maven-3.2.3"
 #export GRADLE_HOME="$HOME/install/gradle-2.2.1"
 export GRADLE_HOME="$HOME/install/android-studio/gradle/gradle-2.2.1"
