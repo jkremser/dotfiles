@@ -385,58 +385,6 @@ export GOPATH=/home/jkremser/install/go-workspace
 
 export WINEARCH=win32
 
-
-#export OPENSHIFT_DEV_CLUSTER=true
-#export OPENSHIFT_NUM_MINIONS=1
-#export DOCKER_TLS=no
-#export EXTRA_ARGS="--insecure-registry 192.168.59.103:5000 --insecure-registry dockerhost:5000 --insecure-registry 10.245.2.2:5000 --insecure-registry 10.245.2.3:5000"
-#export KUBERNETES_MASTER=http://10.245.1.2:8080
-#export DOCKER_REGISTRY=10.245.2.2:5000
-
-#export HADOOP_LOG_DIR=$HADOOP_HOME/log
-
-
-
-#rhq@docker
-#RHQ/JON-ready PostgresSQL
-#docker pull vnguyen/rhq-psql
-
-#JON 3.2.GA Server
-#docker pull docker-registry.usersys.redhat.com/jon_qe/jon32-nodb
-
-#JON 3.3 ER3
-#docker pull docker-registry.usersys.redhat.com/jon_qe/jon33:er3
-
-#RHQ Master (image built nightly)
-#docker pull docker-registry.usersys.redhat.com/jon_qe/rhq-master-nodb
-alias pullRhqImages='docker pull docker-registry.usersys.redhat.com/jon_qe/jon32-nodb; docker pull docker-registry.usersys.redhat.com/jon_qe/jon33:er3; docker pull docker-registry.usersys.redhat.com/jon_qe/rhq-master-nodb'
-
-
-##DEPLOY JON SERVER v. 3.2.GA
-# Launch Postgresql db
-#docker run -d --name jon32-psql vnguyen/rhq-psql
- 
-# Launch JON server
-#docker run -dPit --link jon32-psql:db --name jon32-server docker-registry.usersys.redhat.com/jon_qe/jon32-nodb
- 
-# Find out public http port of JON UI
-#docker port jon32-server 7080
- 
-# Watch JON server.log
-#docker logs -f jon32-server
-alias deploy32='docker run -d --name jon32-psql vnguyen/rhq-psql; docker run -dPit --link jon32-psql:db --name jon32-server docker-registry.usersys.redhat.com/jon_qe/jon32-nodb; docker port jon32-server 7080; docker logs -f jon32-server'
-
-##DEPLOY UPSTREAM RHQ SERVER
-# Launch Postgresql db
-#docker run -d --name rhq-psql vnguyen/rhq-psql
- 
-# Launch RHQ server
-#docker run -dPit --link rhq-psql:db --name rhq-server docker-registry.usersys.redhat.com/jon_qe/rhq-master-nodb
-alias deployLatestMaster='docker run -d --name rhq-psql vnguyen/rhq-psql; docker run -dPit --link rhq-psql:db --name rhq-server docker-registry.usersys.redhat.com/jon_qe/rhq-master-nodb'
-
-# The next line updates PATH for the Google Cloud SDK.
-source '/home/jkremser/install/google-cloud-sdk/path.bash.inc'
-
 # The next line enables bash completion for gcloud.
 source '/home/jkremser/install/google-cloud-sdk/completion.bash.inc'
 
