@@ -264,10 +264,6 @@ alias certList="certutil -d sql:$HOME/.pki/nssdb -L" # add '-h all' to see all b
 # Quick search in a directory for a string
 alias search="ack -i "
 
-# phone
-alias n4mount="simple-mtpfs ~/Nexus4"
-alias n4umount="fusermount -u ~/Nexus4"
-
 #rhq
 export WORKSPACE="$HOME/workspace"
 export RHQ_HOME="$WORKSPACE/rhq"
@@ -411,3 +407,5 @@ source '/home/jkremser/install/google-cloud-sdk/completion.bash.inc'
 
 # added by travis gem
 [ -f /home/jkremser/.travis/travis.sh ] && source /home/jkremser/.travis/travis.sh
+
+. ~/.personal.sh
