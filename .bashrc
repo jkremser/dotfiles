@@ -77,6 +77,7 @@ export TEXT_RED=$(tput setaf 1)
 export TEXT_GREEN=$(tput setaf 2)
 export TEXT_YELLOW=$(tput setaf 3)
 export TEXT_BLUE=$(tput setaf 4)
+export TEXT_HAWKULARBLUE=$(tput setaf 39)
 export TEXT_MAGENTA=$(tput setaf 5)
 export TEXT_CYAN=$(tput setaf 6)
 export TEXT_WHITE=$(tput setaf 7)
@@ -264,6 +265,9 @@ alias rhq='cd $WORKSPACE/rhq && echo ${TEXT_CYAN} && figlet RHQ && echo ${RESET_
 alias rhqGui='cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && echo ${TEXT_MAGENTA} && figlet coregui && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias rtl="rhqctl"
 complete -o default -o nospace -F _rhqctl rtl
+
+#hawkular
+alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet HAWKULAR && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 RHQ_VERSION="4.13.0"
 RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
