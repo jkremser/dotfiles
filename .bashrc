@@ -181,6 +181,11 @@ alias gap="g ap"
 alias grc="g rc"
 alias gra="g ra"
 
+
+showPr() {
+  [[ "x$1" == "x" ]] || git fetch origin pull/$1/head:pr$1 && g cd pr$1
+}
+
 # cd
 alias ..='cd ..'
 alias ...='cd ../../../'
