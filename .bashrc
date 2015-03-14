@@ -314,6 +314,13 @@ history() {
   builtin history "$@"
 }
 
+function histgrep() { fc -l -$((HISTSIZE-1)) | egrep "$@" ;}
+
+function topCmd() { history | awk '{ print $4 }' | sort | uniq -c |sort -rn | head $@;}
+alias top10="topCmd"
+alias top20="topCmd -20"
+alias top50="topCmd -50"
+
 _bash_history_sync() {
   builtin history -a         #1
   HISTFILESIZE=$HISTSIZE     #2
