@@ -102,6 +102,7 @@ mvnColor() {
                -e "s/\(\[ERROR\].*\)/${TEXT_RED}\1${RESET_FORMATTING}/g" \
                -e "s/\(Caused by: .*\)/${BOLD}${TEXT_ORANGE}\1${RESET_FORMATTING}/g" \
                -e "s/\(org\.rhq\..*\)/${BOLD}\1${RESET_FORMATTING}/g" \
+               -e "s/\(org\.hawkular\..*\)/${BOLD}\1${RESET_FORMATTING}/g" \
                -e "s/Tests run: \([^,]*\), Failures: \([^,]*\), Errors: \([^,]*\), Skipped: \([^,]*\)/${BOLD}${TEXT_GREEN}Tests run: \1${RESET_FORMATTING}, Failures: ${BOLD}${TEXT_RED}\2${RESET_FORMATTING}, Errors: ${BOLD}${TEXT_RED}\3${RESET_FORMATTING}, Skipped: ${BOLD}${TEXT_YELLOW}\4${RESET_FORMATTING}/g"
   echo -ne ${RESET_FORMATTING}
 }
@@ -116,6 +117,7 @@ logColor() {
            -e "s/\(\ WARN\ \ .*\)/${TEXT_YELLOW}\1${RESET_FORMATTING}/g" \
            -e "s/\(\ ERROR\ .*\)/${TEXT_RED}\1${RESET_FORMATTING}/g" \
            -e "s/\(org\.rhq\..*\)/${BOLD}\1${RESET_FORMATTING}/g" \
+           -e "s/\(org\.hawkular\..*\)/${BOLD}\1${RESET_FORMATTING}/g" \
            -e "s/\(Caused by: .*\)/${BOLD}${TEXT_RED}\1${RESET_FORMATTING}/g"
 }
 
