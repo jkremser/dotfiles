@@ -43,7 +43,7 @@ pick(){
   echo $@ | tr ',' '\n' | tr ' ' '\n' | sort -R | head -1
 }
 
-mywhich(){
+function which(){
   readlink -f $( which $1 )
 }
 
@@ -51,7 +51,7 @@ bcp(){
   cp $1{,-$( date +%F )}
 }
 
-mylog(){
+log(){
   less +F $1 |egrep --line-buffered --color=auto 'ERROR|WARN|$' # tail log & highlight errors (if your grep supports --color)
 }
 
@@ -222,9 +222,6 @@ else
   alias share="python -m SimpleHTTPServer"
 fi
 
-#which follows symlinks
-alias wh=mywhich
-
 #Show a count of how many normal files are in the current directory and below.
 alias fileNumber="find . -type f | wc -l"
 
@@ -236,7 +233,6 @@ alias plz=sudo
 alias yi="sudo yum install"
 alias ys="sudo yum search"
 
-alias log=mylog
 alias syslogs='s tail -f -n5 $(find /var/log -name \*log)'
 
 #top on steroids
