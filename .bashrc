@@ -174,8 +174,13 @@ alias grc="g rc"
 alias gra="g ra"
 
 
-showPr() {
+gpr() {
   [[ "x$1" == "x" ]] || git fetch origin pull/$1/head:pr$1 && g cd pr$1
+}
+
+ggrp() {
+  [[ $# -ne 2 ]] && echo "usage: ggrp <search_pattern> <path_prefix_to_ignore>" && return
+  git grep "$1" -- `git ls-files | grep -v $2`
 }
 
 personalize() {
