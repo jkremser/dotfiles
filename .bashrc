@@ -184,7 +184,7 @@ ggrp() {
 }
 
 personalize() {
-  G_REMOTE=`git remote -v | head -1 | sed 's;.*\(https://github.com/\)[^/]*\([^\ ]*\).*;\1Jiri-Kremser\2;g'`
+  G_REMOTE=`git remote -v | head -1 | sed 's;.*\(https://github.com/\)[^/]*\([^\ ]*\).*;git@github.com:Jiri-Kremser\2;g'`
   g remote add personal $G_REMOTE
 }
 alias gShowPr="showPr"
@@ -355,12 +355,14 @@ export RHQ_AGENT_DEBUG="true"
 #export RHQ_CONTROL_DEBUG="true"
 
 #JAVA_HOME
+[[ "x$JDK_VER" == "x6" ]] && export JAVA_HOME="$HOME/install/jdk1.6.0_45"
 [[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_71"
 [[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_25"
 [[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_25"
 
 # simple jdk switcher
 jdk() {
+  [[ "x$1" == "x6" ]] && echo "jdk 6" && JDK_VER="6" bash
   [[ "x$1" == "x7" ]] && echo "jdk 7" && JDK_VER="7" bash
   [[ "x$1" == "x8" ]] && echo "jdk 8" && JDK_VER="8" bash
   [[ "x$1" == "x" ]] && echo "no jdk version specified, defaults to jdk 8" && JDK_VER="8" bash
