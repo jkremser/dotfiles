@@ -272,6 +272,7 @@ complete -o default -o nospace -F _rhqctl rtl
 
 #hawkular
 alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet HAWKULAR && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias buildHawkular='mvn -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
 
 RHQ_VERSION="4.13.0"
 RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
