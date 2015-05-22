@@ -183,11 +183,14 @@ ggrp() {
   git grep "$1" -- `git ls-files | grep -v $2`
 }
 
+gShowPr() {
+  [[ "x$1" == "x" ]] || git fetch origin pull/$1/head:pr$1 && g cd pr$1
+}
+
 personalize() {
   G_REMOTE=`git remote -v | head -1 | sed 's;.*\(https://github.com/\)[^/]*\([^\ ]*\).*;git@github.com:Jiri-Kremser\2;g'`
   g remote add personal $G_REMOTE
 }
-alias gShowPr="showPr"
 alias gper="personalize"
 
 # cd
