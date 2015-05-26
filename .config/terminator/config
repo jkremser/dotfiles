@@ -1,0 +1,20 @@
+[global_config]
+  enabled_plugins = TestPlugin, LaunchpadCodeURLHandler, APTURLHandler, MavenPluginURLHandler, LaunchpadBugURLHandler
+  title_transmit_bg_color = "#870001"
+[keybindings]
+[profiles]
+  [[default]]
+    scrollback_lines = 30000
+    background_color = "#202020"
+    background_image = None
+    show_titlebar = False
+    foreground_color = "#bbbbbb"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
