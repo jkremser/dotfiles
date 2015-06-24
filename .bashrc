@@ -5,6 +5,34 @@
 
 [ -f /usr/share/doc/git/contrib/completion/git-completion.bash ] && source /usr/share/doc/git/contrib/completion/git-completion.bash
 
+getSpecialChar() {
+  #_SPECIAL="👒"
+  _SPECIAL_GULP="🍄"
+  _SPECIAL_MVN="🏃"
+  #_SPECIAL="👣"
+  #_SPECIAL="💊"
+  #_SPECIAL="💩"
+  _SPECIAL_NORMAL="💲"
+  #_SPECIAL="🔨"
+  _SPECIAL_CODE="λ"
+
+  [[ `git rev-parse --is-inside-work-tree 2> /dev/null` ]] && {
+    d=`pwd`
+    [[ -s "$d/pom.xml" ]] && {
+      echo $_SPECIAL_MVN
+      exit
+    }
+    [[ -s "$d/gulpfile.js" ]] && {
+      echo $_SPECIAL_GULP
+      exit
+    }
+
+    echo $_SPECIAL_CODE
+    exit
+  }
+  echo $_SPECIAL_NORMAL
+}
+
 #git cmd line branch highlighting
 promptText() {    
   CODE=$?;
@@ -21,8 +49,9 @@ promptText() {
   LIGHT_GRAY="\[\033[0;37m\]";
   NORMAL="\[\033[0m\]";
   [ $CODE != 0 ] && CODE_STR="($CODE)";
+  _SPECIAL=`getSpecialChar`
   PS1="[\u@\h \W$GREEN $GITBRANCH$NORMAL]";
-  PS1="\[\033[G\]$PS1$RED$CODE_STR$NORMAL\$ ";
+  PS1="\[\033[G\]$PS1$RED$CODE_STR$NORMAL$_SPECIAL ";
 }
 #export PROMPT_COMMAND=promptText
 
@@ -230,8 +259,8 @@ alias s=sudo
 alias plz=sudo
 
 #yum
-alias yi="sudo yum install"
-alias ys="sudo yum search"
+alias di="sudo dnf install"
+alias ds="sudo dnf search"
 
 alias syslogs='s tail -f -n5 $(find /var/log -name \*log)'
 
@@ -341,7 +370,6 @@ shopt -s histverify # edit a recalled history line before executing
 # shopt -s no_empty_cmd_com­pletion
 
 export EDITOR="vim"
-export GREP_OPTIONS="--color=auto"
 export GREP_COLOR="0;31"
 
 # wrap the text content on the screen
@@ -360,9 +388,9 @@ export RHQ_AGENT_DEBUG="true"
 
 #JAVA_HOME
 [[ "x$JDK_VER" == "x6" ]] && export JAVA_HOME="$HOME/install/jdk1.6.0_45"
-[[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_71"
-[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_25"
-[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_25"
+[[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_79"
+[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
+[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
 
 # simple jdk switcher
 jdk() {
@@ -372,7 +400,7 @@ jdk() {
   [[ "x$1" == "x" ]] && echo "no jdk version specified, defaults to jdk 8" && JDK_VER="8" bash
 }
 
-export M2_HOME="$HOME/install/apache-maven-3.2.3"
+export M2_HOME="$HOME/install/apache-maven-3.3.3"
 #export GRADLE_HOME="$HOME/install/gradle-2.2.1"
 export GRADLE_HOME="$HOME/install/android-studio/gradle/gradle-2.2.1"
 #export M2_HOME="$HOME/install/apache-maven-2.2.1"
@@ -404,8 +432,6 @@ export GOPATH=/home/jkremser/install/go-workspace
 
 export WINEARCH=win32
 
-# The next line enables bash completion for gcloud.
-source '/home/jkremser/install/google-cloud-sdk/completion.bash.inc'
 
 # added by travis gem
 [ -f /home/jkremser/.travis/travis.sh ] && source /home/jkremser/.travis/travis.sh
