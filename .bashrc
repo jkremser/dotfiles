@@ -183,6 +183,7 @@ function vim {
 #melodyping(){ ping $1|awk -F[=\ ] '/me=/{t=$(NF-1);f=3000-14*log(t^20);c="play -q -n synth 0.7s pl " f;print $0;system(c)}';}
 
 #aliases
+alias mountPhone="simple-mtpfs --device 1 ~/foo"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'em1' -t '^(GET|POST) ' 'tcp and port 80'"
