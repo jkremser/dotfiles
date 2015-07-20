@@ -327,6 +327,7 @@ alias killCassandra='kill -9 $(ps ax | grep cassandra | grep java | awk '\''{pri
 alias killAgent='kill -9 $(ps ax | grep AgentMain | grep java | awk '\''{print $1}'\'')'
 alias killServer='kill -9 $(ps ax | grep rhq-server.properties | grep java | awk '\''{print $1}'\'')'
 alias killRhq='killAgent; killCassandra; killServer'
+alias killHawk='kill -9 $(ps ax | grep "standalone/log/server.log" | grep java | awk '\''{print $1}'\'')'
 
 alias webcam="ssh jkremser@192.168.1.100 -Y 'mplayer tv://device=/dev/video0'"
 
