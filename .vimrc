@@ -1,5 +1,6 @@
 "syntax highlighting
 syntax on
+colorscheme peachpuff
 
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
