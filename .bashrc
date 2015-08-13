@@ -125,7 +125,7 @@ mvnColor() {
                -e "s/Tests run: \([^,]*\), Failures: \([^,]*\), Errors: \([^,]*\), Skipped: \([^,]*\)/${BOLD}${TEXT_GREEN}Tests run: \1${RESET_FORMATTING}, Failures: ${BOLD}${TEXT_RED}\2${RESET_FORMATTING}, Errors: ${BOLD}${TEXT_RED}\3${RESET_FORMATTING}, Skipped: ${BOLD}${TEXT_YELLOW}\4${RESET_FORMATTING}/g"
   echo -ne ${RESET_FORMATTING}
 }
-alias mvn="mvnColor"
+#alias mvn="mvnColor"
 ##### </Maven colors>
 
 
@@ -316,6 +316,8 @@ alias ctl="logColor rhqctl"
 alias runSer="mvn clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-8.2.0.Final/bin/standalone.sh -DprettyJson=true --debug"
 alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
+alias runHawk="hawk && cd hawkular/dist && mvn clean install -DskipTests -Pdev && ./target/hawkular-*/hawkular-*/bin/standalone.sh -Dhawkular.log.inventory.rest.requests=DEBUG -Dhawkular.log.inventory=DEBUG -Dhawkular.log.cassandra=WARN"
+alias runHawkAgentless="runHawk -Dhawkular.agent.enabled=false"
 alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
 alias ctailf="logColor tailf"
@@ -393,6 +395,8 @@ export RHQ_AGENT_DEBUG="true"
 [[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_79"
 [[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
 [[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
+
+export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
 
 # simple jdk switcher
 jdk() {
