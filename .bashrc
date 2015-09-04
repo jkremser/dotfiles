@@ -301,7 +301,7 @@ alias rtl="rhqctl"
 complete -o default -o nospace -F _rhqctl rtl
 
 #hawkular
-alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet HAWKULAR && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 Hawkular && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias buildHawkular='mvn -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
 
 RHQ_VERSION="4.13.0"
@@ -396,7 +396,7 @@ export RHQ_AGENT_DEBUG="true"
 [[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
 [[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
 
-export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
+#export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
 
 # simple jdk switcher
 jdk() {
@@ -405,6 +405,11 @@ jdk() {
   [[ "x$1" == "x8" ]] && echo "jdk 8" && JDK_VER="8" bash
   [[ "x$1" == "x" ]] && echo "no jdk version specified, defaults to jdk 8" && JDK_VER="8" bash
 }
+
+export JAVA_OPTS="$JAVA_OPTS -Djboss.modules.system.pkgs=com.jprofiler -agentlib:jprofilerti=port=8849 -Xbootclasspath/a:/home/jkremser/install/jprofiler9/bin/agent.jar"
+# -agentpath:/home/jkremser/install/jprofiler9/bin/linux-x64/libjprofilerti.so"
+export LD_LIBRARY_PATH="/home/jkremser/install/jprofiler9/bin/linux-x64"
+
 
 export M2_HOME="$HOME/install/apache-maven-3.3.3"
 #export GRADLE_HOME="$HOME/install/gradle-2.2.1"
