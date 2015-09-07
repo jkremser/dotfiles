@@ -406,9 +406,8 @@ jdk() {
   [[ "x$1" == "x" ]] && echo "no jdk version specified, defaults to jdk 8" && JDK_VER="8" bash
 }
 
-export JAVA_OPTS="$JAVA_OPTS -Djboss.modules.system.pkgs=com.jprofiler -agentlib:jprofilerti=port=8849 -Xbootclasspath/a:/home/jkremser/install/jprofiler9/bin/agent.jar"
-# -agentpath:/home/jkremser/install/jprofiler9/bin/linux-x64/libjprofilerti.so"
-export LD_LIBRARY_PATH="/home/jkremser/install/jprofiler9/bin/linux-x64"
+alias profilingOn="export JAVA_OPTS=\"$JAVA_OPTS -Djboss.modules.system.pkgs=com.jprofiler -agentlib:jprofilerti=port=8849 -Xbootclasspath/a:/home/jkremser/install/jprofiler9/bin/agent.jar\" export LD_LIBRARY_PATH=\"/home/jkremser/install/jprofiler9/bin/linux-x64\""
+alias profilingOff="export JAVA_OPTS=\"\" export LD_LIBRARY_PATH=\"\""
 
 
 export M2_HOME="$HOME/install/apache-maven-3.3.3"
