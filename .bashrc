@@ -125,7 +125,7 @@ mvnColor() {
                -e "s/Tests run: \([^,]*\), Failures: \([^,]*\), Errors: \([^,]*\), Skipped: \([^,]*\)/${BOLD}${TEXT_GREEN}Tests run: \1${RESET_FORMATTING}, Failures: ${BOLD}${TEXT_RED}\2${RESET_FORMATTING}, Errors: ${BOLD}${TEXT_RED}\3${RESET_FORMATTING}, Skipped: ${BOLD}${TEXT_YELLOW}\4${RESET_FORMATTING}/g"
   echo -ne ${RESET_FORMATTING}
 }
-#alias mvn="mvnColor"
+alias m="mvnColor"
 ##### </Maven colors>
 
 
@@ -302,7 +302,7 @@ complete -o default -o nospace -F _rhqctl rtl
 
 #hawkular
 alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 Hawkular && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
-alias buildHawkular='mvn -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
+alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
 
 RHQ_VERSION="4.13.0"
 RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
@@ -313,10 +313,10 @@ alias runPostgres="sudo service postgresql start"
 alias ctl="logColor rhqctl"
 #alias runSer="runServer console"
 #alias runSer="ctl console --server"
-alias runSer="mvn clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-8.2.0.Final/bin/standalone.sh -DprettyJson=true --debug"
+alias runSer="m clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-8.2.0.Final/bin/standalone.sh -DprettyJson=true --debug"
 alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
-alias runHawk="hawk && cd hawkular/dist && mvn clean install -DskipTests -Pdev && ./target/hawkular-*/hawkular-*/bin/standalone.sh -Dhawkular.log.inventory.rest.requests=DEBUG -Dhawkular.log.inventory=DEBUG -Dhawkular.log.cassandra=WARN"
+alias runHawk="hawk && cd hawkular/dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/hawkular-*/bin/standalone.sh -Dhawkular.log.inventory.rest.requests=DEBUG -Dhawkular.log.inventory=DEBUG -Dhawkular.log.cassandra=WARN"
 alias runHawkAgentless="runHawk -Dhawkular.agent.enabled=false"
 alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
