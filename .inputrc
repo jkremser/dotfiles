@@ -2,3 +2,5 @@
 "\e[A":history-search-backward
 # arrow down
 "\e[B":history-search-forward
+# ctrl+alt+l to expand alias
+"\e\C-l":alias-expand-line
