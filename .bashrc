@@ -318,7 +318,7 @@ alias runSer="m clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-
 alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
 alias runHawk="hawk && cd hawkular/dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/hawkular-*/bin/standalone.sh -Dhawkular.log.inventory=DEBUG -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
-alias buildRest="hawk && cd hawkular/modules/hawkular-api && m clean install -Pdev -DskipTests"
+alias buildRest="hawk && cd hawkular/modules/hawkular-api-parent && m clean install -Pdev -DskipTests"
 alias runLoadTests="hawk && cd hawkular-inventory/hawkular-inventory-load-tests && m gatling:execute"
 # -DresourceTypes=6 -DmetricTypes=4 -Dresources=30 -Dmetrics=1 -DreadEntity=6 -Dusers=5 -DlogLevel=0"
 alias runHawkAgentless="runHawk -Dhawkular.agent.enabled=false"
