@@ -12,9 +12,9 @@
 	difw = diff --ignore-all-space --color --word-diff
 
 	# View the SHA, description, and history graph of the latest 25 commits
-	g = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\" --graph --abbrev=9
-  l1 = log --pretty=format:\"%h %Cblue%ci%Creset %cn %Cgreen%s%Creset\" --graph --abbrev=9
-  l = log --pretty=format:\"%h %Cblue%cr%Creset %cn %Cgreen%s%Creset\" --topo-order --no-merges --abbrev=9
+	g = log --pretty=format:\"%h %Cblue%cr%Creset %an %Cgreen%s%Creset\" --graph --abbrev=9
+  l1 = log --pretty=format:\"%h %Cblue%ci%Creset %an %Cgreen%s%Creset\" --graph --abbrev=9
+  l = log --pretty=format:\"%h %Cblue%cr%Creset %an %Cgreen%s%Creset\" --topo-order --no-merges --abbrev=9
   l4-helper = log --date=iso --pretty=format:\"%nbranch:  %%REPLACE%%%nlink:    https://github.com/rhq-project/rhq/commit/%h%ntime:    %C(green)%cd%Creset%ncommit:  %C(yellow)%H%Creset%nauthor:  %C(red)%an - %ae%Creset%nmessage: %w(72,0,9)%B%Creset%n\" -4 --abbrev=9
 
   #shows the commits made on this branch that are not present on the other branch specified as an argument
@@ -76,7 +76,7 @@
   pretty = format:time:    %C(green)%ad%Creset%ncommit:  %C(yellow)%H%Creset%nauthor:  %C(red)%an - %ae%Creset%nmessage: %C(blue)%s%Creset%n%n
 
 [branch]
-	autosetuprebase = always
+	#autosetuprebase = always
 [merge]
 	tool = meld
 [push]
@@ -85,3 +85,5 @@
 	excludesfile = ~/.gitignore
 [help]
 	autocorrect = 1
+[grep]
+	lineNumber = true
