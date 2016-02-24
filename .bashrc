@@ -453,3 +453,5 @@ export WINEARCH=win32
 [ -f /home/jkremser/.travis/travis.sh ] && source /home/jkremser/.travis/travis.sh
 
 . ~/.personal.sh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
