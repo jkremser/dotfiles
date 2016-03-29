@@ -84,7 +84,6 @@ certAdd(){
   certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n $1 -i $1
 }
 
-
 ##### </Maven colors>
 # Mvn color (https://gist.github.com/1027800) 
 # Formatting constants
@@ -125,9 +124,8 @@ mvnColor() {
                -e "s/Tests run: \([^,]*\), Failures: \([^,]*\), Errors: \([^,]*\), Skipped: \([^,]*\)/${BOLD}${TEXT_GREEN}Tests run: \1${RESET_FORMATTING}, Failures: ${BOLD}${TEXT_RED}\2${RESET_FORMATTING}, Errors: ${BOLD}${TEXT_RED}\3${RESET_FORMATTING}, Skipped: ${BOLD}${TEXT_YELLOW}\4${RESET_FORMATTING}/g"
   echo -ne ${RESET_FORMATTING}
 }
-alias m="mvnColor"
+alias mv="mvnColor"
 ##### </Maven colors>
-
 
 logColor() {
   echo $@
@@ -202,7 +200,6 @@ alias gdf="gd"
 alias gap="g ap"
 alias grc="g rc"
 alias gra="g ra"
-
 
 gpr() {
   [[ "x$1" == "x" ]] || git fetch origin pull/$1/head:pr$1 && g cd pr$1
@@ -304,6 +301,7 @@ complete -o default -o nospace -F _rhqctl rtl
 #hawkular
 alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 Hawkular && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
+alias hawkR='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 ruby client && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 RHQ_VERSION="4.13.0"
 RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
@@ -400,6 +398,7 @@ export RHQ_AGENT_DEBUG="true"
 [[ "x$JDK_VER" == "x6" ]] && export JAVA_HOME="$HOME/install/jdk1.6.0_45"
 [[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_79"
 [[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
+[[ "x$JDK_VER" == "x84" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_74"
 [[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
 
 #export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
@@ -408,13 +407,12 @@ export RHQ_AGENT_DEBUG="true"
 jdk() {
   [[ "x$1" == "x6" ]] && echo "jdk 6" && JDK_VER="6" bash
   [[ "x$1" == "x7" ]] && echo "jdk 7" && JDK_VER="7" bash
-  [[ "x$1" == "x8" ]] && echo "jdk 8" && JDK_VER="8" bash
+  [[ "x$1" == "x8x" ]] && echo "jdk 8" && JDK_VER="8" bash
   [[ "x$1" == "x" ]] && echo "no jdk version specified, defaults to jdk 8" && JDK_VER="8" bash
 }
 
 alias profilingOn="export JAVA_OPTS=\"$JAVA_OPTS -Djboss.modules.system.pkgs=com.jprofiler -agentlib:jprofilerti=port=8849 -Xbootclasspath/a:/home/jkremser/install/jprofiler9/bin/agent.jar\" export LD_LIBRARY_PATH=\"/home/jkremser/install/jprofiler9/bin/linux-x64\""
 alias profilingOff="export JAVA_OPTS=\"\" export LD_LIBRARY_PATH=\"\""
-
 
 export M2_HOME="$HOME/install/apache-maven-3.3.3"
 #export GRADLE_HOME="$HOME/install/gradle-2.2.1"
@@ -433,11 +431,11 @@ export ANDROID_HOME="$ANDROID_SDK_HOME"
 export SCALA_HOME="$HOME/install/scala-2.11.6"
 export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
-export PATH="$HOME/install/node-v4.2.2-linux-x64/bin:$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin:$PATH"
+export PATH="$PATH:$HOME/install/node-v4.2.2-linux-x64/bin:$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin"
 # rhq ant bundle deployer
-export PATH="$HOME/install/android-ndk-r10d:$HOME/install//node-v0.10.22-linux-x86/bin:$PATH"
-export PATH="$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin:$PATH"
-export PATH="$HOME/install/openshift-origin/_output/local/go/bin:$PATH"
+export PATH="$PATH:$HOME/install/android-ndk-r10d:$HOME/install/node-v0.10.22-linux-x86/bin"
+export PATH="$PATH:$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin"
+export PATH="$PATH:$HOME/install/openshift-origin/_output/local/go/bin"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
 
 # C*
@@ -448,10 +446,10 @@ export GOPATH=/home/jkremser/install/go-workspace
 
 export WINEARCH=win32
 
-
 # added by travis gem
 [ -f /home/jkremser/.travis/travis.sh ] && source /home/jkremser/.travis/travis.sh
 
 . ~/.personal.sh
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+
