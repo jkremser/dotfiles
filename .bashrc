@@ -300,7 +300,7 @@ complete -o default -o nospace -F _rhqctl rtl
 
 #hawkular
 alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 Hawkular && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
-alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
+alias buildHawkular='mv -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
 alias hawkR='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 ruby client && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 RHQ_VERSION="4.13.0"
@@ -312,16 +312,16 @@ alias runPostgres="sudo service postgresql start"
 alias ctl="logColor rhqctl"
 #alias runSer="runServer console"
 #alias runSer="ctl console --server"
-alias runSer="m clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-8.2.0.Final/bin/standalone.sh -DprettyJson=true --debug"
+alias runSer="mv clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-8.2.0.Final/bin/standalone.sh -DprettyJson=true --debug"
 alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
-alias runHawk="hawk && cd hawkular/dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
-alias buildRest="hawk && cd hawkular/modules/hawkular-api-parent && m clean install -Pdev -DskipTests"
-alias runLoadTests="hawk && cd hawkular-inventory/hawkular-inventory-load-tests && m gatling:execute"
+alias runHawk="hawk && cd hawkular/dist && mv clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
+alias buildRest="hawk && cd hawkular/modules/hawkular-api-parent && mv clean install -Pdev -DskipTests"
+alias runLoadTests="hawk && cd hawkular-inventory/hawkular-inventory-load-tests && mv gatling:execute"
 # -DresourceTypes=6 -DmetricTypes=4 -Dresources=30 -Dmetrics=1 -DreadEntity=6 -Dusers=5 -DlogLevel=0"
 alias runHawkAgentless="runHawk -Dhawkular.agent.enabled=false"
 alias runHawkBusless="runHawkAgentless -Dinventory.bus.integration=false"
-alias buildInv="hawk && cd hawkular-inventory && m clean install -DskipTests"
+alias buildInv="hawk && cd hawkular-inventory && mv clean install -DskipTests"
 alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
 alias ctailf="logColor tailf"
