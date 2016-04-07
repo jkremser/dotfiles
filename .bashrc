@@ -380,6 +380,8 @@ shopt -s histverify # edit a recalled history line before executing
 
 export EDITOR="vim"
 export GREP_COLOR="0;31"
+type most &> /dev/null && export PAGER="most"
+
 
 # wrap the text content on the screen
 #export LESS="-FerX"
