@@ -124,7 +124,7 @@ mvnColor() {
                -e "s/Tests run: \([^,]*\), Failures: \([^,]*\), Errors: \([^,]*\), Skipped: \([^,]*\)/${BOLD}${TEXT_GREEN}Tests run: \1${RESET_FORMATTING}, Failures: ${BOLD}${TEXT_RED}\2${RESET_FORMATTING}, Errors: ${BOLD}${TEXT_RED}\3${RESET_FORMATTING}, Skipped: ${BOLD}${TEXT_YELLOW}\4${RESET_FORMATTING}/g"
   echo -ne ${RESET_FORMATTING}
 }
-alias mv="mvnColor"
+alias m="mvnColor"
 ##### </Maven colors>
 
 logColor() {
@@ -300,7 +300,7 @@ complete -o default -o nospace -F _rhqctl rtl
 
 #hawkular
 alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 Hawkular && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
-alias buildHawkular='mv -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
+alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
 alias hawkR='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 ruby client && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 RHQ_VERSION="4.13.0"
@@ -312,16 +312,16 @@ alias runPostgres="sudo service postgresql start"
 alias ctl="logColor rhqctl"
 #alias runSer="runServer console"
 #alias runSer="ctl console --server"
-alias runSer="mv clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-8.2.0.Final/bin/standalone.sh -DprettyJson=true --debug"
+alias runSer="m clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-8.2.0.Final/bin/standalone.sh -DprettyJson=true --debug"
 alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
-alias runHawk="hawk && cd hawkular/dist && mv clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
-alias buildRest="hawk && cd hawkular/modules/hawkular-api-parent && mv clean install -Pdev -DskipTests"
-alias runLoadTests="hawk && cd hawkular-inventory/hawkular-inventory-load-tests && mv gatling:execute"
+alias runHawk="hawk && cd hawkular/dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
+alias buildRest="hawk && cd hawkular/modules/hawkular-api-parent && m clean install -Pdev -DskipTests"
+alias runLoadTests="hawk && cd hawkular-inventory/hawkular-inventory-load-tests && m gatling:execute"
 # -DresourceTypes=6 -DmetricTypes=4 -Dresources=30 -Dmetrics=1 -DreadEntity=6 -Dusers=5 -DlogLevel=0"
 alias runHawkAgentless="runHawk -Dhawkular.agent.enabled=false"
 alias runHawkBusless="runHawkAgentless -Dinventory.bus.integration=false"
-alias buildInv="hawk && cd hawkular-inventory && mv clean install -DskipTests"
+alias buildInv="hawk && cd hawkular-inventory && m clean install -DskipTests"
 alias runCli="$RHQ_HOME/modules/enterprise/remoting/cli/target/rhq-remoting-cli-$RHQ_VERSION-SNAPSHOT/bin/rhq-cli.sh"
 alias runCliLogin="runCli --user rhqadmin --password  rhqadmin"
 alias ctailf="logColor tailf"
@@ -334,6 +334,7 @@ alias killAgent='kill -9 $(ps ax | grep AgentMain | grep java | awk '\''{print $
 alias killServer='kill -9 $(ps ax | grep rhq-server.properties | grep java | awk '\''{print $1}'\'')'
 alias killRhq='killAgent; killCassandra; killServer'
 alias killHawk='kill -9 $(ps ax | grep "standalone/log/server.log" | grep java | awk '\''{print $1}'\'')'
+alias runMiq='bundle exec rake evm:start && bundle exec rails s'
 
 alias webcam="ssh evanii@192.168.1.100 -Y 'mplayer tv://device=/dev/video0'"
 alias microphone="arecord -f dat | ssh -C evanii@192.169.1.111 aplay -f dat"
@@ -401,7 +402,7 @@ export RHQ_AGENT_DEBUG="true"
 [[ "x$JDK_VER" == "x6" ]] && export JAVA_HOME="$HOME/install/jdk1.6.0_45"
 [[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_79"
 [[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
-[[ "x$JDK_VER" == "x84" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_74"
+[[ "x$JDK_VER" == "x87" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_74"
 [[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
 
 #export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
@@ -410,7 +411,7 @@ export RHQ_AGENT_DEBUG="true"
 jdk() {
   [[ "x$1" == "x6" ]] && echo "jdk 6" && JDK_VER="6" bash
   [[ "x$1" == "x7" ]] && echo "jdk 7" && JDK_VER="7" bash
-  [[ "x$1" == "x8x" ]] && echo "jdk 8" && JDK_VER="8" bash
+  [[ "x$1" == "x8" ]] && echo "jdk 8" && JDK_VER="87" bash
   [[ "x$1" == "x" ]] && echo "no jdk version specified, defaults to jdk 8" && JDK_VER="8" bash
 }
 
@@ -436,6 +437,7 @@ export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
 export PATH="$PATH:$HOME/install/node-v4.2.2-linux-x64/bin:$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin"
 # rhq ant bundle deployer
+export PATH="$PATH:$WORKSPACE/miq-helpers/"
 export PATH="$PATH:$HOME/install/android-ndk-r10d:$HOME/install/node-v0.10.22-linux-x86/bin"
 export PATH="$PATH:$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin"
 export PATH="$PATH:$HOME/install/openshift-origin/_output/local/go/bin"
