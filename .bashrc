@@ -335,6 +335,7 @@ alias killServer='kill -9 $(ps ax | grep rhq-server.properties | grep java | awk
 alias killRhq='killAgent; killCassandra; killServer'
 alias killHawk='kill -9 $(ps ax | grep "standalone/log/server.log" | grep java | awk '\''{print $1}'\'')'
 alias runMiq='bundle exec rake evm:start && bundle exec rails s'
+alias rspecFeatures='rspec spec/models/miq_product_feature_spec.rb'
 
 alias webcam="ssh evanii@192.168.1.100 -Y 'mplayer tv://device=/dev/video0'"
 alias microphone="arecord -f dat | ssh -C evanii@192.169.1.111 aplay -f dat"
