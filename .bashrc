@@ -302,6 +302,7 @@ complete -o default -o nospace -F _rhqctl rtl
 alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 Hawkular && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
 alias hawkR='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 ruby client && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias hawkS='cd $WORKSPACE/hawkular/hawkular-services && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkular services && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 RHQ_VERSION="4.13.0"
 RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
@@ -316,6 +317,7 @@ alias runSer="m clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-
 alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
 alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
 alias runHawk="hawk && cd hawkular/dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
+alias runHawkS="hawkS && cd dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
 alias buildRest="hawk && cd hawkular/modules/hawkular-api-parent && m clean install -Pdev -DskipTests"
 alias runLoadTests="hawk && cd hawkular-inventory/hawkular-inventory-load-tests && m gatling:execute"
 # -DresourceTypes=6 -DmetricTypes=4 -Dresources=30 -Dmetrics=1 -DreadEntity=6 -Dusers=5 -DlogLevel=0"
@@ -436,7 +438,7 @@ export ANDROID_HOME="$ANDROID_SDK_HOME"
 export SCALA_HOME="$HOME/install/scala-2.11.6"
 export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
-export PATH="$PATH:$HOME/install/node-v4.2.2-linux-x64/bin:$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$JAVA_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin"
+export PATH="$JAVA_HOME/bin:$PATH:$HOME/install/node-v4.2.2-linux-x64/bin:$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin"
 # rhq ant bundle deployer
 export PATH="$PATH:$WORKSPACE/miq-helpers/"
 export PATH="$PATH:$HOME/install/android-ndk-r10d:$HOME/install/node-v0.10.22-linux-x86/bin"
