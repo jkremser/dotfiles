@@ -3,7 +3,8 @@
 # Source global definitions
 [ -f /etc/bashrc ] && source /etc/bashrc
 
-[ -f /usr/share/doc/git/contrib/completion/git-completion.bash ] && source /usr/share/doc/git/contrib/completion/git-completion.bash
+# completions
+for f in `find ~/.completion -type f`; do source $f; done
 
 getSpecialChar() {
   #_SPECIAL="👒"
@@ -232,10 +233,6 @@ alias rm='rm --preserve-root'
 
 # netstat
 alias ports='netstat -tulanp'
-
-# bash completion working with the 'g' alias
-# https://git.kernel.org/cgit/git/git.git/plain/contrib/completion/git-completion.bash?id=HEAD
-complete -o default -o nospace -F _git g
 
 # ignore some patterns during bash completion
 export FIGNORE=.bat:.svn
