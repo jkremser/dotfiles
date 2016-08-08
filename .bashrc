@@ -6,6 +6,9 @@
 # completions
 for f in `find ~/.completion -type f`; do source $f; done
 
+# bash completion working with the 'g' alias
+complete -o default -o nospace -F _git g
+
 getSpecialChar() {
   #_SPECIAL="👒"
   _SPECIAL_GULP="🍄"
