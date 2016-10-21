@@ -365,6 +365,13 @@ alias top10="topCmd"
 alias top20="topCmd -20"
 alias top50="topCmd -50"
 
+#docker
+alias d="docker"
+complete -F _docker_compose d
+alias dc="docker-compose"
+complete -F _docker_compose dc
+
+
 _bash_history_sync() {
   builtin history -a         #1
   HISTFILESIZE=$HISTSIZE     #2
