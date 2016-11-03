@@ -41,7 +41,7 @@ getSpecialChar() {
 promptText() {    
   CODE=$?;
   CODE_STR="";
-  GITBRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/');
+  GITBRANCH=$(git rev-parse --abbrev-ref HEAD  2> /dev/null);
   YELLOW="\[\033[0;33m\]";
   BLUE="\[\033[0;34m\]";
   LIGHT_BLUE="\[\033[0;36m\]";
@@ -191,7 +191,7 @@ alias mountPhone="simple-mtpfs --device 1 ~/foo"
 alias sniff="sudo ngrep -d 'em1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-# git
+# <git>
 alias g="git "
 alias gl="g l"
 alias gl1="g l1"
@@ -210,19 +210,38 @@ gpr() {
 }
 
 ggrp() {
-  [[ $# -ne 2 ]] && echo "usage: ggrp <search_pattern> <path_prefix_to_ignore>" && return
-  git grep "$1" -- `git ls-files | grep -v $2`
+  [[ $# -lt 2 ]] && echo "usage: ggrp <path_prefix_to_ignore> <search_pattern> [<grep_params>]" && return
+  to_ignore=$1
+  shift
+  to_grep=$1
+  shift
+  params=$*
+  git grep $params "$to_grep" -- `git ls-files | grep -v $to_ignore`
 }
 
 gShowPr() {
   [[ "x$1" == "x" ]] || git fetch origin pull/$1/head:pr$1 && g cd pr$1
 }
 
+gBak() {
+  local _current_branch=$(git rev-parse --abbrev-ref HEAD  2> /dev/null)
+  local _suffix="_bak"
+  local _candidate="$_current_branch""$_suffix"
+  while git rev-parse --verify $_candidate &> /dev/null && true ; do
+    _candidate="$_candidate""$_suffix"
+  done
+  git checkout -b $_candidate
+  echo "branch $_candidate created"
+  git checkout -
+}
+
 personalize() {
   G_REMOTE=`git remote -v | head -1 | sed 's;.*\(https://github.com/\)[^/]*\([^\ ]*\).*;git@github.com:Jiri-Kremser\2;g'`
   g remote add personal $G_REMOTE
 }
+
 alias gper="personalize"
+#</git>
 
 # cd
 alias ..='cd ..'
