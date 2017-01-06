@@ -243,6 +243,9 @@ personalize() {
 alias gper="personalize"
 #</git>
 
+# general
+alias psg='ps aux | grep'
+
 # cd
 alias ..='cd ..'
 alias ...='cd ../../../'
@@ -489,3 +492,4 @@ export WINEARCH=win32
 
 export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
+#export VAGRANT_DEFAULT_PROVIDER=virtualbox
