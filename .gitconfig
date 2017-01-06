@@ -2,6 +2,8 @@
 	name = Jirka Kremser
 	email = jkremser@redhat.com
 [alias]
+  branch-cleanup = "!git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d #"
+
 	bugs = "ls-remote --heads "
 
 	# plain diff
@@ -26,6 +28,7 @@
 	pl = pull --rebase origin master
   pll = pull --rebase
 	ls = branch -a
+  lls = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	cd = checkout
 	sh = show
   ap = add -p
