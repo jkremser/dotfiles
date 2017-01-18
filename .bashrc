@@ -434,9 +434,9 @@ export RHQ_AGENT_DEBUG="true"
 #JAVA_HOME
 [[ "x$JDK_VER" == "x6" ]] && export JAVA_HOME="$HOME/install/jdk1.6.0_45"
 [[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_79"
-[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
+[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_121"
 [[ "x$JDK_VER" == "x87" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_74"
-[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_45"
+[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_121"
 
 #export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
 
