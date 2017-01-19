@@ -326,6 +326,15 @@ alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawku
 alias hawkR='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 ruby client && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias hawkS='cd $WORKSPACE/hawkular/hawkular-services && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkular services && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
+#MiQ
+alias miq='cd $WORKSPACE/manageiq && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias miqUi='cd $WORKSPACE/manageiq-ui-classic && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ UI && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+
+#other
+alias hawkinit='cd $WORKSPACE/hawkular/hawkinit && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkinit && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias hawkfly='cd $WORKSPACE/hawkfly-domain-dockerfiles && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 docker stuff && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+
+
 RHQ_VERSION="4.13.0"
 RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
 RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME"
