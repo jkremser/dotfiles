@@ -331,7 +331,7 @@ alias miq='cd $WORKSPACE/manageiq && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf
 alias miqUi='cd $WORKSPACE/manageiq-ui-classic && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ UI && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 #other
-alias hawkinit='cd $WORKSPACE/hawkular/hawkinit && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkinit && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias hawkin='cd $WORKSPACE/hawkular/hawkinit && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkinit && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias hawkfly='cd $WORKSPACE/hawkfly-domain-dockerfiles && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 docker stuff && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 
