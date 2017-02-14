@@ -401,6 +401,17 @@ alias d="docker"
 complete -F _docker_compose d
 alias dc="docker-compose"
 complete -F _docker_compose dc
+dockerCleanup(){
+  d kill `d ps -aq`
+  d rm -f `d ps -aq`
+  d rmi -f `d images -qa`
+  d volume rm `d volume ls -q`
+  d network rm `d network ls -q`
+
+  # removing images that can't be removed ("Error response from daemon: reference does not exist")
+  sudo rm -Rf /var/lib/docker/image/devicemapper/imagedb/content/sha256 && sudo mkdir /var/lib/docker/image/devicemapper/imagedb/content/sha256
+}
+alias dCleanup="dockerCleanup"
 
 
 _bash_history_sync() {
