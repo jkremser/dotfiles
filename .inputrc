@@ -4,3 +4,11 @@
 "\e[B":history-search-forward
 # ctrl+alt+l to expand alias
 "\e\C-l":alias-expand-line
+
+# ctrl+left/right jump over the words
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
