@@ -288,6 +288,12 @@ alias syslogs='s tail -f -n5 $(find /var/log -name \*log)'
 #top on steroids
 alias top="htop"
 
+#grep on steroids
+alias grep="ag"
+
+# better formatting for mount
+alias mountt='mount | column -t'
+
 # Complement to whoami command.
 alias whereami='echo "$( hostname --fqdn ) ($(hostname -i)):$( pwd )"'
 #alias neco="melodyping"
@@ -328,7 +334,7 @@ alias hawkS='cd $WORKSPACE/hawkular/hawkular-services && echo ${TEXT_HAWKULARBLU
 
 #MiQ
 alias miq='cd $WORKSPACE/manageiq && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
-alias miqUi='cd $WORKSPACE/manageiq-ui-classic && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ UI && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias miqUi='cd $WORKSPACE/manageiq/plugins/manageiq-ui-classic && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ UI && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 #other
 alias hawkin='cd $WORKSPACE/hawkular/hawkinit && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkinit && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
@@ -488,10 +494,10 @@ export ANDROID_HOME="$ANDROID_SDK_HOME"
 export SCALA_HOME="$HOME/install/scala-2.11.6"
 export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
-export PATH="$JAVA_HOME/bin:$PATH:$HOME/install/node-v4.2.2-linux-x64/bin:$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$HOME/install/sbt/bin:$VERTEX_HOME/bin"
+export PATH="$HOME/install/sbt-launcher-packaging-0.13.13/bin:$JAVA_HOME/bin:$PATH:$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$VERTEX_HOME/bin"
 # rhq ant bundle deployer
 export PATH="$PATH:$WORKSPACE/miq-helpers/"
-export PATH="$PATH:$HOME/install/android-ndk-r10d:$HOME/install/node-v0.10.22-linux-x86/bin"
+#export PATH="$PATH:$HOME/install/android-ndk-r10d:$HOME/install/node-v0.10.22-linux-x86/bin"
 export PATH="$PATH:$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin"
 export PATH="$PATH:$HOME/install/openshift-origin/_output/local/go/bin"
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
