@@ -331,6 +331,7 @@ alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/o
 alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
 alias hawkR='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 ruby client && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias hawkS='cd $WORKSPACE/hawkular/hawkular-services && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkular services && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias hawkRubyGem='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkular ruby gem && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
 #MiQ
 alias miq='cd $WORKSPACE/manageiq && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
