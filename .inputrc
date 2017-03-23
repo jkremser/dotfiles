@@ -1,7 +1,14 @@
-# arrow up
-"\e[A":history-search-backward
-# arrow down
-"\e[B":history-search-forward
+# this is needed for sbt to work properly with up-arrow
+$if Bash
+  # arrow up
+  "\e[A":history-search-backward
+  # arrow down
+  "\e[B":history-search-forward
+$endif
+
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
 # ctrl+alt+l to expand alias
 "\e\C-l":alias-expand-line
 
