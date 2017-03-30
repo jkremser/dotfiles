@@ -78,12 +78,6 @@ log(){
   less +F $1 |egrep --line-buffered --color=auto 'ERROR|WARN|$' # tail log & highlight errors (if your grep supports --color)
 }
 
-runAgents(){
-  cd $WORKSPACE/rhq/etc/agentspawn/target/
-  java -jar -Dperftest.spawncount=$1 org.rhq.agentspawn-1.0-SNAPSHOT.jar start
-  cd -
-}
-
 certAdd(){
   certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n $1 -i $1
 }
@@ -341,25 +335,10 @@ alias miqUi='cd $WORKSPACE/manageiq/plugins/manageiq-ui-classic && echo ${TEXT_Y
 alias hawkin='cd $WORKSPACE/hawkular/hawkinit && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkinit && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias hawkfly='cd $WORKSPACE/hawkfly-domain-dockerfiles && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 docker stuff && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
-
-RHQ_VERSION="4.13.0"
-RHQ_AGENT_HOME="$RHQ_HOME/dev-container/rhq-agent/"
-RHQ_AGENT_INSTALL_DIR="$RHQ_AGENT_HOME"
-#RHQ_AGENT_HOME="$WORKSPACE/rhq/dev-container/jbossas/standalone/deployments/rhq.ear/rhq-downloads/rhq-agent/rhq-agent"
-
-alias runPostgres="sudo service postgresql start"
-alias ctl="logColor rhqctl"
-#alias runSer="runServer console"
-#alias runSer="ctl console --server"
-alias runSer="m clean install -DskipTests -Dcheckstyle.skip && ./target/wildfly-8.2.0.Final/bin/standalone.sh -DprettyJson=true --debug"
-alias runAgent="$RHQ_AGENT_INSTALL_DIR/bin/rhq-agent.sh"
-alias runAgentInstalation="cd $RHQ_AGENT_HOME && wget -O latest-agent.jar http://localhost:7080/agentupdate/download && java -jar $RHQ_AGENT_HOME/latest-agent.jar --install && cd -"
 alias runHawk="hawk && cd hawkular/dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
 alias runHawkS="hawkS && cd dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG -Dhawkular.rest.user=jdoe -Dhawkular.rest.password=password"
 alias runHawkSA="runHawkS -Dhawkular.agent.enabled=false"
 alias buildRest="hawk && cd hawkular/modules/hawkular-api-parent && m clean install -Pdev -DskipTests"
-alias runLoadTests="hawk && cd hawkular-inventory/hawkular-inventory-load-tests && m gatling:execute"
-# -DresourceTypes=6 -DmetricTypes=4 -Dresources=30 -Dmetrics=1 -DreadEntity=6 -Dusers=5 -DlogLevel=0"
 alias runHawkAgentless="runHawk -Dhawkular.agent.enabled=false"
 alias runHawkBusless="runHawkAgentless -Dinventory.bus.integration=false"
 alias buildInv="hawk && cd hawkular-inventory && m clean install -DskipTests"
@@ -376,7 +355,6 @@ alias killServer='kill -9 $(ps ax | grep rhq-server.properties | grep java | awk
 alias killRhq='killAgent; killCassandra; killServer'
 alias killHawk='kill -9 $(ps ax | grep "standalone/log/server.log" | grep java | awk '\''{print $1}'\'')'
 alias runMiq='bundle exec rake evm:start && bundle exec rails s'
-alias rspecFeatures='rspec spec/models/miq_product_feature_spec.rb'
 
 alias webcam="ssh evanii@192.168.1.100 -Y 'mplayer tv://device=/dev/video0'"
 alias microphone="arecord -f dat | ssh -C evanii@192.169.1.111 aplay -f dat"
@@ -451,13 +429,6 @@ type most &> /dev/null && export PAGER="most"
 export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
-export RHQ_SERVER_ADDITIONAL_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n"
-export RHQ_AGENT_ADDITIONAL_JAVA_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,address=9797,server=y,suspend=n'
-#pre-rhqctl epoch
-#export RHQ_SERVER_DEBUG="true"
-export RHQ_AGENT_DEBUG="true"
-#export RHQ_CONTROL_DEBUG="true"
-
 #JAVA_HOME
 [[ "x$JDK_VER" == "x6" ]] && export JAVA_HOME="$HOME/install/jdk1.6.0_45"
 [[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_79"
@@ -479,28 +450,35 @@ alias profilingOn="export JAVA_OPTS=\"$JAVA_OPTS -Djboss.modules.system.pkgs=com
 alias profilingOff="export JAVA_OPTS=\"\" export LD_LIBRARY_PATH=\"\""
 
 export M2_HOME="$HOME/install/apache-maven-3.3.3"
-#export GRADLE_HOME="$HOME/install/gradle-2.2.1"
-export GRADLE_HOME="$HOME/install/android-studio/gradle/gradle-2.2.1"
-#export M2_HOME="$HOME/install/apache-maven-2.2.1"
-
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:ReservedCodeCacheSize=96M"
 # add permgen jvm options for jdk 7 and lower
 [[ $("$JAVA_HOME/bin/java" -version 2>&1 | awk -F '"' '/version/ {print $2}') > "1.8" ]] || export MAVEN_OPTS="$MAVEN_OPTS -XX:PermSize=128M -XX:MaxPermSize=256M"
-#export HADOOP_HOME="$HOME/install/hadoop-1.0.3"
 export FORGE_HOME="$HOME/install/forge"
-export JBAKE_HOME="$HOME/install/jbake-2.3.2"
-export GWT_HOME="$HOME/install/gwt-2.5.1"
-export ANDROID_SDK_HOME="$HOME/install/adt-bundle-linux-x86_64-20140702/sdk"
-export ANDROID_HOME="$ANDROID_SDK_HOME"
-export SCALA_HOME="$HOME/install/scala-2.11.6"
-export VERTEX_HOME="$HOME/install/vert.x-2.1M2"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
-export PATH="$HOME/install/sbt-launcher-packaging-0.13.13/bin:$JAVA_HOME/bin:$PATH:$HOME/install/os/:$JBAKE_HOME/bin:$HOME/install/apache-ant-1.9.4/bin:$HOME/install/gradle-2.0/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$SCALA_HOME/bin:$RHQ_HOME/dev-container/rhq-server/bin:/opt/vagrant/bin:$FORGE_HOME/bin:$M2_HOME/bin:$GRADLE_HOME/bin:$VERTEX_HOME/bin"
-# rhq ant bundle deployer
-export PATH="$PATH:$WORKSPACE/miq-helpers/"
-#export PATH="$PATH:$HOME/install/android-ndk-r10d:$HOME/install/node-v0.10.22-linux-x86/bin"
-export PATH="$PATH:$RHQ_HOME/modules/common/ant-bundle/target/rhq-bundle-deployer-$RHQ_VERSION-SNAPSHOT/bin"
-export PATH="$PATH:$HOME/install/openshift-origin/_output/local/go/bin"
+
+# <$PATH stuff>
+_addToPath() {
+  if [[ $# != 1 ]] && [[ $# != 2 ]]; then
+     echo "Usage: _addToPath /bin/foo" && exit
+  fi
+  local _to_add=$1
+  # must be a directory, must be an absolute path, $PATH must not contain it
+  if [[ -d "${_to_add}" ]] && [[ "${_to_add}" = /* ]] && [[ $PATH != *"${_to_add}"* ]]; then
+    if [[ $# != 2 ]]; then
+      export PATH="$PATH:$_to_add"
+    else
+      export PATH="$_to_add:$PATH"
+    fi
+  fi
+}
+
+_addToPath "$M2_HOME/bin"
+_addToPath "$WORKSPACE/miq-helpers"
+_addToPath "$HOME/.rvm/bin" "toTheBegining"
+#_addToPath "/bin/foo"
+
+# </$PATH stuff>
+
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
 
 # C*
@@ -516,7 +494,5 @@ export WINEARCH=win32
 
 . ~/.personal.sh
 . ~/.ruby-fu.sh
-
-export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
 #export VAGRANT_DEFAULT_PROVIDER=virtualbox
