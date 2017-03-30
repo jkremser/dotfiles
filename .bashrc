@@ -17,7 +17,7 @@ getSpecialChar() {
   #_SPECIAL="💊"
   #_SPECIAL="💩"
   _SPECIAL_NORMAL="💲"
-  #_SPECIAL="🔨"
+  _SPECIAL_DOCKER_COMPOSE="🔨"
   _SPECIAL_CODE="λ"
 
   [[ `git rev-parse --is-inside-work-tree 2> /dev/null` ]] && {
@@ -30,6 +30,10 @@ getSpecialChar() {
       echo $_SPECIAL_GULP
       exit
     }
+    [[ -s "$d/docker-compose.yaml" ]] || [[ -s "$d/docker-compose.yml" ]] && {
+      echo $_SPECIAL_DOCKER_COMPOSE
+      exit
+    }
 
     echo $_SPECIAL_CODE
     exit
@@ -39,7 +43,8 @@ getSpecialChar() {
 
 #git cmd line branch highlighting
 promptText() {    
-  CODE=$?;
+  #CODE=$?;
+  CODE=$1;
   CODE_STR="";
   GITBRANCH=$(git rev-parse --abbrev-ref HEAD  2> /dev/null);
   YELLOW="\[\033[0;33m\]";
@@ -376,10 +381,12 @@ history() {
 
 function histgrep() { fc -l -$((HISTSIZE-1)) | egrep "$@" ;}
 
-function topCmd() { history | awk '{ print $4 }' | sort | uniq -c |sort -rn | head $@;}
+function topCmd() { history | awk '{ print $4 }' | sort | uniq -c | sort -rn | head $@;}
 alias top10="topCmd"
 alias top20="topCmd -20"
 alias top50="topCmd -50"
+
+alias vbash="vim ~/.bashrc"
 
 #docker
 alias d="docker"
@@ -400,11 +407,12 @@ alias dCleanup="dockerCleanup"
 
 
 _bash_history_sync() {
+  CODE=$?
   builtin history -a         #1
   HISTFILESIZE=$HISTSIZE     #2
   builtin history -c         #3 comment out 3 and 4 if you don't want to share last commands across terminal sessions
   builtin history -r         #4
-  promptText  
+  promptText $CODE
 }
 
 PROMPT_COMMAND=_bash_history_sync
@@ -474,7 +482,8 @@ _addToPath() {
 
 _addToPath "$M2_HOME/bin"
 _addToPath "$WORKSPACE/miq-helpers"
-_addToPath "$HOME/.rvm/bin" "toTheBegining"
+_addToPath "$HOME/.rvm/bin"
+#_addToPath "$HOME/.rvm/bin" "toTheBegining"
 #_addToPath "/bin/foo"
 
 # </$PATH stuff>
