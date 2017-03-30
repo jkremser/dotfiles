@@ -2,4 +2,6 @@
 .classpath
 .settings
 Gemfile.dev.rb
+.rake_tasks
+.rake_tasks~
 #.gitignore
