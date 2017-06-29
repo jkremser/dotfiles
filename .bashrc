@@ -174,12 +174,12 @@ function cd {
 }
 END
 
-function vim {
-  local target="$1"
-  [[ $target == ~?* ]] && target="~/${target:2}"
-  eval "/usr/bin/vim ${target}"
-  return $?
-}
+#function vim {
+#  local target="$1"
+#  [[ $target == ~?* ]] && target="~/${target:2}"
+#  eval "/usr/bin/vim ${target}"
+#  return $?
+#}
 
 #melodyping(){ ping $1|awk -F[=\ ] '/me=/{t=$(NF-1);f=3000-14*log(t^20);c="play -q -n synth 0.7s pl " f;print $0;system(c)}';}
 
@@ -288,7 +288,7 @@ alias syslogs='s tail -f -n5 $(find /var/log -name \*log)'
 alias top="htop"
 
 #grep on steroids
-alias grep="ag"
+alias grp="ag"
 
 # better formatting for mount
 alias mountt='mount | column -t'
@@ -340,8 +340,7 @@ alias miqUi='cd $WORKSPACE/manageiq/plugins/manageiq-ui-classic && echo ${TEXT_Y
 alias hawkin='cd $WORKSPACE/hawkular/hawkinit && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkinit && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 alias hawkfly='cd $WORKSPACE/hawkfly-domain-dockerfiles && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 docker stuff && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
 
-alias runHawk="hawk && cd hawkular/dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG"
-alias runHawkS="hawkS && cd dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG -Dhawkular.rest.user=jdoe -Dhawkular.rest.password=password"
+alias runHawkS="hawkS && cd dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG -Dhawkular.rest.user=jdoe -Dhawkular.rest.password=password -Dhawkular.agent.enabled=true"
 alias runHawkSA="runHawkS -Dhawkular.agent.enabled=false"
 alias buildRest="hawk && cd hawkular/modules/hawkular-api-parent && m clean install -Pdev -DskipTests"
 alias runHawkAgentless="runHawk -Dhawkular.agent.enabled=false"
@@ -402,6 +401,10 @@ dockerCleanup(){
 
   # removing images that can't be removed ("Error response from daemon: reference does not exist")
   sudo rm -Rf /var/lib/docker/image/devicemapper/imagedb/content/sha256 && sudo mkdir /var/lib/docker/image/devicemapper/imagedb/content/sha256
+
+  # this helps if it's saying the port is already allocated even though it's not
+  sudo rm /var/lib/docker/network/files/*
+  sudo systemctl restart docker
 }
 alias dCleanup="dockerCleanup"
 
@@ -483,6 +486,7 @@ _addToPath() {
 _addToPath "$M2_HOME/bin"
 _addToPath "$WORKSPACE/miq-helpers"
 _addToPath "$HOME/.rvm/bin"
+_addToPath "$HOME/install/sbt-launcher-packaging-0.13.13/bin"
 #_addToPath "$HOME/.rvm/bin" "toTheBegining"
 #_addToPath "/bin/foo"
 
