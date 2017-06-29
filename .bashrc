@@ -408,6 +408,7 @@ dockerCleanup(){
 }
 alias dCleanup="dockerCleanup"
 
+alias ap="ansible-playbook"
 
 _bash_history_sync() {
   CODE=$?
