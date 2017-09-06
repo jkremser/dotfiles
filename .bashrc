@@ -325,20 +325,28 @@ alias rhqGui='cd $WORKSPACE/rhq/modules/enterprise/gui/coregui && echo ${TEXT_MA
 alias rtl="rhqctl"
 complete -o default -o nospace -F _rhqctl rtl
 
+sayCWD() {
+  [[ "x$1" == "x" ]] || echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 $1 && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd
+}
+
+#daikon
+alias daikon='cd $WORKSPACE/radanalyticsio && sayCWD radanalytics'
+alias radanalytics='daikon'
+
 #hawkular
-alias hawk='cd $WORKSPACE/hawkular && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 Hawkular && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias hawk='cd $WORKSPACE/hawkular && sawCWD hawkular'
 alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
-alias hawkR='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 ruby client && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
-alias hawkS='cd $WORKSPACE/hawkular/hawkular-services && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkular services && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
-alias hawkRubyGem='cd $WORKSPACE/hawkular-client-ruby && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkular ruby gem && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias hawkR='cd $WORKSPACE/hawkular-client-ruby && sayCWD hawkular ruby client'
+alias hawkS='cd $WORKSPACE/hawkular/hawkular-services && sawCWD hawkular services'
+alias hawkRubyGem='cd $WORKSPACE/hawkular-client-ruby && sayCWD hawkular ruby gem'
 
 #MiQ
-alias miq='cd $WORKSPACE/manageiq && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
-alias miqUi='cd $WORKSPACE/manageiq/plugins/manageiq-ui-classic && echo ${TEXT_YELLOW} && figlet -f ~/ogre.flf -m8 ManageIQ UI && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias miq='cd $WORKSPACE/manageiq && sayCWD MiQ'
+alias miqUi='cd $WORKSPACE/manageiq/plugins/manageiq-ui-classic && sayCWD MIQ UI'
 
 #other
-alias hawkin='cd $WORKSPACE/hawkular/hawkinit && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 hawkinit && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
-alias hawkfly='cd $WORKSPACE/hawkfly-domain-dockerfiles && echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 docker stuff && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd'
+alias hawkin='cd $WORKSPACE/hawkular/hawkinit && sayCWD hawkinit'
+alias hawkfly='cd $WORKSPACE/hawkfly-domain-dockerfiles && sayCWD docker stuff'
 
 alias runHawkS="hawkS && cd dist && m clean install -DskipTests -Pdev && ./target/hawkular-*/bin/standalone.sh -Dhawkular.log.cassandra=WARN -Dhawkular.log.inventory.rest.requests=DEBUG -Dhawkular.rest.user=jdoe -Dhawkular.rest.password=password -Dhawkular.agent.enabled=true"
 alias runHawkSA="runHawkS -Dhawkular.agent.enabled=false"
@@ -444,9 +452,9 @@ export LESS=' -R '
 #JAVA_HOME
 [[ "x$JDK_VER" == "x6" ]] && export JAVA_HOME="$HOME/install/jdk1.6.0_45"
 [[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_79"
-[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_121"
+[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_144"
 [[ "x$JDK_VER" == "x87" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_74"
-[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_121"
+[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_144"
 
 #export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
 
@@ -461,7 +469,7 @@ jdk() {
 alias profilingOn="export JAVA_OPTS=\"$JAVA_OPTS -Djboss.modules.system.pkgs=com.jprofiler -agentlib:jprofilerti=port=8849 -Xbootclasspath/a:/home/jkremser/install/jprofiler9/bin/agent.jar\" export LD_LIBRARY_PATH=\"/home/jkremser/install/jprofiler9/bin/linux-x64\""
 alias profilingOff="export JAVA_OPTS=\"\" export LD_LIBRARY_PATH=\"\""
 
-export M2_HOME="$HOME/install/apache-maven-3.3.3"
+export M2_HOME="$HOME/install/apache-maven-3.5.0"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:ReservedCodeCacheSize=96M"
 # add permgen jvm options for jdk 7 and lower
 [[ $("$JAVA_HOME/bin/java" -version 2>&1 | awk -F '"' '/version/ {print $2}') > "1.8" ]] || export MAVEN_OPTS="$MAVEN_OPTS -XX:PermSize=128M -XX:MaxPermSize=256M"
@@ -491,6 +499,9 @@ _addToPath "$HOME/install/sbt-launcher-packaging-0.13.13/bin"
 #_addToPath "$HOME/.rvm/bin" "toTheBegining"
 #_addToPath "/bin/foo"
 
+HADOOP_HOME="/home/jkremser/install/hadoop-2.2.0"
+_addToPath "$HADOOP_HOME/bin"
+
 # </$PATH stuff>
 
 export CATALINA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Djava.rmi.server.hostname=localhost";
@@ -507,6 +518,7 @@ export WINEARCH=win32
 [ -f /home/jkremser/.travis/travis.sh ] && source /home/jkremser/.travis/travis.sh
 
 . ~/.personal.sh
-. ~/.ruby-fu.sh
+#. ~/.ruby-fu.sh
 
 #export VAGRANT_DEFAULT_PROVIDER=virtualbox
+export GOPATH=$HOME/go
