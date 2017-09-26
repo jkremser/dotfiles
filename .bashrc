@@ -245,6 +245,8 @@ alias gper="personalize"
 # general
 alias psg='ps aux | grep'
 
+alias untar="tar xvzf"
+
 # cd
 alias ..='cd ..'
 alias ...='cd ../../../'
@@ -394,6 +396,8 @@ alias top20="topCmd -20"
 alias top50="topCmd -50"
 
 alias vbash="vim ~/.bashrc"
+alias vibash="vbash"
+alias vimbash="vbash"
 
 #docker
 alias d="docker"
