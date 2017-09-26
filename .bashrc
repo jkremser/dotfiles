@@ -245,7 +245,7 @@ alias gper="personalize"
 # general
 alias psg='ps aux | grep'
 
-alias untar="tar xvzf"
+alias untar="tar -xvzf"
 
 # cd
 alias ..='cd ..'
