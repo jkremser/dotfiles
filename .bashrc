@@ -402,9 +402,11 @@ alias vimbash="vbash"
 
 #docker
 alias d="docker"
-complete -F _docker_compose d
+complete -F _docker d
 alias dc="docker-compose"
 complete -F _docker_compose dc
+
+#helper for removing all the docker mess, or just use `docker system prune`
 dockerCleanup(){
   d kill `d ps -aq`
   d rm -f `d ps -aq`
