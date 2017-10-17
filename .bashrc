@@ -503,6 +503,7 @@ _addToPath "$M2_HOME/bin"
 _addToPath "$WORKSPACE/miq-helpers"
 _addToPath "$HOME/.rvm/bin"
 _addToPath "$HOME/install/sbt-launcher-packaging-0.13.13/bin"
+_addToPath "/usr/local/cuda/bin"
 #_addToPath "$HOME/.rvm/bin" "toTheBegining"
 #_addToPath "/bin/foo"
 
@@ -529,3 +530,11 @@ export WINEARCH=win32
 
 #export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=$HOME/go
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/home/jkremser/install/cuda-cdnn-5:/usr/lib64/nvidia-bumblebee/"
+
+export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$HOME/NVIDIA_CUDA-9.0_Samples/common/inc"
+
+export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5.1.10"
+
+. /home/jkremser/torch/install/bin/torch-activate
