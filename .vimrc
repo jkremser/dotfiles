@@ -61,9 +61,11 @@ set laststatus=2
 "Format the status line
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-"scala
+"scala  https://raw.githubusercontent.com/derekwyatt/vim-scala/master/syntax/scala.vim
 au BufRead,BufNewFile *.scala set filetype=scala
 au! Syntax scala source ~/.vim/syntax/scala.vim
+
+" for `vim /foo/file:42` feature, use: https://github.com/bogado/file-line  (https://raw.githubusercontent.com/bogado/file-line/master/plugin/file_line.vim)
 
 
 " Wrap visual selection in an XML comment
