@@ -482,6 +482,7 @@ export MAVEN_OPTS="-Xms256M -Xmx768M -XX:ReservedCodeCacheSize=96M"
 [[ $("$JAVA_HOME/bin/java" -version 2>&1 | awk -F '"' '/version/ {print $2}') > "1.8" ]] || export MAVEN_OPTS="$MAVEN_OPTS -XX:PermSize=128M -XX:MaxPermSize=256M"
 export FORGE_HOME="$HOME/install/forge"
 export SBT_OPTS="-Xms1336m -Xmx1336m"
+export CUDA_HOME="/usr/local/cuda"
 
 # <$PATH stuff>
 _addToPath() {
@@ -503,7 +504,8 @@ _addToPath "$M2_HOME/bin"
 _addToPath "$WORKSPACE/miq-helpers"
 _addToPath "$HOME/.rvm/bin"
 _addToPath "$HOME/install/sbt-launcher-packaging-0.13.13/bin"
-_addToPath "/usr/local/cuda/bin"
+#_addToPath "$CUDA_HOME/bin"
+#_addToPath "/usr/lib64/nvidia-bumblebee"
 #_addToPath "$HOME/.rvm/bin" "toTheBegining"
 #_addToPath "/bin/foo"
 
@@ -531,10 +533,15 @@ export WINEARCH=win32
 #export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=$HOME/go
 
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/home/jkremser/install/cuda-cdnn-5:/usr/lib64/nvidia-bumblebee/"
+MINISHIFT_ENABLE_EXPERIMENTAL=y
 
-export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$HOME/NVIDIA_CUDA-9.0_Samples/common/inc"
+#export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64:/usr/lib64/nvidia-bumblebee/"
 
-export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5.1.10"
+#export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64:/home/jkremser/install/cuda-cdnn-5:/usr/lib64/nvidia-bumblebee/"
 
-. /home/jkremser/torch/install/bin/torch-activate
+
+#export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$HOME/NVIDIA_CUDA-9.0_Samples/common/inc"
+
+#export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5.1.10"
+
+#. /home/jkremser/torch/install/bin/torch-activate
