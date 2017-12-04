@@ -92,10 +92,10 @@
 	lineNumber = true
 [pull]
 	rebase = true
-[init]
-	templatedir = /home/jkremser/.git-templates
 [rerere]
 	enabled = true
 	autoupdate = true
 [status]
 	showUntrackedFiles = all
+[commit]
+	gpgsign = true
