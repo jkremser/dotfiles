@@ -1,6 +1,10 @@
 [user]
 	name = Jirka Kremser
 	email = jkremser@redhat.com
+# gpg --list-secret-keys --keyid-format LONG
+# will print: sec   2048R/B78168105C66AD96 2017-12-04
+# git config --global user.signingkey B78168105C66AD96
+	signingkey = B78168105C66AD96
 [alias]
   branch-cleanup = "!git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d #"
 
