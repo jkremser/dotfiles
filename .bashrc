@@ -406,6 +406,11 @@ complete -F _docker d
 alias dc="docker-compose"
 complete -F _docker_compose dc
 
+#kubectl
+source <(kubectl completion bash | sed 's/kubectl/kc/g')
+alias kc="kubectl"
+#complete -F _kubectl kc
+
 #helper for removing all the docker mess, or just use `docker system prune`
 dockerCleanup(){
   d kill `d ps -aq`
@@ -499,7 +504,7 @@ _addToPath() {
     fi
   fi
 }
-
+_addToPath "$JAVA_HOME/bin" "true"
 _addToPath "$M2_HOME/bin"
 _addToPath "$WORKSPACE/miq-helpers"
 _addToPath "$HOME/.rvm/bin"
