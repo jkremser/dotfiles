@@ -406,6 +406,9 @@ complete -F _docker d
 alias dc="docker-compose"
 complete -F _docker_compose dc
 
+#openshift
+alias woc="watch oc get all"
+
 #kubectl
 source <(kubectl completion bash | sed 's/kubectl/kc/g')
 alias kc="kubectl"
@@ -509,6 +512,7 @@ _addToPath "$M2_HOME/bin"
 _addToPath "$WORKSPACE/miq-helpers"
 _addToPath "$HOME/.rvm/bin"
 _addToPath "$HOME/install/sbt-launcher-packaging-0.13.13/bin"
+_addToPath "$WORKSPACE/radanalyticsio/istio/istio-0.3.0/bin"
 #_addToPath "$CUDA_HOME/bin"
 #_addToPath "/usr/lib64/nvidia-bumblebee"
 #_addToPath "$HOME/.rvm/bin" "toTheBegining"
