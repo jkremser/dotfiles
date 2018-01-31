@@ -406,6 +406,10 @@ complete -F _docker d
 alias dc="docker-compose"
 complete -F _docker_compose dc
 
+
+alias bu="sudo buildah"
+complete -F _buildah bu
+
 #openshift
 alias woc="watch oc get all"
 
