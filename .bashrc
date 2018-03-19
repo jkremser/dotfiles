@@ -411,7 +411,7 @@ alias bu="sudo buildah"
 complete -F _buildah bu
 
 #openshift
-alias woc="watch oc get all"
+alias woc="watch oc get pods"
 
 #kubectl
 source <(kubectl completion bash | sed 's/kubectl/kc/g')
@@ -503,7 +503,7 @@ _addToPath() {
   fi
   local _to_add=$1
   # must be a directory, must be an absolute path, $PATH must not contain it
-  if [[ -d "${_to_add}" ]] && [[ "${_to_add}" = /* ]] && [[ $PATH != *"${_to_add}"* ]]; then
+  if [[ -d "${_to_add}" ]] && [[ "${_to_add}" = /* ]] && [[ $PATH != *":${_to_add}:"* ]]; then
     if [[ $# != 2 ]]; then
       export PATH="$PATH:$_to_add"
     else
@@ -517,6 +517,8 @@ _addToPath "$WORKSPACE/miq-helpers"
 _addToPath "$HOME/.rvm/bin"
 _addToPath "$HOME/install/sbt-launcher-packaging-0.13.13/bin"
 _addToPath "$WORKSPACE/radanalyticsio/istio/istio-0.3.0/bin"
+_addToPath "/bin"
+_addToPath "/usr/bin"
 #_addToPath "$CUDA_HOME/bin"
 #_addToPath "/usr/lib64/nvidia-bumblebee"
 #_addToPath "$HOME/.rvm/bin" "toTheBegining"
