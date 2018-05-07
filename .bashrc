@@ -549,6 +549,7 @@ export WINEARCH=win32
 
 #export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=$HOME/go
+_addToPath "$GOPATH/bin/"
 
 MINISHIFT_ENABLE_EXPERIMENTAL=y
 
