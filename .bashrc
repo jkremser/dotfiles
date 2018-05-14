@@ -546,6 +546,7 @@ export WINEARCH=win32
 
 . ~/.personal.sh
 #. ~/.ruby-fu.sh
+source <(oc completion bash)
 
 #export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=$HOME/go
