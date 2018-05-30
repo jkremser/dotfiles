@@ -66,7 +66,8 @@ promptText() {
   [ $CODE != 0 ] && CODE_STR="($CODE)";
   _SPECIAL=`getSpecialChar`
   USERR=`[ "${#USER}" -gt "4" ] && echo $USER | cut -c1-2 || echo $USER`
-  PS1="[$USERR@\h \W $CONTAINERS$GREEN$GITBRANCH$NORMAL]";
+  HOSTT=`[ "$(hostname -s)" == "localhost" ] && echo "local" || echo $(hostname -s)`
+  PS1="[$USERR@$HOSTT \W $CONTAINERS$GREEN$GITBRANCH$NORMAL]";
   PS1="\[\033[G\]$PS1$RED$CODE_STR$NORMAL$_SPECIAL ";
 }
 #export PROMPT_COMMAND=promptText
