@@ -41,6 +41,10 @@ getSpecialChar() {
   echo $_SPECIAL_NORMAL
 }
 
+localClusterRunning() {
+  docker ps --no-trunc --format "{{.Command}}" | grep "/usr/bin/openshift start" &> /dev/null && echo "◜" || echo ""
+}
+
 #git cmd line branch highlighting
 promptText() {    
   #CODE=$?;
@@ -58,7 +62,7 @@ promptText() {
   LIGHT_GRAY="\[\033[0;37m\]";
   NORMAL="\[\033[0m\]";
   CONTAINERS=`docker ps --format "{{.ID}}" | wc -l`
-  CONTAINERS=`[ $CONTAINERS != 0 ] && echo "$YELLOW[$NORMAL$CONTAINERS$YELLOW]$NORMAL " || echo ""`
+  CONTAINERS=`[ $CONTAINERS != 0 ] && echo "$YELLOW[$NORMAL$CONTAINERS$(localClusterRunning)$YELLOW]$NORMAL " || echo ""`
   [ $CODE != 0 ] && CODE_STR="($CODE)";
   _SPECIAL=`getSpecialChar`
   PS1="[\u@\h \W $CONTAINERS$GREEN$GITBRANCH$NORMAL]";
