@@ -57,9 +57,11 @@ promptText() {
   WHITE="\[\033[1;37m\]";
   LIGHT_GRAY="\[\033[0;37m\]";
   NORMAL="\[\033[0m\]";
+  CONTAINERS=`docker ps --format "{{.ID}}" | wc -l`
+  CONTAINERS=`[ $CONTAINERS != 0 ] && echo "$YELLOW[$NORMAL$CONTAINERS$YELLOW]$NORMAL " || echo ""`
   [ $CODE != 0 ] && CODE_STR="($CODE)";
   _SPECIAL=`getSpecialChar`
-  PS1="[\u@\h \W$GREEN $GITBRANCH$NORMAL]";
+  PS1="[\u@\h \W $CONTAINERS$GREEN$GITBRANCH$NORMAL]";
   PS1="\[\033[G\]$PS1$RED$CODE_STR$NORMAL$_SPECIAL ";
 }
 #export PROMPT_COMMAND=promptText
