@@ -65,7 +65,8 @@ promptText() {
   CONTAINERS=`[ $CONTAINERS != 0 ] && echo "$YELLOW[$NORMAL$CONTAINERS$(localClusterRunning)$YELLOW]$NORMAL " || echo ""`
   [ $CODE != 0 ] && CODE_STR="($CODE)";
   _SPECIAL=`getSpecialChar`
-  PS1="[\u@\h \W $CONTAINERS$GREEN$GITBRANCH$NORMAL]";
+  USERR=`[ "${#USER}" -gt "4" ] && echo $USER | cut -c1-2 || echo $USER`
+  PS1="[$USERR@\h \W $CONTAINERS$GREEN$GITBRANCH$NORMAL]";
   PS1="\[\033[G\]$PS1$RED$CODE_STR$NORMAL$_SPECIAL ";
 }
 #export PROMPT_COMMAND=promptText
