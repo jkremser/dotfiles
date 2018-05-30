@@ -200,12 +200,14 @@ alias httpdump="sudo tcpdump -i em1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 
 # <git>
 alias g="git "
+alias ga="g add -A"
 alias gl="g l"
 alias gl1="g l1"
 alias gg="git g"
 alias gst="g st"
 alias gpl="g pl"
 alias gpll="g pll"
+alias gppm="g push personal master"
 alias gd="g dif"
 alias gdf="gd"
 alias gap="g ap"
