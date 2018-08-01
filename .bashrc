@@ -412,6 +412,12 @@ alias vbash="vim ~/.bashrc"
 alias vibash="vbash"
 alias vimbash="vbash"
 
+alias work="ssh vps@vps 'ssh pi@pi raspistill --timeout 1 -o i.jpg && scp pi@pi:i.jpg .' && scp vps@vps:i.jpg . && eog i.jpg ; rm i.jpg"
+alias workVpn="ssh pi@pi raspistill --timeout 1 -o i.jpg && scp pi@pi:i.jpg . && eog i.jpg ; rm i.jpg"
+alias workNight="ssh vps@vps 'ssh pi@pi raspistill --timeout 2000 -ex night -o i.jpg && scp pi@pi:i.jpg .' && scp vps@vps:i.jpg . && eog i.jpg ; rm i.jpg"
+alias workNightVpn="ssh pi@pi raspistill --timeout 2000 -ex night -o i.jpg && scp pi@pi:i.jpg . && eog i.jpg ; rm i.jpg"
+
+
 #docker
 alias d="docker"
 complete -F _docker d
