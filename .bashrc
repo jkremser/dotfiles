@@ -345,6 +345,7 @@ sayCWD() {
 #daikon
 alias daikon='cd $WORKSPACE/radanalyticsio && sayCWD radanalytics'
 alias radanalytics='daikon'
+alias sop='cd $WORKSPACE/radanalyticsio/spark-operator && sayCWD spark-op'
 
 #hawkular
 alias hawk='cd $WORKSPACE/hawkular && sawCWD hawkular'
