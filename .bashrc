@@ -12,7 +12,7 @@ complete -o default -o nospace -F _git g
 getSpecialChar() {
   #_SPECIAL="👒"
   _SPECIAL_GULP="🍄"
-  _SPECIAL_MVN="🏃"
+  _SPECIAL_MVN="λ"
   #_SPECIAL="👣"
   #_SPECIAL="💊"
   #_SPECIAL="💩"
@@ -61,8 +61,8 @@ promptText() {
   WHITE="\[\033[1;37m\]";
   LIGHT_GRAY="\[\033[0;37m\]";
   NORMAL="\[\033[0m\]";
-  CONTAINERS=`docker ps --format "{{.ID}}" | wc -l`
-  CONTAINERS=`[ $CONTAINERS != 0 ] && echo "$YELLOW[$NORMAL$CONTAINERS$(localClusterRunning)$YELLOW]$NORMAL " || echo ""`
+  #CONTAINERS=`docker ps --format "{{.ID}}" | wc -l`
+  #CONTAINERS=`[ $CONTAINERS != 0 ] && echo "$YELLOW[$NORMAL$CONTAINERS$(localClusterRunning)$YELLOW]$NORMAL " || echo ""`
   [ $CODE != 0 ] && CODE_STR="($CODE)";
   _SPECIAL=`getSpecialChar`
   USERR=`[ "${#USER}" -gt "4" ] && echo $USER | cut -c1-2 || echo $USER`
