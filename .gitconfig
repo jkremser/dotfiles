@@ -87,7 +87,7 @@
 [merge]
 	tool = meld
 [push]
-	default = simple
+	default = current
 [core]
 	excludesfile = ~/.gitignore
 [help]
