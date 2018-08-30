@@ -246,6 +246,7 @@ gBak() {
 
 personalize() {
   G_REMOTE=`git remote -v | head -1 | sed 's;.*\(https://github.com/\)[^/]*\([^\ ]*\).*;git@github.com:Jiri-Kremser\2;g'`
+  sed -i'' 's;remote = origin;remote = personal;g' .git/config
   g remote add personal $G_REMOTE
 }
 
