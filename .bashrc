@@ -509,7 +509,7 @@ jdk() {
 alias profilingOn="export JAVA_OPTS=\"$JAVA_OPTS -Djboss.modules.system.pkgs=com.jprofiler -agentlib:jprofilerti=port=8849 -Xbootclasspath/a:/home/jkremser/install/jprofiler9/bin/agent.jar\" export LD_LIBRARY_PATH=\"/home/jkremser/install/jprofiler9/bin/linux-x64\""
 alias profilingOff="export JAVA_OPTS=\"\" export LD_LIBRARY_PATH=\"\""
 
-export M2_HOME="$HOME/install/apache-maven-3.5.0"
+export M2_HOME="$HOME/install/apache-maven-3.5.4"
 export MAVEN_OPTS="-Xms256M -Xmx768M -XX:ReservedCodeCacheSize=96M"
 # add permgen jvm options for jdk 7 and lower
 [[ $("$JAVA_HOME/bin/java" -version 2>&1 | awk -F '"' '/version/ {print $2}') > "1.8" ]] || export MAVEN_OPTS="$MAVEN_OPTS -XX:PermSize=128M -XX:MaxPermSize=256M"
