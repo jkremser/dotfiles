@@ -399,6 +399,15 @@ export HISTIGNORE="hist*:ls:pwd:g l:g st:g dif:rhq:rhqGui:runPostgres:bash"
 export HISTSIZE="1000000"
 export HISTFILESIZE="1000000"
 
+_bash_history_sync() {
+  CODE=$?
+  builtin history -a         #1
+  HISTFILESIZE=$HISTSIZE     #2
+  builtin history -c         #3 comment out 3 and 4 if you don't want to share last commands across terminal sessions
+  builtin history -r         #4
+  promptText $CODE
+}
+
 history() {
   _bash_history_sync
   builtin history "$@"
@@ -435,7 +444,7 @@ complete -F _buildah bu
 alias woc="watch oc get pods"
 
 #kubectl
-source <(kubectl completion bash | sed 's/kubectl/kc/g')
+command -v kubectl &> /dev/null && source <(kubectl completion bash | sed 's/kubectl/kc/g')
 alias kc="kubectl"
 #complete -F _kubectl kc
 
@@ -457,15 +466,6 @@ dockerCleanup(){
 alias dCleanup="dockerCleanup"
 
 alias ap="ansible-playbook"
-
-_bash_history_sync() {
-  CODE=$?
-  builtin history -a         #1
-  HISTFILESIZE=$HISTSIZE     #2
-  builtin history -c         #3 comment out 3 and 4 if you don't want to share last commands across terminal sessions
-  builtin history -r         #4
-  promptText $CODE
-}
 
 PROMPT_COMMAND=_bash_history_sync
 
@@ -492,9 +492,9 @@ export LESS=' -R '
 #JAVA_HOME
 [[ "x$JDK_VER" == "x6" ]] && export JAVA_HOME="$HOME/install/jdk1.6.0_45"
 [[ "x$JDK_VER" == "x7" ]] && export JAVA_HOME="$HOME/install/jdk1.7.0_79"
-[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_144"
+[[ "x$JDK_VER" == "x8" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_181"
 [[ "x$JDK_VER" == "x87" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_74"
-[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_144"
+[[ "x$JDK_VER" == "x" ]] && export JAVA_HOME="$HOME/install/jdk1.8.0_181"
 
 #export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
 
