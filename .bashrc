@@ -442,6 +442,7 @@ complete -F _buildah bu
 
 #openshift
 alias woc="watch oc get pods"
+alias ocUp="oc cluster up --base-dir=~/tmp/"
 
 #kubectl
 command -v kubectl &> /dev/null && source <(kubectl completion bash | sed 's/kubectl/kc/g')
