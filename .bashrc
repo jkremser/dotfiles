@@ -350,6 +350,9 @@ alias radanalytics='daikon'
 alias sop='cd $WORKSPACE/jvm-operators/spark-operator && sayCWD spark-op'
 alias sap='cd $WORKSPACE/jvm-operators/abstract-operator && sayCWD abstract-op'
 
+#work
+alias workScreens='xrandr --output eDP-1 --pos 0x953 --mode 1600x900 --rate 59.99 --output DP-1-2 --pos 1600x462 --mode 1920x1080 --rate 60 --output DP-1-3 --pos 3520x0 --mode 1920x1080 --rate 60 --rotate right'
+
 #hawkular
 alias hawk='cd $WORKSPACE/hawkular && sawCWD hawkular'
 alias buildHawkular='m -U clean install -DskipTests -Pdev && ./dist/target/hawkular-1.0.0-SNAPSHOT/wildfly-8.2.0.Final/bin/standalone.sh --debug'
