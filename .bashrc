@@ -449,6 +449,7 @@ alias ocUp="oc cluster up --base-dir=~/tmp/"
 
 #kubectl
 command -v kubectl &> /dev/null && source <(kubectl completion bash | sed 's/kubectl/kc/g')
+command -v kubectl &> /dev/null && source <(kubectl completion bash)
 alias kc="kubectl"
 #complete -F _kubectl kc
 
