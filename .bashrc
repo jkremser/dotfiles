@@ -537,6 +537,7 @@ _addToPath() {
     fi
   fi
 }
+_addToPath "$HOME/install/spark-2.4.0-bin-hadoop2.7/bin"
 _addToPath "$JAVA_HOME/bin" "true"
 _addToPath "$M2_HOME/bin"
 _addToPath "$WORKSPACE/miq-helpers"
