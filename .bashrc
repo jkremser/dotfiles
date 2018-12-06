@@ -205,6 +205,7 @@ alias gl="g l"
 alias gl1="g l1"
 alias gg="git g"
 alias gst="g st"
+alias gs="gst" # sorry, ghost script
 alias gpl="g pl"
 alias gpll="g pll"
 alias gppm="g push personal master"
