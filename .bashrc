@@ -350,6 +350,9 @@ alias daikon='cd $WORKSPACE/radanalyticsio && sayCWD radanalytics'
 alias radanalytics='daikon'
 alias sop='cd $WORKSPACE/jvm-operators/spark-operator && sayCWD spark-op'
 alias sap='cd $WORKSPACE/jvm-operators/abstract-operator && sayCWD abstract-op'
+opLogs() {
+  oc logs -f `oc get pod -l app.kubernetes.io/name=spark-operator -o='jsonpath="{.items[0].metadata.name}"' | sed 's/"//g'`
+}
 
 #work
 alias workScreens='xrandr --output eDP-1 --pos 0x953 --mode 1600x900 --rate 59.99 --output DP-1-2 --pos 1600x462 --mode 1920x1080 --rate 60 --output DP-1-3 --pos 3520x0 --mode 1920x1080 --rate 60 --rotate right'
