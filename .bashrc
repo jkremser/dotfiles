@@ -356,7 +356,7 @@ opLogs() {
 
 #work
 alias workScreens='xrandr --output eDP-1 --pos 0x953 --mode 1600x900 --rate 59.99 --output DP-1-2 --pos 1600x462 --mode 1920x1080 --rate 60 --output DP-1-3 --pos 3520x0 --mode 1920x1080 --rate 60 --rotate right'
-alias meeting="xrandr --output DP-1-2 --off && xrandr --output DP-1-3 -off"
+alias meeting="xrandr --output DP-1-2 --off && xrandr --output DP-1-3 --off"
 
 #hawkular
 alias hawk='cd $WORKSPACE/hawkular && sawCWD hawkular'
