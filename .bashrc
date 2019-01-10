@@ -452,6 +452,8 @@ complete -F _buildah bu
 alias woc="watch oc get pods"
 alias ocUp="oc cluster up --base-dir=~/tmp/"
 
+alias watch="watch "
+
 #kubectl
 command -v kubectl &> /dev/null && source <(kubectl completion bash | sed 's/kubectl/kc/g')
 command -v kubectl &> /dev/null && source <(kubectl completion bash)
