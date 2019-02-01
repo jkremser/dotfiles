@@ -6,6 +6,7 @@
 # completions
 for f in `find ~/.completion -type f`; do source $f; done
 
+source /usr/share/bash-completion/completions/git
 # bash completion working with the 'g' alias
 complete -o default -o nospace -F _git g
 
