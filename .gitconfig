@@ -31,7 +31,7 @@
 	cm = commit
 	pl = pull --rebase origin master
   pll = pull --rebase
-	ls = branch -a
+	ls = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(color:yellow)%(refname:short)%(color:reset)'
   lls = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	cd = checkout
 	sh = show
@@ -103,3 +103,5 @@
 	showUntrackedFiles = all
 [commit]
 	gpgsign = true
+[fetch]
+	prune = true
