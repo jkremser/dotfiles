@@ -275,6 +275,9 @@ alias rm='rm --preserve-root'
 # netstat
 alias ports='netstat -tulanp'
 
+# color cat
+alias cat="ccat --bg=dark "
+
 # ignore some patterns during bash completion
 export FIGNORE=.bat:.svn
 bind 'set match-hidden-files off'
