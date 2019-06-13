@@ -92,6 +92,8 @@ log(){
   less +F $1 |egrep --line-buffered --color=auto 'ERROR|WARN|$' # tail log & highlight errors (if your grep supports --color)
 }
 
+alias jctl="journalctl -f"
+
 certAdd(){
   certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n $1 -i $1
 }
