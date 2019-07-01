@@ -594,6 +594,7 @@ _addToPath "$GOPATH/bin/"
 MINISHIFT_ENABLE_EXPERIMENTAL=y
 
 export KUBECONFIG=/home/jkremser/.kube/config
+export GRAALVM_HOME=/home/jkremser/install/graalvm-ce-19.0.2/
 
 #export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CUDA_HOME/lib64:/usr/lib64/nvidia-bumblebee/"
 
