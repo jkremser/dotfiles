@@ -39,9 +39,6 @@
   rc = rebase --continue
   ra = rebase --abort
 
-	# Undo a `git push`
-	undopush = push -f origin HEAD^:master
-
 	unstage = reset
 
   # commit counts
