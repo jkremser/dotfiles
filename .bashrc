@@ -250,9 +250,9 @@ gBak() {
 
 personalize() {
   G_REMOTE=`git remote -v | head -1 | sed 's;.*\(https://github.com/\)[^/]*\([^\ ]*\).*;git@github.com:jkremser\2;g'` || true
-  sed -i'' 's;remote = origin;remote = personal;g' .git/config || true
-  sed -i'' 's;https://github.com/jkremser;git@github.com:jkremser;g' .git/config || true
-  g remote add personal $G_REMOTE
+  sed -i'' 's;remote "origin";remote "personal";g' .git/config || true
+  sed -i'' 's;https\?://github.com/jkremser;git@github.com:jkremser;g' .git/config || true
+  #g remote add personal $G_REMOTE
 }
 
 alias gper="personalize"
@@ -583,9 +583,9 @@ export WINEARCH=win32
 # added by travis gem
 [ -f /home/jkremser/.travis/travis.sh ] && source /home/jkremser/.travis/travis.sh
 
-. ~/.personal.sh
+#. ~/.personal.sh
 #. ~/.ruby-fu.sh
-source <(oc completion bash)
+#source <(oc completion bash)
 
 #export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=$HOME/go
