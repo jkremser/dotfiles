@@ -277,7 +277,7 @@ alias rm='rm --preserve-root'
 # netstat
 alias ports='netstat -tulanp'
 
-# color cat
+# color cat - https://github.com/jingweno/ccat/releases
 alias cat="ccat --bg=dark "
 
 # ignore some patterns during bash completion
