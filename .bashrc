@@ -80,9 +80,9 @@ pick(){
   echo $@ | tr ',' '\n' | tr ' ' '\n' | sort -R | head -1
 }
 
-function which(){
-  readlink -f $( which $1 )
-}
+#function which(){
+#  readlink -f $( which $1 )
+#}
 
 bcp(){
   cp $1{,-$( date +%F )}
