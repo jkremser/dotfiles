@@ -465,6 +465,7 @@ alias ocUp="oc cluster up --base-dir=~/tmp/"
 alias watch="watch "
 
 #kubectl
+source /etc/bash_completion
 command -v kubectl &> /dev/null && source <(kubectl completion bash | sed 's/kubectl/kc/g')
 command -v kubectl &> /dev/null && source <(kubectl completion bash)
 alias kc="kubectl"
