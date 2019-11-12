@@ -98,6 +98,10 @@ certAdd(){
   certutil -d sql:$HOME/.pki/nssdb -A -t "P,," -n $1 -i $1
 }
 
+#ls
+alias ls="ls --color=auto"
+alias ll="ls -l"
+
 ##### </Maven colors>
 # Mvn color (https://gist.github.com/1027800) 
 # Formatting constants
