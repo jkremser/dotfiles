@@ -599,7 +599,7 @@ _addToPath "$GOPATH/bin/"
 MINISHIFT_ENABLE_EXPERIMENTAL=y
 
 export KUBECONFIG=/home/jkremser/.kube/config
-export GRAALVM_HOME=/home/jkremser/install/graalvm-ce-19.0.2/
+export GRAALVM_HOME=/home/jkremser/install/graalvm-ce-19.2.1
 _addToPath "$GRAALVM_HOME/bin/"
 _addToPath "$HOME/.krew/bin"
 
