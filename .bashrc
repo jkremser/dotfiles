@@ -555,6 +555,7 @@ _addToPath() {
     fi
   fi
 }
+_addToPath "$HOME/install/mx-5.247.4"
 _addToPath "$HOME/install/spark-2.4.0-bin-hadoop2.7/bin"
 _addToPath "$JAVA_HOME/bin" "true"
 _addToPath "$M2_HOME/bin"
@@ -599,7 +600,7 @@ _addToPath "$GOPATH/bin/"
 MINISHIFT_ENABLE_EXPERIMENTAL=y
 
 export KUBECONFIG=/home/jkremser/.kube/config
-export GRAALVM_HOME=/home/jkremser/install/graalvm-ce-19.2.1
+export GRAALVM_HOME=/home/jkremser/install/graalvm-ee-19.2.1
 _addToPath "$GRAALVM_HOME/bin/"
 _addToPath "$HOME/.krew/bin"
 
