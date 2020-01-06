@@ -160,10 +160,15 @@ POWERLEVEL9K_SHORTEN_STRATEGY=truncate_from_right
 #POWERLEVEL9K_SHORTEN_DELIMITER=*
 #POWERLEVEL9K_SHORTEN_STRATEGY=truncate_folders
 POWERLEVEL9K_USE_CACHE=true
-
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='green'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='green'
 
 #java_version
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs ram kubecontext)
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 
 ifconfig | grep 10\.173\. &> /dev/null && {
   export http_proxy="http://www-proxy.us.oracle.com:80"
@@ -171,7 +176,7 @@ ifconfig | grep 10\.173\. &> /dev/null && {
   export https_proxy=$http_proxy
   export HTTPS_PROXY=$https_proxy
   #,0,1,2,3,4,5,6,7,8,9
-  export no_proxy="localhost,.oracle.com,.oraclecorp.com,192.168.64.1,192.168.64.2,192.168.64.3"
+  export no_proxy="localhost,.oracle.com,.oraclecorp.com,192.168.64.1,192.168.64.2,192.168.64.3.192.168.64.4,192.168.64.5,192.168.64.6,192.168.64.7,192.168.64.8,192.168.64.9,10.96.0.1"
   export NO_PROXY=$no_proxy
   git config --global http.proxy $HTTP_PROXY
 } || {
