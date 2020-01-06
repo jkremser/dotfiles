@@ -6,7 +6,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # completions
 for f in `find ~/.completion -type f`; do
   #source $f;
-  zstyle ':completion:*:*:git:*' script $f
+  #zstyle ':completion:*:*:git:*' script $f
 done
 
 # Which plugins would you like to load?
