@@ -196,5 +196,7 @@ alias sop='cd $WORKSPACE/jvm-operators/spark-operator && sayCWD spark-op'
 alias sap='cd $WORKSPACE/jvm-operators/abstract-operator && sayCWD abstract-op'
 
 
+source ~/.personal.sh
+
 # kubectl tonative plugin
 export PATH="/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin"
