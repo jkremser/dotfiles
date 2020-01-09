@@ -131,6 +131,14 @@ command -v kubectl &> /dev/null && source <(kubectl completion zsh)
 alias k="kubectl"
 alias kc="kubectl"
 alias wp="watch kubectl get pods"
+alias kpd="kubectl delete pod"
+alias kpl="kubectl logs -f"
+#alias kshell="kubectl exec -ti"
+
+kshell() {
+  [[ $# -lt 1 ]] && echo "usage: kshell <pod_name>]" && return
+  kubectl exec -ti $1 -- bash &> /dev/null || kubectl exec -ti $1 -- sh &> /dev/null
+}
 
 # -------------------------------- POWERLEVEL ---------------------------------
 
@@ -176,7 +184,7 @@ ifconfig | grep 10\.173\. &> /dev/null && {
   export https_proxy=$http_proxy
   export HTTPS_PROXY=$https_proxy
   #,0,1,2,3,4,5,6,7,8,9
-  export no_proxy="localhost,.oracle.com,.oraclecorp.com,192.168.64.1,192.168.64.2,192.168.64.3.192.168.64.4,192.168.64.5,192.168.64.6,192.168.64.7,192.168.64.8,192.168.64.9,10.96.0.1"
+  export no_proxy="localhost,.oracle.com,.oraclecorp.com,192.168.64.1,192.168.64.2,192.168.64.3.192.168.64.4,192.168.64.5,192.168.64.6,192.168.64.7,192.168.64.8,192.168.64.9,10.96.0.1,10.96.0.0/12,192.168.99.0/24,192.168.64.0/24"
   export NO_PROXY=$no_proxy
   git config --global http.proxy $HTTP_PROXY
 } || {
@@ -189,6 +197,18 @@ ifconfig | grep 10\.173\. &> /dev/null && {
 }
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd\n'
+
 
 #work
 alias graalOp="cd $WORKSPACE/graal-cloud/operators/graal-operator/ && sayCWD graal-op"
@@ -200,3 +220,7 @@ source ~/.personal.sh
 
 # kubectl tonative plugin
 export PATH="/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/jkremser/.sdkman"
+[[ -s "/Users/jkremser/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jkremser/.sdkman/bin/sdkman-init.sh"
