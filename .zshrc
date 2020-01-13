@@ -56,6 +56,10 @@ export BACKGROUND_CYAN=$(tput setab 6)
 export BACKGROUND_WHITE=$(tput setab 7)
 export RESET_FORMATTING=$(tput sgr0)
 
+# history
+export HISTFILESIZE="10000000"
+export HISTSIZE="10000000"
+
 alias g="git"
 
 # <git>
@@ -184,7 +188,9 @@ ifconfig | grep 10\.173\. &> /dev/null && {
   export https_proxy=$http_proxy
   export HTTPS_PROXY=$https_proxy
   #,0,1,2,3,4,5,6,7,8,9
-  export no_proxy="localhost,.oracle.com,.oraclecorp.com,192.168.64.1,192.168.64.2,192.168.64.3.192.168.64.4,192.168.64.5,192.168.64.6,192.168.64.7,192.168.64.8,192.168.64.9,10.96.0.1,10.96.0.0/12,192.168.99.0/24,192.168.64.0/24"
+  no_proxy="localhost,.oracle.com,.oraclecorp.com"
+  for i in {1..50}; do no_proxy="$no_proxy,192.168.64.$i" ; done
+  export no_proxy
   export NO_PROXY=$no_proxy
   git config --global http.proxy $HTTP_PROXY
 } || {
