@@ -135,7 +135,7 @@ command -v kubectl &> /dev/null && source <(kubectl completion zsh)
 alias k="kubectl"
 alias kc="kubectl"
 alias wp="watch kubectl get pods"
-alias kpd="kubectl delete pod"
+alias kpd="kubectl delete pod --wait=false"
 alias kpl="kubectl logs -f"
 #alias kshell="kubectl exec -ti"
 
