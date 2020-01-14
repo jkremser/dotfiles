@@ -15,6 +15,12 @@ done
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(colorize docker helm minikube kubectl)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  plugins=(osx)
+else
+  true # currently noop
+fi
+
 
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME="powerlevel9k/powerlevel9k"

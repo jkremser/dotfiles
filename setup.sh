@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 gsettings set org.gnome.desktop.peripherals.keyboard delay 300
 
@@ -10,3 +9,8 @@ for i in $(ls -A); do
     cp -r $i ~
   }
 done
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # remove that annoying 'Last login..' msg
+  touch ~/.hushlogin
+fi
