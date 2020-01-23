@@ -27,7 +27,6 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 
 
 
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -140,10 +139,17 @@ alias dc="docker-compose"
 command -v kubectl &> /dev/null && source <(kubectl completion zsh)
 alias k="kubectl"
 alias kc="kubectl"
-alias wp="watch kubectl get pods"
+alias wp='watch kubectl get pods'
+alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
 alias kpd="kubectl delete pod --wait=false"
 alias kpl="kubectl logs -f"
 #alias kshell="kubectl exec -ti"
+
+bindkey -s '^[[1;2P' 'k9s\n'
+bindkey -s '^[[1;2S' 'kp\n'
+#bindkey -s '^[[15;2~' ''
+#bindkey -s '^[[17;2~' ''
+#bindkey -s '^[[18;2~' ''
 
 kshell() {
   [[ $# -lt 1 ]] && echo "usage: kshell <pod_name>]" && return
@@ -183,8 +189,8 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='green'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='green'
 
-#java_version
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs ram kubecontext)
+#java_version  #kubecontext
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs ram)
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 
@@ -196,9 +202,14 @@ ifconfig | grep 10\.173\. &> /dev/null && {
   #,0,1,2,3,4,5,6,7,8,9
   no_proxy="localhost,.oracle.com,.oraclecorp.com"
   for i in {1..50}; do no_proxy="$no_proxy,192.168.64.$i" ; done
+  for i in {1..25}; do no_proxy="$no_proxy,172.17.0.$i" ; done
+  for i in {1..35}; do no_proxy="$no_proxy,10.173.205.$i" ; done
+  no_proxy="$no_proxy"
   export no_proxy
   export NO_PROXY=$no_proxy
   git config --global http.proxy $HTTP_PROXY
+  cp ~/.m2/settings.xml ~/.m2/settings.xml-bak
+  cp ~/.m2/settings.xml-oracle ~/.m2/settings.xml
 } || {
   git config --global --unset http.proxy
   git config --global --unset https.proxy
@@ -206,6 +217,8 @@ ifconfig | grep 10\.173\. &> /dev/null && {
   export HTTP_PROXY=
   export https_proxy=
   export HTTPS_PROXY=
+  cp ~/.m2/settings.xml ~/.m2/settings.xml-bak
+  cp ~/.m2/settings.xml-normal ~/.m2/settings.xml
 }
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
@@ -221,9 +234,8 @@ lfcd () {
 }
 bindkey -s '^o' 'lfcd\n'
 
-
 #work
-alias graalOp="cd $WORKSPACE/graal-cloud/operators/graal-operator/ && sayCWD graal-op"
+alias graalOp="cd $WORKSPACE/graal-operator/ && sayCWD graal-op"
 alias sop='cd $WORKSPACE/jvm-operators/spark-operator && sayCWD spark-op'
 alias sap='cd $WORKSPACE/jvm-operators/abstract-operator && sayCWD abstract-op'
 
@@ -236,3 +248,7 @@ export PATH="/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/jkremser/.sdkman"
 [[ -s "/Users/jkremser/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jkremser/.sdkman/bin/sdkman-init.sh"
+
+
+# kubectl tonative plugin
+export PATH="/Users/jkremser/.sdkman/candidates/sbt/current/bin:/Users/jkremser/.sdkman/candidates/micronaut/current/bin:/Users/jkremser/.sdkman/candidates/java/current/bin:/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-operator/kubectl-plugin"
