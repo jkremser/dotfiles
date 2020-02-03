@@ -143,18 +143,21 @@ alias wp='watch kubectl get pods'
 alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
 alias kpd="kubectl delete pod --wait=false"
 alias kpl="kubectl logs -f"
-#alias kshell="kubectl exec -ti"
 
+#xxd or cat captures the code
 bindkey -s '^[[1;2P' 'k9s\n'
 bindkey -s '^[[1;2S' 'kp\n'
+bindkey -s '^[[15;2~' 'kshell\t\t\t'
 #bindkey -s '^[[15;2~' ''
 #bindkey -s '^[[17;2~' ''
 #bindkey -s '^[[18;2~' ''
 
 kshell() {
   [[ $# -lt 1 ]] && echo "usage: kshell <pod_name>]" && return
-  kubectl exec -ti $1 -- bash &> /dev/null || kubectl exec -ti $1 -- sh &> /dev/null
+  kubectl exec -ti $1 -- /bin/sh -c 'command -v bash &> /dev/null && bash || sh'
+  #kubectl exec -ti $1 -- command -v bash &> /dev/null && kubectl exec -ti $1 -- bash || kubectl exec -ti $1 -- sh
 }
+complete -o default -F __kubectl_get_resource_pod kshell
 
 # -------------------------------- POWERLEVEL ---------------------------------
 
@@ -242,13 +245,13 @@ alias sap='cd $WORKSPACE/jvm-operators/abstract-operator && sayCWD abstract-op'
 
 source ~/.personal.sh
 
-# kubectl tonative plugin
-export PATH="/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin"
-
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/jkremser/.sdkman"
 [[ -s "/Users/jkremser/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jkremser/.sdkman/bin/sdkman-init.sh"
 
 
 # kubectl tonative plugin
-export PATH="/Users/jkremser/.sdkman/candidates/sbt/current/bin:/Users/jkremser/.sdkman/candidates/micronaut/current/bin:/Users/jkremser/.sdkman/candidates/java/current/bin:/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-operator/kubectl-plugin"
+export PATH="/Users/jkremser/bin:/Users/jkremser/.sdkman/candidates/sbt/current/bin:/Users/jkremser/.sdkman/candidates/micronaut/current/bin:/Users/jkremser/.sdkman/candidates/java/current/bin:/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-operator/kubectl-plugin"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
