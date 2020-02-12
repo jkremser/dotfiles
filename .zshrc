@@ -1,4 +1,6 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export EDITOR=vim
+export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -140,6 +142,7 @@ command -v kubectl &> /dev/null && source <(kubectl completion zsh)
 alias k="kubectl"
 alias kc="kubectl"
 alias wp='watch kubectl get pods'
+alias woc='wp'
 alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
 alias kpd="kubectl delete pod --wait=false"
 alias kpl="kubectl logs -f"
