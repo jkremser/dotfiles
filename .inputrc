@@ -4,13 +4,12 @@ $if Bash
   "\e[A":history-search-backward
   # arrow down
   "\e[B":history-search-forward
+  # ctrl+alt+l to expand alias
+  "\e\C-l":alias-expand-line
 $endif
 
 set show-all-if-ambiguous on
 set completion-ignore-case on
-
-# ctrl+alt+l to expand alias
-"\e\C-l":alias-expand-line
 
 # ctrl+left/right jump over the words
 "\e[1;5C": forward-word
