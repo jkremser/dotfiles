@@ -160,7 +160,7 @@ alias kpl="kubectl logs -f"
 #xxd or cat captures the code
 bindkey -s '^[[1;2P' 'k9s\n'
 bindkey -s '^[[1;2S' 'kp\n'
-bindkey -s '^[[15;2~' 'kshell\t\t\t'
+bindkey -s '^[[15;2~' 'kshell\t\t\t\t'
 #bindkey -s '^[[15;2~' ''
 #bindkey -s '^[[17;2~' ''
 #bindkey -s '^[[18;2~' ''
@@ -227,6 +227,8 @@ ifconfig | grep 10\.173\. &> /dev/null && {
   git config --global http.proxy $HTTP_PROXY
   cp ~/.m2/settings.xml ~/.m2/settings.xml-bak
   cp ~/.m2/settings.xml-oracle ~/.m2/settings.xml
+  cp ~/.docker/config.json ~/.docker/config.json-bak
+  cp ~/.docker/config.json-oracle ~/.docker/config.json
 } || {
   git config --global --unset http.proxy
   git config --global --unset https.proxy
@@ -234,8 +236,12 @@ ifconfig | grep 10\.173\. &> /dev/null && {
   export HTTP_PROXY=
   export https_proxy=
   export HTTPS_PROXY=
+  export no_proxy=
+  export NO_PROXY=
   cp ~/.m2/settings.xml ~/.m2/settings.xml-bak
   cp ~/.m2/settings.xml-normal ~/.m2/settings.xml
+  cp ~/.docker/config.json ~/.docker/config.json-bak
+  cp ~/.docker/config.json-normal ~/.docker/config.json
 }
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
