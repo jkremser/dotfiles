@@ -77,12 +77,13 @@ export RESET_FORMATTING=$(tput sgr0)
 export HISTFILESIZE="10000000"
 export HISTSIZE="10000000"
 
-alias g="git"
+alias g="git "
 
 # <git>
 alias g="git "
 alias ga="git add -A"
 alias gl="git l"
+alias gls="git ls"
 alias gl1="git l1"
 alias gg="git g"
 alias gst="git st"
@@ -167,7 +168,7 @@ bindkey -s '^[[15;2~' 'kshell\t\t\t\t'
 
 kshell() {
   [[ $# -lt 1 ]] && echo "usage: kshell <pod_name>]" && return
-  kubectl exec -ti $1 -- /bin/sh -c 'command -v bash &> /dev/null && bash || sh'
+  kubectl exec -ti $@ -- /bin/sh -c 'command -v bash &> /dev/null && bash || sh'
   #kubectl exec -ti $1 -- command -v bash &> /dev/null && kubectl exec -ti $1 -- bash || kubectl exec -ti $1 -- sh
 }
 complete -o default -F __kubectl_get_resource_pod kshell
