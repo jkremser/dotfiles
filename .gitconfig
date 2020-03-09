@@ -1,10 +1,13 @@
 [user]
 	name = Jirka Kremser
 	email = jiri.kremser@oracle.com
+# generate key: gpg --full-generate-key
 # gpg --list-secret-keys --keyid-format LONG
-# will print: sec   2048R/B78168105C66AD96 2017-12-04
-# git config --global user.signingkey B78168105C66AD96
-	signingkey = 66AA767654DC91D2
+# will print: sec   2048R/CE0B27698D13CEA8 2017-12-04
+# git config --global user.signingkey CE0B27698D13CEA8
+	signingkey = CE0B27698D13CEA8
+# to print the public part of the key:
+# gpg --armor --export CE0B27698D13CEA8
 [alias]
   branch-cleanup = "!git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d #"
 
