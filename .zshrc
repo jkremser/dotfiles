@@ -130,9 +130,7 @@ gBak() {
 }
 
 personalize() {
-  G_REMOTE=`git remote -v | head -1 | sed 's;.*\(https://github.com/\)[^/]*\([^\ ]*\).*;git@github.com:jkremser\2;g'` || true
-  #sed -i'' 's;remote "origin";remote "personal";g' .git/config || true
-  #sed -i'' 's;https\?://github.com/jkremser;git@github.com:jkremser;g' .git/config || true
+  G_REMOTE=`git remote -v | head -1 | sed 's;.*://github.com/[^/]*\([^\ ]*\).*;git@github.com:jkremser\1;g'` || true
   g remote add personal $G_REMOTE
 }
 alias gper="personalize"
