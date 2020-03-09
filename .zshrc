@@ -45,12 +45,11 @@ fi
 
 
 POWERLEVEL9K_MODE='nerdfont-complete'
-#ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 
-#source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -87,6 +86,8 @@ export RESET_FORMATTING=$(tput sgr0)
 # history
 export HISTFILESIZE="10000000"
 export HISTSIZE="10000000"
+#bindkey "^[[A" ihistory-search-backward
+#bindkey "^[[B" history-search-forward
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
@@ -288,7 +289,7 @@ export SDKMAN_DIR="/Users/jkremser/.sdkman"
 
 
 # kubectl tonative plugin
-export PATH="/Users/jkremser/bin:/Users/jkremser/.sdkman/candidates/sbt/current/bin:/Users/jkremser/.sdkman/candidates/micronaut/current/bin:/Users/jkremser/.sdkman/candidates/java/current/bin:/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-operator/kubectl-plugin"
+export PATH="/Users/jkremser/bin:/Users/jkremser/.sdkman/candidates/sbt/current/bin:/Users/jkremser/.sdkman/candidates/micronaut/current/bin:/Users/jkremser/.sdkman/candidates/java/current/bin:/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jirikremser/workspace/graal-cloud/graal-operator/kubectl-plugin"
 
 #autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
