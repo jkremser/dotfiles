@@ -1,3 +1,6 @@
+autoload -Uz compinit
+compinit
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -7,6 +10,8 @@ fi
 
 [[ "x$ZSH_DEBUG" == "x" ]] || zmodload zsh/zprof
 
+
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 #export FILTER_BRANCH_SQUELCH_WARNING=1
@@ -28,6 +33,12 @@ done
 # plugins=(colorize docker helm minikube kubectl)
 if [[ "$OSTYPE" == "darwin"* ]]; then
   plugins=(osx)
+  # switch ~ and ±
+  #hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
+  bindkey "^[[F" end-of-line
+  bindkey "^[[H" beginning-of-line
+  #bindkey "±" '~'
+
 else
   true # currently noop
 fi
@@ -39,7 +50,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -76,6 +87,8 @@ export RESET_FORMATTING=$(tput sgr0)
 # history
 export HISTFILESIZE="10000000"
 export HISTSIZE="10000000"
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
 alias g="git "
 
@@ -96,6 +109,8 @@ alias gdf="gd"
 alias gap="git ap"
 alias grc="git rc"
 alias gra="git ra"
+
+alias ll="ls -l"
 
 gShowPr() {
   [[ "x$1" == "x" ]] || git fetch origin pull/$1/head:pr$1 && g cd pr$1
@@ -125,6 +140,7 @@ alias gper="personalize"
 # safe rm
 #alias rm='rm --preserve-root'
 
+#https://github.com/jingweno/ccat/releases
 alias cat="ccat --bg=dark "
 
 # Start a web service on port 8000 that uses CWD as its document root.
