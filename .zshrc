@@ -37,7 +37,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   #hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
   bindkey "^[[F" end-of-line
   bindkey "^[[H" beginning-of-line
-  #bindkey "±" '~'
+  bindkey "§" '`'
+  bindkey "±" '~'
 
 else
   true # currently noop
@@ -274,7 +275,7 @@ lfcd () {
 bindkey -s '^o' 'lfcd\n'
 
 #work
-alias graalOp="cd $WORKSPACE/graal-operator/ && sayCWD graal-op"
+alias graalOp="cd $WORKSPACE/graal-cloud/graal-operator && sayCWD graal-op"
 alias sop='cd $WORKSPACE/jvm-operators/spark-operator && sayCWD spark-op'
 alias sap='cd $WORKSPACE/jvm-operators/abstract-operator && sayCWD abstract-op'
 
@@ -287,7 +288,7 @@ export SDKMAN_DIR="/Users/jkremser/.sdkman"
 
 
 # kubectl tonative plugin
-export PATH="/Users/jkremser/bin:/Users/jkremser/.sdkman/candidates/sbt/current/bin:/Users/jkremser/.sdkman/candidates/micronaut/current/bin:/Users/jkremser/.sdkman/candidates/java/current/bin:/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jirikremser/workspace/graal-cloud/graal-operator/kubectl-plugin"
+export PATH="/Users/jkremser/bin:/Users/jkremser/.sdkman/candidates/sbt/current/bin:/Users/jkremser/.sdkman/candidates/micronaut/current/bin:/Users/jkremser/.sdkman/candidates/java/current/bin:/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jirikremser/workspace/graal-cloud/graal-operator/kubectl-plugin:/Users/jirikremser/bin"
 
 #autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
@@ -297,3 +298,5 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 
 # this should be in the end
 [[ "x$ZSH_DEBUG" == "x" ]] || zprof && export ZSH_DEBUG=""
+
+
