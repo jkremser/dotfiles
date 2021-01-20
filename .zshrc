@@ -10,8 +10,9 @@ fi
 
 [[ "x$ZSH_DEBUG" == "x" ]] || zmodload zsh/zprof
 
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+#source ~/powerlevel10k/powerlevel10k.zsh-theme
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 #export FILTER_BRANCH_SQUELCH_WARNING=1
@@ -20,10 +21,10 @@ export EDITOR=vim
 export ZSH="$HOME/.oh-my-zsh"
 
 # completions
-for f in `find ~/.completion -type f`; do
-  #source $f;
-  #zstyle ':completion:*:*:git:*' script $f
-done
+#for f in `find ~/.completion -type f`; do
+#  #source $f;
+#  #zstyle ':completion:*:*:git:*' script $f
+#done
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -34,12 +35,12 @@ done
 if [[ "$OSTYPE" == "darwin"* ]]; then
   plugins=(osx)
   # switch ~ and ±
-  #hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
+  #hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}' &> /dev/null
   bindkey "^[[F" end-of-line
   bindkey "^[[H" beginning-of-line
-  bindkey "§" '`'
-  bindkey "±" '~'
-
+  #bindkey "§" '`'
+  #bindkey "±" 'echo ~'
+  source ~/.mac.sh
 else
   true # currently noop
 fi
@@ -228,38 +229,6 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs ram)
 #vcs
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 
-ifconfig | grep 10\.173\. &> /dev/null && {
-  export http_proxy="http://www-proxy.us.oracle.com:80"
-  export HTTP_PROXY=$http_proxy
-  export https_proxy=$http_proxy
-  export HTTPS_PROXY=$https_proxy
-  #,0,1,2,3,4,5,6,7,8,9
-  no_proxy="localhost,.oracle.com,.oraclecorp.com"
-  for i in {1..50}; do no_proxy="$no_proxy,192.168.64.$i" ; done
-  for i in {1..25}; do no_proxy="$no_proxy,172.17.0.$i" ; done
-  for i in {1..35}; do no_proxy="$no_proxy,10.173.205.$i" ; done
-  no_proxy="$no_proxy"
-  export no_proxy
-  export NO_PROXY=$no_proxy
-  git config --global http.proxy $HTTP_PROXY
-  cp ~/.m2/settings.xml ~/.m2/settings.xml-bak
-  cp ~/.m2/settings.xml-oracle ~/.m2/settings.xml
-  cp ~/.docker/config.json ~/.docker/config.json-bak
-  cp ~/.docker/config.json-oracle ~/.docker/config.json
-} || {
-  git config --global --unset http.proxy
-  git config --global --unset https.proxy
-  export http_proxy=
-  export HTTP_PROXY=
-  export https_proxy=
-  export HTTPS_PROXY=
-  export no_proxy=
-  export NO_PROXY=
-  cp ~/.m2/settings.xml ~/.m2/settings.xml-bak
-  cp ~/.m2/settings.xml-normal ~/.m2/settings.xml
-  cp ~/.docker/config.json ~/.docker/config.json-bak
-  cp ~/.docker/config.json-normal ~/.docker/config.json
-}
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Use lf to switch directories and bind it to ctrl-o
