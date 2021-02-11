@@ -174,6 +174,7 @@ alias woc='wp'
 alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
 alias kpd="kubectl delete pod --wait=false"
 alias kpl="kubectl logs -f"
+alias kDebug="kubectl run curl --image=radial/busyboxplus:curl -i --tty"
 
 #xxd or cat captures the code
 bindkey -s '^[[1;2P' 'k9s\n'
