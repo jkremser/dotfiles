@@ -38,8 +38,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   #hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}' &> /dev/null
   bindkey "^[[F" end-of-line
   bindkey "^[[H" beginning-of-line
-  #bindkey "§" '`'
-  #bindkey "±" 'echo ~'
+  bindkey "§" '`'
+  bindkey "±" '~'
   source ~/.mac.sh
 else
   true # currently noop
@@ -174,7 +174,7 @@ alias woc='wp'
 alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
 alias kpd="kubectl delete pod --wait=false"
 alias kpl="kubectl logs -f"
-alias kDebug="kubectl run curl --image=radial/busyboxplus:curl -i --tty"
+alias ns="kubectl config set-context --current --namespace=\$(kubectl get ns --no-headers | fzf -e | cut -d' ' -f1)"
 
 #xxd or cat captures the code
 bindkey -s '^[[1;2P' 'k9s\n'
@@ -230,7 +230,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs ram)
 #vcs
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$HOME/.cargo/bin"
 
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
@@ -257,8 +257,6 @@ export SDKMAN_DIR="/Users/jkremser/.sdkman"
 [[ -s "/Users/jkremser/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jkremser/.sdkman/bin/sdkman-init.sh"
 
 
-# kubectl tonative plugin
-export PATH="/Users/jkremser/bin:/Users/jkremser/.sdkman/candidates/sbt/current/bin:/Users/jkremser/.sdkman/candidates/micronaut/current/bin:/Users/jkremser/.sdkman/candidates/java/current/bin:/Users/jkremser/bin:/usr/local/bin:/Users/jkremser/install/graalvm-ce-19.2.1/Contents/Home/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jkremser/workspace/graal-cloud/operators/graal-operator/kubectl-plugin:/Users/jirikremser/workspace/graal-cloud/graal-operator/kubectl-plugin:/Users/jirikremser/bin"
 
 #autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
@@ -269,4 +267,11 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 # this should be in the end
 [[ "x$ZSH_DEBUG" == "x" ]] || zprof && export ZSH_DEBUG=""
 
+
+
+export GOPATH="${HOME}/.go"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+test -d "${GOPATH}" || mkdir "${GOPATH}"
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
