@@ -18,7 +18,8 @@ export EDITOR=vim
 #export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+#export ZSH="$HOME/.oh-my-zsh"
+#source $ZSH/oh-my-zsh.sh
 
 # completions
 #for f in `find ~/.completion -type f`; do
@@ -35,7 +36,7 @@ export ZSH="$HOME/.oh-my-zsh"
 if [[ "$OSTYPE" == "darwin"* ]]; then
   plugins=(osx)
   # switch ~ and ±
-  #hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}' &> /dev/null
+  hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}' &> /dev/null
   bindkey "^[[F" end-of-line
   bindkey "^[[H" beginning-of-line
   bindkey "§" '`'
@@ -49,9 +50,6 @@ fi
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -86,8 +84,19 @@ export BACKGROUND_WHITE=$(tput setab 7)
 export RESET_FORMATTING=$(tput sgr0)
 
 # history
+
+#When share_history is enabled, it reads and writes to the history file.
+setopt share_history
+
+#When inc_append_history is enabled, it only writes to the history file.
+unsetopt inc_append_history
 export HISTFILESIZE="10000000"
 export HISTSIZE="10000000"
+export SAVEHIST="${HISTSIZE}00"
+export HISTFILE=~/.zsh_history
+setopt append_history
+
+#setopt incappendhistory
 #bindkey "^[[A" ihistory-search-backward
 #bindkey "^[[B" history-search-forward
 bindkey "^[[A" history-beginning-search-backward
@@ -117,6 +126,20 @@ alias ll="ls -l"
 
 gShowPr() {
   [[ "x$1" == "x" ]] || git fetch origin pull/$1/head:pr$1 && g cd pr$1
+}
+
+prs() {
+  _PR_NUM=$(gh pr list | cut -f -2 | fzf --header "Select PR to checkout" --ansi --cycle --preview-window bottom:70% --preview "gh pr diff --color=always {1}" | cut -f1)
+   git fetch origin pull/${_PR_NUM}/head:pr${_PR_NUM} && git checkout pr${_PR_NUM}
+}
+
+cleanBranches() {
+  _TO_DELETE=$(g ls | grep -v " master$" | fzf -m --tac --no-sort --header "Use Shift+Tab to select multiple branches to delete" | cut -d' ' -f2)
+  [[ "x$_TO_DELETE" == "x" ]] || {
+    echo -e "selected branches:\n$(echo $_TO_DELETE | sed 's/^\s\?/- /g')\n"
+    read "ans?Are you sure you want to delete them? $TEXT_RED<y/n>$RESET_FORMATTING "
+    [[ $ans == "y" ]] && for b in `echo $_TO_DELETE`; do git branch -D $b; done;
+  }
 }
 
 gBak() {
@@ -184,6 +207,9 @@ bindkey -s '^[[15;2~' 'kshell\t\t\t\t'
 #bindkey -s '^[[17;2~' ''
 #bindkey -s '^[[18;2~' ''
 
+# for setting up option and backspace and arrows see:
+#https://medium.com/@jonnyhaynes/jump-forwards-backwards-and-delete-a-word-in-iterm2-on-mac-os-43821511f0a
+
 kshell() {
   [[ $# -lt 1 ]] && echo "usage: kshell <pod_name>]" && return
   kubectl exec -ti $@ -- /bin/sh -c 'command -v bash &> /dev/null && bash || sh'
@@ -248,6 +274,7 @@ bindkey -s '^o' 'lfcd\n'
 alias graalOp="cd $WORKSPACE/graal-cloud/graal-operator && sayCWD graal-op"
 alias sop='cd $WORKSPACE/jvm-operators/spark-operator && sayCWD spark-op'
 alias sap='cd $WORKSPACE/jvm-operators/abstract-operator && sayCWD abstract-op'
+alias kgb='cd $WORKSPACE/k8gb && sayCWD k8gb'
 
 
 source ~/.personal.sh
@@ -255,7 +282,8 @@ source ~/.personal.sh
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/jkremser/.sdkman"
 [[ -s "/Users/jkremser/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/jkremser/.sdkman/bin/sdkman-init.sh"
-
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 
 #autoload -U +X bashcompinit && bashcompinit
@@ -268,10 +296,14 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 [[ "x$ZSH_DEBUG" == "x" ]] || zprof && export ZSH_DEBUG=""
 
 
-
 export GOPATH="${HOME}/.go"
-export GOROOT="$(brew --prefix golang)/libexec"
+#export GOROOT="/usr/local/go/"
+export GOROOT=/usr/local/opt/go/libexec
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 test -d "${GOPATH}" || mkdir "${GOPATH}"
 test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
