@@ -6,3 +6,4 @@ Gemfile.dev.rb
 .rake_tasks~
 #.gitignore
 .vscode/
+.DS_Store
