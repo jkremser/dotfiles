@@ -165,7 +165,10 @@ alias gper="personalize"
 #alias rm='rm --preserve-root'
 
 #https://github.com/jingweno/ccat/releases
-alias cat="ccat --bg=dark "
+#alias cat="ccat --bg=dark "
+#https://github.com/sharkdp/bat
+alias cat="bat "
+export BAT_THEME="Visual Studio Dark+"
 
 # Start a web service on port 8000 that uses CWD as its document root.
 if type ruby &> /dev/null; then
@@ -205,7 +208,7 @@ bindkey -s '^[[1;2S' 'kp\n'
 bindkey -s '^[[15;2~' 'kshell\t\t\t\t'
 #bindkey -s '^[[15;2~' ''
 #bindkey -s '^[[17;2~' ''
-#bindkey -s '^[[18;2~' ''
+bindkey -s '^[[18;2~' '~/helper.sh\n'
 
 # for setting up option and backspace and arrows see:
 #https://medium.com/@jonnyhaynes/jump-forwards-backwards-and-delete-a-word-in-iterm2-on-mac-os-43821511f0a
@@ -304,6 +307,8 @@ test -d "${GOPATH}" || mkdir "${GOPATH}"
 test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
 
 source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='λ'
+
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
