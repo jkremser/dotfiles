@@ -41,6 +41,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   bindkey "^[[H" beginning-of-line
   bindkey "§" '`'
   bindkey "±" '~'
+  # this requires to set the escape code that's send when pressing option + right to ff (workaround to mac bullshit)
+  bindkey "^[ff" forward-word
   source ~/.mac.sh
 else
   true # currently noop
@@ -198,6 +200,7 @@ alias kc="kubectl"
 alias wp='watch kubectl get pods'
 alias woc='wp'
 #alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
+alias kpa="kp -A"
 alias kpd="kubectl delete pod --wait=false"
 alias kpl="kubectl logs -f"
 alias ns="kubectl config set-context --current --namespace=\$(kubectl get ns --no-headers | fzf -e | cut -d' ' -f1)"
