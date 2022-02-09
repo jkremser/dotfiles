@@ -197,7 +197,7 @@ alias k="kubectl"
 alias kc="kubectl"
 alias wp='watch kubectl get pods'
 alias woc='wp'
-alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
+#alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
 alias kpd="kubectl delete pod --wait=false"
 alias kpl="kubectl logs -f"
 alias ns="kubectl config set-context --current --namespace=\$(kubectl get ns --no-headers | fzf -e | cut -d' ' -f1)"
@@ -212,6 +212,10 @@ bindkey -s '^[[18;2~' '~/helper.sh\n'
 
 # for setting up option and backspace and arrows see:
 #https://medium.com/@jonnyhaynes/jump-forwards-backwards-and-delete-a-word-in-iterm2-on-mac-os-43821511f0a
+
+kp() {
+  kubectl get pods $@ | awk '{print $1 " " $2 " " substr($4,1,7) " " $5}' | column -t | lolcat
+}
 
 kshell() {
   [[ $# -lt 1 ]] && echo "usage: kshell <pod_name>]" && return
