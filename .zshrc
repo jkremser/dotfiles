@@ -124,6 +124,8 @@ alias gap="git ap"
 alias grc="git rc"
 alias gra="git ra"
 
+export LSCOLORS="ExfxcxdxCxegecabagacad"
+alias ls="ls -lGH"
 alias ll="ls -l"
 
 gShowPr() {
@@ -170,6 +172,7 @@ alias gper="personalize"
 #alias cat="ccat --bg=dark "
 #https://github.com/sharkdp/bat
 alias cat="bat "
+alias catt="bat --plain "
 export BAT_THEME="Visual Studio Dark+"
 
 # Start a web service on port 8000 that uses CWD as its document root.
@@ -305,7 +308,7 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 # this should be in the end
 [[ "x$ZSH_DEBUG" == "x" ]] || zprof && export ZSH_DEBUG=""
 
-
+export AWS_PROFILE=saml
 export GOPATH="${HOME}/.go"
 #export GOROOT="/usr/local/go/"
 export GOROOT=/usr/local/opt/go/libexec
@@ -318,4 +321,5 @@ typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='λ'
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 
