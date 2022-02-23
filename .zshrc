@@ -43,6 +43,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   bindkey "±" '~'
   # this requires to set the escape code that's send when pressing option + right to ff (workaround to mac bullshit)
   bindkey "^[ff" forward-word
+
+  # env
+  export HOMEBREW_NO_AUTO_UPDATE=1
+
   source ~/.mac.sh
 else
   true # currently noop
@@ -125,7 +129,7 @@ alias grc="git rc"
 alias gra="git ra"
 
 export LSCOLORS="ExfxcxdxCxegecabagacad"
-alias ls="ls -lGH"
+alias ls="ls -GH"
 alias ll="ls -l"
 
 gShowPr() {
@@ -291,6 +295,7 @@ alias kgb='cd $WORKSPACE/k8gb && sayCWD k8gb'
 
 
 source ~/.personal.sh
+source ~/.functions
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/jkremser/.sdkman"
