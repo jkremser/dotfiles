@@ -296,6 +296,7 @@ alias kgb='cd $WORKSPACE/k8gb && sayCWD k8gb'
 
 source ~/.personal.sh
 source ~/.functions
+source ~/.fzf-bindings.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/jkremser/.sdkman"
