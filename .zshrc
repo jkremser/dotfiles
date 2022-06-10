@@ -207,9 +207,10 @@ alias kc="kubectl"
 alias wp='watch kubectl get pods'
 alias woc='wp'
 #alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
+alias kpp='kubectl get pods -A'
 alias kpa="kp -A"
 alias kpd="kubectl delete pod --wait=false"
-alias kpl="kubectl logs -f"
+#alias kpl="kubectl logs -f"
 alias ns="kubectl config set-context --current --namespace=\$(kubectl get ns --no-headers | fzf -e | cut -d' ' -f1)"
 
 #xxd or cat captures the code
@@ -222,6 +223,30 @@ bindkey -s '^[[18;2~' '~/helper.sh\n'
 
 # for setting up option and backspace and arrows see:
 #https://medium.com/@jonnyhaynes/jump-forwards-backwards-and-delete-a-word-in-iterm2-on-mac-os-43821511f0a
+
+kpl() {
+  _cmd_args=$1
+  [[ $# -lt 1 ]] && {
+    local _pod_and_ns=$(kubectl get pods --no-headers -A | fzf --header "Select a pod" -e)
+    local _ns=$(echo $_pod_and_ns | awk '{print $1}')
+    local _pod=$(echo $_pod_and_ns | awk '{print $2}')
+    local _cont_num=$(echo $_pod_and_ns | awk '{print $3}' | cut -d'/' -f2)
+    _cmd_args="$_pod -n $_ns"
+    # if there are more containers ask for a container name
+    [[ $_cont_num -gt 1 ]] && {
+      local _cont_name=$(kubectl get pod -n $_ns $_pod -o jsonpath='{.spec.containers[*].name}' | tr ' ' '\n' | fzf --header "the pod has 2 or more containers, select a container" -e)
+      _cmd_args="$_cmd_args -c $_cont_name"
+    }
+  }
+  echo "kubectl logs -f $_cmd_args"
+  kubectl logs -f `echo $_cmd_args` || {
+    out=$(kubectl logs -f `echo $_cmd_args` 2>&1 > /dev/null)
+    if echo $out | grep -q "error: a container name must be specified for pod" ; then
+      local _cont_name=$(echo $out | sed -e 's/.*choose one of: \[//g' -e 's/]//g' | tr ' ' '\n' | fzf -e)
+      kubectl logs -f `echo $_cmd_args` -c $_cont_name
+    fi
+  }
+}
 
 kp() {
   kubectl get pods $@ | awk '{print $1 " " $2 " " substr($4,1,7) " " $5}' | column -t | lolcat
@@ -317,7 +342,8 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 export AWS_PROFILE=saml
 export GOPATH="${HOME}/.go"
 #export GOROOT="/usr/local/go/"
-export GOROOT=/usr/local/opt/go/libexec
+#export GOROOT="/usr/local/opt/go@1.17"
+#export GOROOT=/usr/local/opt/go/libexec
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 test -d "${GOPATH}" || mkdir "${GOPATH}"
 test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
@@ -328,4 +354,8 @@ typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='λ'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+#kubectl log2rbac __complete "\$@"
+export PATH="/usr/local/opt/go@1.17/bin:$PATH"
 
+export GO111MODULE=on
+export GOPROXY=https://goproxy.cn

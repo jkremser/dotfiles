@@ -614,3 +614,4 @@ _addToPath "$HOME/.krew/bin"
 #export CUDNN_PATH="/usr/local/cuda/lib64/libcudnn.so.5.1.10"
 
 #. /home/jkremser/torch/install/bin/torch-activate
+. "$HOME/.cargo/env"
