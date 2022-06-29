@@ -108,7 +108,6 @@ setopt append_history
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
-alias g="git "
 
 # <git>
 alias g="git "
@@ -119,9 +118,8 @@ alias gl1="git l1"
 alias gg="git g"
 alias gst="git st"
 alias gs="gst" # sorry, ghost script
-alias gpl="git pl"
+# alias gpl="git pl"
 alias gpll="git pll"
-alias gppm="git push personal master"
 alias gd="git dif"
 alias gdf="gd"
 alias gap="git ap"
@@ -131,6 +129,10 @@ alias gra="git ra"
 export LSCOLORS="ExfxcxdxCxegecabagacad"
 alias ls="ls -GH"
 alias ll="ls -l"
+
+gpl() {
+  git pull --rebase origin master || { echo "trying 'main'.." && git pull --rebase origin main }
+}
 
 gShowPr() {
   [[ "x$1" == "x" ]] || git fetch origin pull/$1/head:pr$1 && g cd pr$1
@@ -206,6 +208,7 @@ alias k="kubectl"
 alias kc="kubectl"
 alias wp='watch kubectl get pods'
 alias woc='wp'
+alias watch='watch -t '
 #alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
 alias kpp='kubectl get pods -A'
 alias kpa="kp -A"
