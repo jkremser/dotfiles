@@ -1,6 +1,7 @@
 "syntax highlighting
 syntax on
-colorscheme peachpuff
+set background=dark
+"colorscheme molokai
 
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256

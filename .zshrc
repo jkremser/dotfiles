@@ -204,6 +204,11 @@ alias dc="docker-compose"
 
 #kubectl
 command -v kubectl &> /dev/null && source <(kubectl completion zsh)
+
+#cosign
+command -v cosign &> /dev/null && source <(cosign completion zsh)
+command -v syft &> /dev/null && source <(syft completion zsh)
+
 alias k="kubectl"
 alias kc="kubectl"
 alias wp='watch kubectl get pods'
@@ -359,6 +364,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 #kubectl log2rbac __complete "\$@"
 export PATH="/usr/local/opt/go@1.17/bin:$PATH"
+export PATH="~/.go-1.18/bin/:$PATH"
 
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn
