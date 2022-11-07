@@ -13,4 +13,5 @@ done
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # remove that annoying 'Last login..' msg
   touch ~/.hushlogin
+  mkdir ~/bin
 fi
