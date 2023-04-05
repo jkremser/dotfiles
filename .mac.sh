@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 url(){
   cat <<EOF | osascript 
 tell application "Google Chrome" to return URL of active tab of front window

@@ -15,3 +15,5 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   touch ~/.hushlogin
   mkdir ~/bin
 fi
+
+cp -r .dotfiles ~/.dotfiles
