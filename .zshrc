@@ -27,11 +27,11 @@ export EDITOR=vim
 #  #zstyle ':completion:*:*:git:*' script $f
 #done
 
-#if type brew &>/dev/null; then
-#  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-#  autoload -Uz compinit
-#  compinit
-#fi
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  autoload -Uz compinit
+  compinit
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   plugins=(osx git opsctl kubectl)
@@ -187,8 +187,8 @@ do
 done
 
 # source functions
-for f in $(ls -A .functions); do
-  source .functions/$f
+for f in $(ls -A ~/.functions); do
+  source ~/.functions/$f
 done
 
 export SDKMAN_DIR="/Users/jkremser/.sdkman"
