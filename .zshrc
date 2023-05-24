@@ -100,12 +100,13 @@ alias gdf="gd"
 alias gap="git ap"
 alias grc="git rc"
 alias gra="git ra"
+# </git>
 
 export LSCOLORS="ExfxcxdxCxegecabagacad"
 alias ls="ls -GH"
 alias ll="ls -l"
-#</git>
 
+alias grep="grep --color"
 
 #https://github.com/jingweno/ccat/releases
 #alias cat="ccat --bg=dark "

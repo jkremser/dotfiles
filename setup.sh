@@ -16,4 +16,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   mkdir ~/bin || true
 fi
 
+# gpg in .gitconfig
+set -o pipefail
+signingkey=$(gpg --list-secret-keys --keyid-format LONG | grep sec | head -1 | cut -d'/' -f2 | cut -d' ' -f1)
+code=$?
+[[ "$code" -eq 0 ]] &&  sed -i'' -e "s;\(signingkey = \).*;\1$signingkey;g" ~/.gitconfig
+set +o pipefail
+
+
+
 #cp -r .dotfiles ~/.dotfiles
