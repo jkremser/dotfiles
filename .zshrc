@@ -135,6 +135,9 @@ alias dc="docker-compose"
 #kubectl
 command -v kubectl &> /dev/null && source <(kubectl completion zsh)
 
+#helm
+command -v helm &> /dev/null && source <(helm completion zsh)
+
 #cosign
 command -v cosign &> /dev/null && source <(cosign completion zsh)
 command -v syft &> /dev/null && source <(syft completion zsh)
@@ -199,7 +202,9 @@ export PATH="${PATH}:${HOME}/.krew/bin"
 export PATH="${PATH}:${HOME}/install/govc_Darwin_arm64"
 
 
-#autoload -U +X bashcompinit && bashcompinit
+zstyle ':completion:*:*:make:*' tag-order 'targets'
+autoload -U +X bashcompinit && bashcompinit
+
 #complete -o nospace -C /usr/local/bin/terraform terraform
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
