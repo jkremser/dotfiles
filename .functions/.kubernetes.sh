@@ -37,6 +37,7 @@ kpl() {
       _cmd_args="$_cmd_args -c $_cont_name"
     }
   }
+  echo "kubectl logs -f $_cmd_args" | pbcopy
   echo "kubectl logs -f $_cmd_args"
   kubectl logs -f `echo $_cmd_args` || {
     out=$(kubectl logs -f `echo $_cmd_args` 2>&1 > /dev/null)
