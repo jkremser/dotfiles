@@ -145,4 +145,9 @@ get_machines_in_installation(){
   opsctl show installation -i ${1} | yq -r '.Machines'
 }
 
+lpass_edit(){
+  _all=$(lpass ls --color=always)
+  lpass edit --sync=now $(echo $_all | fzf --ansi | sed 's/^.*id: \([0-9]\+\).*$/\1/g')
+}
+
 source ~/.giantswarm-personal.sh
