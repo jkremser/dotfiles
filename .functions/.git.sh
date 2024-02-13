@@ -35,6 +35,10 @@ gBak() {
 }
 
 personalize() {
-  G_REMOTE=`git remote -v | head -1 | sed 's;.*://github.com/[^/]*\([^\ ]*\).*;git@github.com:jkremser\1;g'` || true
+  git remote -v | head -1 | grep '//github.com/' && { # origin cloned as https://github.com
+    G_REMOTE=`git remote -v | head -1 | sed 's;.*://github.com/[^/]*\([^\ ]*\).*;git@github.com:jkremser\1;g'` || true
+  } || { # origin cloned as git@github.com
+    G_REMOTE=`git remote -v | head -1 | sed 's;.*git@github.com:[^/]\{2,\}\(\S*\).*;git@github.com:jkremser\1;g'`
+  }
   g remote add personal $G_REMOTE
 }
