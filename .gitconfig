@@ -110,3 +110,9 @@
 	helper = osxkeychain
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+
+[includeIf "gitdir:~/workspace/kedify/"]
+   path = ~/no-origin-pushes.inc
+
+#[includeIf "hasconfig:remote.*.url:git@github.com:kedify/*"]
+#  path = ~/no-origin-pushes.inc
