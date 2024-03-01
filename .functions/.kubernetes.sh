@@ -61,3 +61,12 @@ kshell() {
   #kubectl exec -ti $1 -- command -v bash &> /dev/null && kubectl exec -ti $1 -- bash || kubectl exec -ti $1 -- sh
 }
 #complete -o default -F __kubectl_get_resource_pod kshell
+
+addKubeconfig() {
+  [[ $# -lt 1 ]] && echo "usage: ${0} ns" && return
+  ns="${1}"
+  vcluster connect ${ns} -n${ns} --update-current=false --server=https://$(kubectl get svc -n${ns}  "${ns}-lb" --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
+  kubectl kc add -m -c --context-name vcluster_${ns} -f ./kubeconfig.yaml
+  rm ./kubeconfig.yaml
+}
+
