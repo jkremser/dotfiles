@@ -41,4 +41,5 @@ personalize() {
     G_REMOTE=`git remote -v | head -1 | sed 's;.*git@github.com:[^/]\{2,\}\(\S*\).*;git@github.com:jkremser\1;g'`
   }
   g remote add personal $G_REMOTE
+  gh repo fork
 }
