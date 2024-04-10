@@ -1,11 +1,11 @@
 #!/bin/bash
 
-command -v opsctl &> /dev/null && source <(opsctl completion zsh)
+# command -v opsctl &> /dev/null && source <(opsctl completion zsh)
 
-opsctl 1> /dev/null || {
-  echo "Updating opsctl.."
-  opsctl version update
-}
+# opsctl 1> /dev/null || {
+#   echo "Updating opsctl.."
+#   opsctl version update
+# }
 
 function cordon() {
   # also there is flux suspend helmrelease ..
