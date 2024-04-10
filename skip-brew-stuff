@@ -1,1 +1,1 @@
-colima cliclick docker fzf gh gnupg goreleaser graphviz helm kubectl lima lolcat protobuf qemu
+colima cliclick docker fzf gh gnupg goreleaser graphviz helm k3d kubectl lima lolcat protobuf qemu
