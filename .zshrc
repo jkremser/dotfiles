@@ -229,8 +229,7 @@ typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='λ'
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 #kubectl log2rbac __complete "\$@"
-export PATH="/usr/local/opt/go@1.17/bin:$PATH"
-export PATH="~/.go-1.18/bin/:$PATH"
+export PATH="/opt/homebrew/opt/go/bin:$PATH"
 export PATH="$GOBIN:$PATH"
 
 export GO111MODULE=on
