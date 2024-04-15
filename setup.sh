@@ -12,6 +12,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   touch ~/.hushlogin 
   mkdir ~/bin || true
   brew install $(cat skip-brew-stuff)
+  # annoying language indicator
+  sudo defaults write /Library/Preferences/FeatureFlags/Domain/UIKit.plist redesigned_text_cursor -dict-add Enabled -bool NO
 else
   # linux
   gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
