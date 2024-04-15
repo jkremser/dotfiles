@@ -1,1 +1,1 @@
-bat cliclick colima docker fzf gh gnupg goreleaser graphviz helm k3d kind kubectl lima lolcat protobuf qemu
+bat cliclick colima docker fzf gh gnupg goreleaser graphviz helm jq k3d kind kubectl lima lolcat protobuf stern qemu yq
