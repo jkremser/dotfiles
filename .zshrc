@@ -112,7 +112,7 @@ alias grep="grep --color"
 #alias cat="ccat --bg=dark "
 #https://github.com/sharkdp/bat
 alias cat="bat "
-alias catt="bat --plain --paging=never "
+alias catt="bat --plain --style=plain --paging=never "
 alias ccat="catt"
 alias catl="cat -l yaml"
 export BAT_THEME="Visual Studio Dark+"
