@@ -1,1 +1,1 @@
-act bat cliclick colima cosign docker figlet fzf gh gnupg goreleaser graphviz helm jq k3d kind kubectl lima lolcat protobuf popsql stern syft qemu yq
+act bat cliclick colima cosign docker figlet fzf gettext gh gnupg goreleaser graphviz helm jq k3d kind kubectl lima lolcat protobuf libpq stern syft qemu yq
