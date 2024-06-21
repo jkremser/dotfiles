@@ -1,1 +1,1 @@
-act bat cliclick colima cosign docker figlet fzf gettext gh gnupg goreleaser graphviz helm jq k3d kind kubectl lima lolcat protobuf libpq stern syft qemu yq
+act bat cliclick colima cosign docker figlet fzf gettext gh gnupg goreleaser graphviz helm hugo jid jq k3d kind kor kubecolor kubectl lima lolcat protobuf libpq stern syft qemu yq wget
