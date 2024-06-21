@@ -142,16 +142,23 @@ command -v helm &> /dev/null && source <(helm completion zsh)
 command -v cosign &> /dev/null && source <(cosign completion zsh)
 command -v syft &> /dev/null && source <(syft completion zsh)
 
+
+# kubecolor
+KUBECOLOR_OBJ_FRESH="2m"
+KUBECOLOR_THEME_DATA_STRING="white"
+compdef kubecolor=kubectl
+
 #alias k="kubectl"
-alias compdef k="kubectl"
+#alias compdef k="kubectl"
+alias compdef k="kubecolor"
 alias kc="kubectl"
 alias wp='watch kubectl get pods'
 alias woc='wp'
 alias watch='watch -t --color '
 #alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
-alias kpp='kubectl get pods -A'
+alias kpp='k get pods -A'
 alias kpa="kp -A"
-alias kpd="kubectl delete pod --wait=false"
+alias kpd="k delete pod --wait=false"
 #alias kpl="kubectl logs -f"
 alias ns="kubectl config set-context --current --namespace=\$(kubectl get ns --no-headers | fzf -e | cut -d' ' -f1)"
 
@@ -246,3 +253,5 @@ if [ -f '/Users/jkremser/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then 
 
 # this should be in the end
 [[ "x$ZSH_DEBUG" == "x" ]] || zprof && export ZSH_DEBUG=""
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
