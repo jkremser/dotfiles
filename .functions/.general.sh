@@ -54,3 +54,9 @@ function digg() {
 sayCWD() {
   [[ "x$1" == "x" ]] || echo ${TEXT_HAWKULARBLUE} && figlet -f ~/ogre.flf -m8 $1 && echo ${RESET_FORMATTING} && echo "Current directory is:" && pwd
 }
+
+
+wa() {
+  while true; do clear ; $@ ; sleep 2; done
+}
+

@@ -1,6 +1,7 @@
 autoload -Uz compinit
 compinit
 
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -144,8 +145,8 @@ command -v syft &> /dev/null && source <(syft completion zsh)
 
 
 # kubecolor
-KUBECOLOR_OBJ_FRESH="2m"
-KUBECOLOR_THEME_DATA_STRING="white"
+export KUBECOLOR_OBJ_FRESH="2m"
+export KUBECOLOR_THEME_DATA_STRING="white"
 compdef kubecolor=kubectl
 
 #alias k="kubectl"
@@ -156,7 +157,7 @@ alias wp='watch kubectl get pods'
 alias woc='wp'
 alias watch='watch -t --color '
 #alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
-alias kpp='k get pods -A'
+alias kpp='k get pods -A --force-colors'
 alias kpa="kp -A"
 alias kpd="k delete pod --wait=false"
 #alias kpl="kubectl logs -f"
