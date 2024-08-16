@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# home and end buttons on magic keyboards
+# https://ke-complex-modifications.pqrs.org/#HomeEnd
+
 url(){
   cat <<EOF | osascript 
 tell application "Google Chrome" to return URL of active tab of front window
