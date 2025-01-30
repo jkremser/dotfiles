@@ -36,10 +36,25 @@ gBak() {
 
 personalize() {
   git remote -v | head -1 | grep '//github.com/' && { # origin cloned as https://github.com
-    G_REMOTE=`git remote -v | head -1 | sed 's;.*://github.com/[^/]*\([^\ ]*\).*;git@github.com:jkremser\1;g'` || true
+    G_REMOTE=`git remote -v | head -1 | sed -e 's;.*://github.com/[^/]*\([^\ ]*\).*;gh:jkremser\1;g' || true`
   } || { # origin cloned as git@github.com
-    G_REMOTE=`git remote -v | head -1 | sed 's;.*git@github.com:[^/]\{2,\}\(\S*\).*;git@github.com:jkremser\1;g'`
+    G_REMOTE=`git remote -v | head -1 | sed -e 's;.*git@github.com:[^/]\{2,\}\(\S*\).*;gh:jkremser\1;g' -e 's;.*gh:[^/]\{2,\}\(\S*\).*;gh:jkremser\1;g'`
   }
   g remote add personal $G_REMOTE
   gh repo fork
 }
+
+yolo() {
+  _yolo_mode=$(echo "🤠\n👔" | fzf)
+  [ "${_yolo_mode}" = "🤠" ] && {
+    [ -f ~/.gitconfig_bak ] && echo "already yoloing" | lolcat && return
+    cp ~/.gitconfig ~/.gitconfig_bak
+    ccat ~/.gitconfig_bak | sed -e ':a;N;$!ba;s@\(\[includeIf[^\n]*\n\)\([^\n]*\)@#\1#\2@g' > ~/.gitconfig
+    echo "idkfa, YOLO mode engaged 🤠" | lolcat
+  } || {
+    [ -f ~/.gitconfig_bak ] || return
+    mv ~/.gitconfig_bak ~/.gitconfig
+    echo "YOLO mode off 👔"
+  }
+}
+

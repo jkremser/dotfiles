@@ -5,7 +5,7 @@
 # gpg --list-secret-keys --keyid-format LONG
 # will print: sec   2048R/CE0B27698D13CEA8 2017-12-04
 # git config --global user.signingkey CE0B27698D13CEA8
-	signingkey = B2A23EA743F71369
+	signingkey = 900A75F172BD5423
 # to print the public part of the key:
 # gpg --armor --export CE0B27698D13CEA8
 [alias]
@@ -111,8 +111,11 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 
-[includeIf "gitdir:~/workspace/kedify/"]
-   path = ~/no-origin-pushes.inc
+[url "git@github.com:"]
+  insteadOf = gh:
 
-#[includeIf "hasconfig:remote.*.url:git@github.com:kedify/*"]
-#  path = ~/no-origin-pushes.inc
+[includeIf "gitdir:~/workspace/kedify/"]
+  path = ~/no-origin-pushes.inc
+
+[includeIf "hasconfig:remote.*.url:git@github.com:kedify/*"]
+  path = ~/no-origin-pushes.inc
