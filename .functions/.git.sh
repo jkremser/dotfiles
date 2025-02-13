@@ -58,3 +58,7 @@ yolo() {
   }
 }
 
+ggrp() {
+  [[ $# -lt 1 ]] && echo "usage: $0 <search_pattern>" && git grep -h
+  git grep ${@} -- ':!*.svg' ':!*/go.sum' # ':!*.pb.go'
+}
