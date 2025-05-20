@@ -8,3 +8,5 @@ Gemfile.dev.rb
 .vscode/
 .DS_Store
 /env-*
+.certs
+/Makefile.mine
