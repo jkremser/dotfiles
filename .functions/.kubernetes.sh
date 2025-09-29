@@ -33,7 +33,7 @@ kpl() {
     _cmd_args="$_pod -n $_ns"
     # if there are more containers ask for a container name
     [[ $_cont_num -gt 1 ]] && {
-      local _cont_name=$(kubectl get pod -n $_ns $_pod -o jsonpath='{.spec.containers[*].name}' | tr ' ' '\n' | fzf --header "the pod has 2 or more containers, select a container" -e)
+      local _cont_name=$(kubectl get pod -n $_ns $_pod -o jsonpath='{.spec.containers[*].name} {.spec.initContainers[*].name}' | tr ' ' '\n' | fzf --header "the pod has 2 or more containers, select a container" -e)
       _cmd_args="$_cmd_args -c $_cont_name"
     }
   }
