@@ -41,7 +41,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   bindkey "^[[F" end-of-line
   bindkey "^[[H" beginning-of-line
   bindkey "§" '`'
-  bindkey "±" '~'
+  #bindkey "±" '~'
   # this requires to set the escape code that's send when pressing option + right to ff (workaround to mac bullshit)
   bindkey "^[ff" forward-word
   #xxd or cat captures the code
@@ -155,7 +155,7 @@ alias compdef k="kubecolor"
 alias kc="kubectl"
 alias wp='watch kubectl get pods'
 alias woc='wp'
-alias watch='watch -t --color '
+alias watch='watch -c -t --color '
 #alias kp='kubectl get pods | awk {'"'"'print $1" " $2" " substr($4,1,3)" " $5'"'"'} | column -t'
 alias kpp='k get pods -A --force-colors'
 alias kpa="kp -A"
@@ -245,14 +245,58 @@ export GO111MODULE=on
 PATH="/Users/jkremser/Library/Python/3.8/bin:$PATH"
 PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/jkremser/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jkremser/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/jkremser/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jkremser/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 
 # this should be in the end
 [[ "x$ZSH_DEBUG" == "x" ]] || zprof && export ZSH_DEBUG=""
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+
+# disable right prompt
+export POWERLEVEL9K_SHOW_RULER=false
+export POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR=' '
+export POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX=''
+export POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX=''
+export POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX=''
+export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+
+\#(){
+echo " - ${TEXT_GREEN}${@}${RESET_FORMATTING}"
+}
+
+\@(){
+echo " - ${TEXT_RED}${@}${RESET_FORMATTING}"
+}
+
+#alias 1="asciinema play https://asciinema.org/a/676293"
+#alias 2="asciinema play https://asciinema.org/a/676294"
+#alias 3="asciinema play https://asciinema.org/a/676295"
+
+alias 1="asciinema play https://asciinema.org/a/722248"
+alias 2="asciinema play https://asciinema.org/a/722249"
+alias 3="asciinema play https://asciinema.org/a/722250"
+alias 4="asciinema play https://asciinema.org/a/722251"
+
+# bun completions
+[ -s "/Users/jkremser/.bun/_bun" ] && source "/Users/jkremser/.bun/_bun"
+
+# don't include records from /etc/hosts to autocompletion
+zstyle -e ':completion:*:hosts' hosts 'reply=(
+  ${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
+  ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+)'
+
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:/Users/jkremser/Library/Python/3.9/bin:$PATH"
+export PATH="/usr/local/go/bin/:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jkremser/Downloads/google-cloud-sdk 2/path.zsh.inc' ]; then . '/Users/jkremser/Downloads/google-cloud-sdk 2/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jkremser/Downloads/google-cloud-sdk 2/completion.zsh.inc' ]; then . '/Users/jkremser/Downloads/google-cloud-sdk 2/completion.zsh.inc'; fi
+
+#export POWERLEVEL9K_DISABLE_GITSTATUS=true
+#export KUBECONFIG=~/demo
