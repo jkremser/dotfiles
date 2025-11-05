@@ -1,0 +1,1 @@
+alias flatten="gron"
