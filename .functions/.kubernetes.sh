@@ -71,10 +71,11 @@ addKubeconfig() {
 }
 
 nightlyKc() {
+  [[ $# -lt 1 ]] && _cluster="nightly" || _cluster="${1}"
   set -euxo pipefail
-  k kc delete nightly
-  _ip=$(k --context gke_kedify-initial_us-central1_kedify-cluster-dev get svc -ntest-agent-nightly test-agent-nightly-lb -ojsonpath='{.status.loadBalancer.ingress[].ip}')
-  k kc add -c --context-name nightly -f <(vcluster --context gke_kedify-initial_us-central1_kedify-cluster-dev connect test-agent-nightly -ntest-agent-nightly --insecure --print --server=https://${_ip}:443 2> /dev/null)
-  k --context nightly get no
+  k kc delete ${_cluster} 2> /dev/null || true
+  _ip=$(k --context gke_kedify-initial_us-central1_kedify-cluster-dev get svc -ntest-agent-${_cluster} test-agent-${_cluster}-lb -ojsonpath='{.status.loadBalancer.ingress[].ip}')
+  k kc add -c --context-name ${_cluster} -f <(vcluster --context gke_kedify-initial_us-central1_kedify-cluster-dev connect test-agent-${_cluster} -ntest-agent-${_cluster} --insecure --print --server=https://${_ip}:443 2> /dev/null)
+  k --context ${_cluster} get no
   set +euxo pipefail
 }
