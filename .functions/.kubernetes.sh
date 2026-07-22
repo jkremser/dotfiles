@@ -70,12 +70,11 @@ addKubeconfig() {
   rm ./kubeconfig.yaml
 }
 
-nightlyKc() {
-  [[ $# -lt 1 ]] && _cluster="nightly" || _cluster="${1}"
-  set -euxo pipefail
-  k kc delete ${_cluster} 2> /dev/null || true
-  _ip=$(k --context gke_kedify-initial_us-central1_kedify-cluster-dev get svc -ntest-agent-${_cluster} test-agent-${_cluster}-lb -ojsonpath='{.status.loadBalancer.ingress[].ip}')
-  k kc add -c --context-name ${_cluster} -f <(vcluster --context gke_kedify-initial_us-central1_kedify-cluster-dev connect test-agent-${_cluster} -ntest-agent-${_cluster} --insecure --print --server=https://${_ip}:443 2> /dev/null)
-  k --context ${_cluster} get no
-  set +euxo pipefail
+nightlyKc () {
+        [[ $# -lt 1 ]] && _cluster="nightly"  || _cluster="${1}"
+        kubecolor kc delete ${_cluster} &> /dev/null || true
+        _ip=$(k --context gke_kedify-initial_us-central1_kedify-cluster-dev get svc -ntest-agent-helm-${_cluster} test-agent-helm-${_cluster}-lb -ojsonpath='{.status.loadBalancer.ingress[].ip}')
+        kubecolor kc add -c --context-name ${_cluster} -f <(vcluster --context gke_kedify-initial_us-central1_kedify-cluster-dev connect test-agent-helm-${_cluster} -ntest-agent-helm-${_cluster} --insecure --print --server=https://${_ip}:443 2> /dev/null)
+        kubecolor --context ${_cluster} get no
 }
+

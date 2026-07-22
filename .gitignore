@@ -10,3 +10,4 @@ Gemfile.dev.rb
 /env-*
 .certs
 /Makefile.mine
+my-custom-stuff/
